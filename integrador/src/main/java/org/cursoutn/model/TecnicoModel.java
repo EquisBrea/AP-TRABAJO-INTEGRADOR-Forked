@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name="tecnicos")
-public class TecnicosModel {
+public class TecnicoModel {
     @Id
     @Column
     @GeneratedValue
@@ -14,8 +14,8 @@ public class TecnicosModel {
     @Column
     private String nombreTecnico;
     @Column
-    private List<IncidentesModel> incidentesResueltos;
+    private List<IncidenteModel> incidentesResueltos;
     @ManyToOne
     @JoinColumn(name="tecnico_id", nullable = false)
-    private IncidentesModel incidente;
+    private IncidenteModel incidente;
 }

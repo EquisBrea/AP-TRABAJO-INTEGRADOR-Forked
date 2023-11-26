@@ -14,5 +14,5 @@ public class EstadoIncidenteModel implements Serializable {
     @Column
     private String estadoDescripcion;
     @OneToOne(mappedBy = "estado_incidente", cascade = CascadeType.ALL)
-    private IncidentesModel incidentes;
+    private IncidenteModel incidentes;
 }

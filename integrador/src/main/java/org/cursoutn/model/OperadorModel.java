@@ -3,16 +3,12 @@ package org.cursoutn.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="clientes")
-public class ClientesModel {
+@Table(name="operadores")
+public class OperadorModel {
     @Id
     @Column
     @GeneratedValue
     private int id;
     @Column
-    private String razon_social;
-    @Column
-    private int cuil;
-
-
+    private String nombreOperador;
 }

@@ -13,5 +13,5 @@ public class TipoProblemaModel {
     private String nombreTipoProblema;
     @ManyToOne
     @JoinColumn(name="incidente_id", nullable = false)
-    private IncidentesModel incidente;
+    private IncidenteModel incidente;
 }

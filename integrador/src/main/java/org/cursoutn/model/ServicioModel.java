@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name="servicios")
-public class ServiciosModel {
+public class ServicioModel {
     @Id
     @Column
     @GeneratedValue

@@ -3,7 +3,6 @@ package org.cursoutn;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import org.cursoutn.packageModel.ClientesModel;
 
 public class Main {
 
@@ -14,7 +13,7 @@ public class Main {
     }
     private static void saludarAlMundo () {
         /* System.out.println("Hello world!");
-        ClientesModel cliente1 = new ClientesModel();
+        ClienteModel cliente1 = new ClienteModel();
         cliente1.setName("Roberto");
         System.out.println("Hello, " + cliente1.getName()+ "!");
 

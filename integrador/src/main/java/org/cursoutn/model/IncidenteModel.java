@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name="incidentes")
-public class IncidentesModel implements Serializable {
+public class IncidenteModel implements Serializable {
     @Id
     @Column
     @GeneratedValue
@@ -31,6 +31,6 @@ public class IncidentesModel implements Serializable {
     @OneToMany
     @MapsId
     @JoinColumn(name = "tecnico", referencedColumnName = "id")
-    private List<TecnicosModel> tecnicos;
+    private List<TecnicoModel> tecnicos;
 
 }
