@@ -1,4 +1,4 @@
-package org.cursoutn.packageModel;
+package org.cursoutn.model;
 
 import jakarta.persistence.*;
 

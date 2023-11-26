@@ -1,4 +1,4 @@
-package org.cursoutn.packageController;
+package org.cursoutn.controller;
 
 import lombok.Getter;
 import lombok.Setter;

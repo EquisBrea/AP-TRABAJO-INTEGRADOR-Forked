@@ -1,4 +1,4 @@
-package org.cursoutn.packageView;
+package org.cursoutn.view;
 
 public class NotificacionView {
 }

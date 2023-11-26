@@ -1,7 +1,6 @@
-package org.cursoutn.packageModel;
+package org.cursoutn.model;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.Check;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
