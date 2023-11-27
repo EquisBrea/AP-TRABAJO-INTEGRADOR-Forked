@@ -1,11 +1,13 @@
 package org.cursoutn.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
+@Getter
+@Setter
 @Entity
 @Table(name="cliente")
 public class ClienteModel {
@@ -24,12 +26,10 @@ public class ClienteModel {
     @OneToMany
     @MapsId
     @JoinColumn(name="cliente_id",referencedColumnName = "id")
-    private List<ServicioModel> servicios;
+    private List<ServicioModel> servicio;
     @OneToMany
     @MapsId
     @JoinColumn(name="cliente_id", referencedColumnName = "id")
     private List<IncidenteModel> incidentes;
-
-
 
 }
