@@ -1,23 +1,38 @@
 package org.cursoutn.repository;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import org.cursoutn.model.TipoProblemaModel;
+
+import java.util.List;
+
 public class JpaTipoProblemaRepository implements TipoProblemaRepository {
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
     @Override
-    public void crear(Object item) {
+    public List<TipoProblemaModel> obtenerTodosLosTipoProblema() {
+        return null;
+    }
+
+    @Override
+    public void guardarTipoProblema(TipoProblemaModel tipoProblema) {
 
     }
 
     @Override
-    public void leer(Object item) {
+    public TipoProblemaModel obtenerTipoProblemaPorId(int id) {
+        return null;
+    }
+
+    @Override
+    public void actualizarTipoProblema(TipoProblemaModel tipoProblema) {
 
     }
 
     @Override
-    public void actualizar(Object item) {
-
-    }
-
-    @Override
-    public void eliminar(Object item) {
+    public void eliminarTipoProblema(TipoProblemaModel tipoProblema) {
 
     }
 }
