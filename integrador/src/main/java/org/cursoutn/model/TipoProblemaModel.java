@@ -13,9 +13,9 @@ public class TipoProblemaModel {
     private int id;
     @Column
     private String nombreTipoProblema;
-    @ManyToOne
+    @ManyToMany
     @JoinColumn(name="incidente_id", nullable = false)
-    private IncidenteModel incidente;
+    private List<IncidenteModel> incidentes;
     @OneToMany
     @JoinColumn(name="tipo_problema_id", referencedColumnName = "id")
     private List<EspecialidadModel> especialidades;

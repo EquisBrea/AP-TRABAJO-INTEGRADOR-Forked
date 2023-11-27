@@ -3,6 +3,7 @@ package org.cursoutn.model;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name="estado_incidente")
@@ -13,6 +14,6 @@ public class EstadoIncidenteModel implements Serializable {
     private int id;
     @Column
     private String estadoDescripcion;
-    @OneToOne(mappedBy = "estado_incidente", cascade = CascadeType.ALL)
-    private IncidenteModel incidentes;
+    @OneToMany(mappedBy = "estado_incidente", cascade = CascadeType.ALL)
+    private List<IncidenteModel> incidentes;
 }

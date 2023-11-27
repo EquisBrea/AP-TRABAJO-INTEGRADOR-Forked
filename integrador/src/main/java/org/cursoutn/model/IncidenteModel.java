@@ -25,7 +25,7 @@ public class IncidenteModel implements Serializable {
     private int tiempoNecesario;
     @Column
     private int esComplejo;
-    @Column 
+    @Column
     private EstadoIncidente estadoIncidenteActual;
     @ManyToMany
     @JoinColumn(name="operador_id",referencedColumnName = "id")
