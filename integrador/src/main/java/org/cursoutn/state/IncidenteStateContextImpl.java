@@ -9,21 +9,21 @@ public class IncidenteStateContextImpl implements IncidenteStateContext {
 
     @Override
     public void setState(EstadoIncidente estado) {
-
+        this.estado = estado;
     }
 
     @Override
     public void iniciar() {
-
+        this.incidente.setEstadoIncidenteActual(this.estado);
     }
 
     @Override
     public void enCurso() {
-
+        this.incidente.setEstadoIncidenteActual(new EstadoEnCurso());
     }
 
     @Override
     public void finalizar() {
-
+    this.incidente.setEstadoIncidenteActual(new EstadoFinalizado();
     }
 }

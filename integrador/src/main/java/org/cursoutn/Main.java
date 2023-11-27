@@ -16,7 +16,6 @@ public class Main {
         ClienteModel cliente1 = new ClienteModel();
         cliente1.setName("Roberto");
         System.out.println("Hello, " + cliente1.getName()+ "!");
-
          */
     }
     public static void main(String[] args) {
