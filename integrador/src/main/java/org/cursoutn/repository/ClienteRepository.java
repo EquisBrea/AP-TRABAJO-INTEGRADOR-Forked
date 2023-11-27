@@ -8,7 +8,7 @@ public interface ClienteRepository {
 
     public List<ClienteModel> obtenerTodosLosClientes();
 
-    public void guardarCliente(ClienteModel cliente);
+    public void guardarCliente(ClienteModel cliente) throws Exception;
 
     public ClienteModel obtenerClientePorId(int id);
 

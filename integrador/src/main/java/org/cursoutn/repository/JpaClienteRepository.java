@@ -14,22 +14,31 @@ public class JpaClienteRepository implements ClienteRepository{
 
     @Override
     public List<ClienteModel> obtenerTodosLosClientes() {
-        return null;
+        return entityManager.createQuery("SELECT c FROM ClienteModel c", ClienteModel.class).getResultList();
     }
 
     @Override
-    public void guardarCliente(ClienteModel cliente) {
-
+    public void guardarCliente(ClienteModel cliente) throws Exception{
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(cliente);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            throw new Exception("Se produjo un error, tus cambios no fueron guardados");
+        }
     }
 
     @Override
     public ClienteModel obtenerClientePorId(int id) {
-        return null;
+        return entityManager.find(ClienteModel.class, id);
     }
 
     @Override
     public void actualizarCliente(ClienteModel cliente) {
-
+        entityManager.getTransaction().begin();
+        entityManager.merge(cliente);
+        entityManager.getTransaction().commit();
     }
 
     @Override
