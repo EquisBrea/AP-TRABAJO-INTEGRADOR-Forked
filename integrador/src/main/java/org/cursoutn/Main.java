@@ -20,9 +20,7 @@ public class Main {
         cliente1.setName("Roberto");
         System.out.println("Hello, " + cliente1.getName()+ "!");
          */
-        IncidenteModel model = new IncidenteModel();
-        IncidentesView view = new IncidentesView();
-        IncidentesController nuevoIncidente = new IncidentesController(model, view);
+
     }
     public static void main(String[] args) {
         saludarAlMundo();
