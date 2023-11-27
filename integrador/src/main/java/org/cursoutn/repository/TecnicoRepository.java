@@ -6,15 +6,15 @@ import java.util.List;
 
 public interface TecnicoRepository {
 
-    public List<TecnicoModel> obtenerTodosLosTecnicos();
+    public List<TecnicoModel> obtenerTodosLosTecnicos() throws Exception;
 
-    public void guardarTecnico(TecnicoModel tecnico);
+    public void guardarTecnico(TecnicoModel tecnico) throws Exception;
 
-    public TecnicoModel obtenerTecnicoPorId(int id);
+    public TecnicoModel obtenerTecnicoPorId(int id) throws Exception;
 
-    public void actualizarTecnico(TecnicoModel tecnico);
+    public void actualizarTecnico(TecnicoModel tecnico) throws Exception;
 
-    public void eliminarTecnico(TecnicoModel tecnico);
+    public void eliminarTecnico(TecnicoModel tecnico) throws Exception;
 
 
 

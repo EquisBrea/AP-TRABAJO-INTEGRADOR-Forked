@@ -13,12 +13,16 @@ public class JpaClienteRepository implements ClienteRepository{
 
 
     @Override
-    public List<ClienteModel> obtenerTodosLosClientes() {
-        return entityManager.createQuery("SELECT c FROM ClienteModel c", ClienteModel.class).getResultList();
+    public List<ClienteModel> obtenerTodosLosClientes() throws Exception {
+        try{
+            return entityManager.createQuery("SELECT a FROM cliente a", ClienteModel.class).getResultList();
+        } catch (Exception e) {
+            throw new Exception("Error al obtener todos los registros");
+        }
     }
 
     @Override
-    public void guardarCliente(ClienteModel cliente) throws Exception{
+    public void guardarCliente(ClienteModel cliente) throws Exception {
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(cliente);
@@ -30,19 +34,35 @@ public class JpaClienteRepository implements ClienteRepository{
     }
 
     @Override
-    public ClienteModel obtenerClientePorId(int id) {
-        return entityManager.find(ClienteModel.class, id);
+    public ClienteModel obtenerClientePorId(int id)  throws Exception {
+        try {
+            return entityManager.find(ClienteModel.class, id);
+        } catch (Exception e) {
+            throw new Exception("Error al obtener el registro solicitado");
+        }
     }
 
     @Override
-    public void actualizarCliente(ClienteModel cliente) {
+    public void actualizarCliente(ClienteModel cliente)  throws Exception {
+        try {
         entityManager.getTransaction().begin();
         entityManager.merge(cliente);
         entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            throw new Exception("Error al actualizar el registro");
+        }
     }
 
     @Override
-    public void eliminarCliente(ClienteModel cliente) {
-
+    public void eliminarCliente(ClienteModel cliente) throws Exception {
+        try {
+        entityManager.getTransaction().begin();
+        entityManager.remove(entityManager.contains(cliente) ? cliente : entityManager.merge(cliente));
+        entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            throw new Exception("Error al eliminar el registro");
+        }
     }
 }
