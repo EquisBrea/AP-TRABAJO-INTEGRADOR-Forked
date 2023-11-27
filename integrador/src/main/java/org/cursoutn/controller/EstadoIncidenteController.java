@@ -1,8 +1,6 @@
 package org.cursoutn.controller;
 
-import org.cursoutn.model.EstadoIncidenteModel;
 import org.cursoutn.model.IncidenteModel;
-import org.cursoutn.state.EstadoIncidente;
 import org.cursoutn.view.EstadoIncidenteView;
 
 import java.util.List;
