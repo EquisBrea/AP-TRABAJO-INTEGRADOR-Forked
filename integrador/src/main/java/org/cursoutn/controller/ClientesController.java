@@ -1,14 +1,12 @@
 package org.cursoutn.controller;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.cursoutn.model.ClienteModel;
+import org.cursoutn.model.IncidenteModel;
 import org.cursoutn.model.NotificacionModel;
 import org.cursoutn.model.ServicioModel;
 import org.cursoutn.view.ClientesView;
 
 import java.util.List;
-import java.util.Set;
 
 public class ClientesController {
     private ClienteModel model;
@@ -39,10 +37,22 @@ public class ClientesController {
     public void setNotificaciones(NotificacionModel notificacion){
         model.getNotificaciones().add(notificacion);
     }
-    public String getNotificaciones(){
-        return model.getNotificaciones().stream().toString();
+    public List<NotificacionModel> getNotificaciones(){
+        return model.getNotificaciones();
     }
-    public void setServicios(ServicioModel servicio){
-        model.setServicio().add(servicio);
+   public void setServicios(ServicioModel servicios) {
+       model.getServicio().add(servicios);
+   }
+   public List<ServicioModel> listadoServicios (){
+        return this.model.getServicio();
+   }
+    public void setIncidentes(IncidenteModel incidente){
+        model.getIncidentes().add(incidente);
+    }
+    public List<IncidenteModel> getIncidentes(){
+        return model.getIncidentes();
+    }
+    public void actualizarView() {
+        view.mostrarDetallesCliente(model.getId(), model.getRazon_social(), model.getNotificaciones(), model.getServicio(), model.getIncidentes());
     }
 }

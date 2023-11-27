@@ -13,8 +13,7 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-@Getter
-@Setter
+
 @Entity
 @Table(name="incidente")
 public class IncidenteModel implements Serializable {
@@ -93,6 +92,22 @@ public class IncidenteModel implements Serializable {
 
     public void setEstadoIncidenteActual(EstadoIncidente estadoIncidenteActual) {
         this.estadoIncidenteActual = estadoIncidenteActual;
+    }
+
+    public void setOperadores(List<OperadorModel> operadores) {
+        this.operadores = operadores;
+    }
+
+    public List<OperadorModel> getOperadores() {
+        return operadores;
+    }
+
+    public ClienteModel getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(ClienteModel cliente) {
+        this.cliente = cliente;
     }
 
     public List<TipoProblemaModel> getTipoProblema() {
