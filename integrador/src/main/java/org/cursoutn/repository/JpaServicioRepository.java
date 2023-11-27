@@ -12,27 +12,56 @@ public class JpaServicioRepository implements ServicioRepository {
     private EntityManager entityManager;
 
     @Override
-    public List<ServicioModel> obtenerTodosLosServicios() {
-        return null;
+    public List<ServicioModel> obtenerTodosLosServicios() throws Exception {
+        try{
+            return entityManager.createQuery("SELECT a FROM servicio a", ServicioModel.class).getResultList();
+        } catch (Exception e) {
+            throw new Exception("Error al obtener todos los registros");
+        }
     }
 
     @Override
-    public void guardarServicio(ServicioModel servicio) {
-
+    public void guardarServicio(ServicioModel servicio) throws Exception {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(servicio);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            throw new Exception("Se produjo un error, tus cambios no fueron guardados");
+        }
     }
 
     @Override
-    public ServicioModel obtenerServicioPorId(int id) {
-        return null;
+    public ServicioModel obtenerServicioPorId(int id) throws Exception {
+        try {
+            return entityManager.find(ServicioModel.class, id);
+        } catch (Exception e) {
+            throw new Exception("Error al obtener el registro solicitado");
+        }
     }
 
     @Override
-    public void actualizarServicio(ServicioModel servicio) {
-
+    public void actualizarServicio(ServicioModel servicio) throws Exception {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(servicio);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            throw new Exception("Error al actualizar el registro");
+        }
     }
 
     @Override
-    public void eliminarServicio(ServicioModel servicio) {
-
+    public void eliminarServicio(ServicioModel servicio) throws Exception {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.remove(entityManager.contains(servicio) ? servicio : entityManager.merge(servicio));
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            throw new Exception("Error al eliminar el registro");
+        }
     }
 }

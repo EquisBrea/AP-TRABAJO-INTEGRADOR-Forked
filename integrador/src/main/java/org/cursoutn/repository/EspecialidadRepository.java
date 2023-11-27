@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface EspecialidadRepository {
 
-    public List<EspecialidadModel> obtenerTodasLasEspecialidades();
+    public List<EspecialidadModel> obtenerTodasLasEspecialidades() throws Exception;
 
-    public void guardarEspecialidad(EspecialidadModel especialidad);
+    public void guardarEspecialidad(EspecialidadModel especialidad) throws Exception;
 
-    public EspecialidadModel obtenerEspecialidadPorId(int id);
+    public EspecialidadModel obtenerEspecialidadPorId(int id) throws Exception;
 
-    public void actualizarEspecialidad(EspecialidadModel especialidad);
+    public void actualizarEspecialidad(EspecialidadModel especialidad) throws Exception;
 
-    public void eliminarEspecialidad(EspecialidadModel especialidad);
+    public void eliminarEspecialidad(EspecialidadModel especialidad) throws Exception;
 }

@@ -6,14 +6,14 @@ import java.util.List;
 
 public interface ClienteRepository {
 
-    public List<ClienteModel> obtenerTodosLosClientes();
+    public List<ClienteModel> obtenerTodosLosClientes() throws Exception;
 
     public void guardarCliente(ClienteModel cliente) throws Exception;
 
-    public ClienteModel obtenerClientePorId(int id);
+    public ClienteModel obtenerClientePorId(int id) throws Exception;
 
-    public void actualizarCliente(ClienteModel cliente);
+    public void actualizarCliente(ClienteModel cliente) throws Exception;
 
-    public void eliminarCliente(ClienteModel cliente);
+    public void eliminarCliente(ClienteModel cliente) throws Exception;
 
 }

@@ -11,29 +11,57 @@ public class JpaNotificacionRepository implements NotificacionRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-
     @Override
-    public List<NotificacionModel> obtenerTodasLasNotificaciones() {
-        return null;
+    public List<NotificacionModel> obtenerTodasLasNotificaciones() throws Exception {
+        try{
+            return entityManager.createQuery("SELECT a FROM notificacion a", NotificacionModel.class).getResultList();
+        } catch (Exception e) {
+            throw new Exception("Error al obtener todos los registros");
+        }
     }
 
     @Override
-    public void guardarNotificacion(NotificacionModel notificacion) {
-
+    public void guardarNotificacion(NotificacionModel notificacion) throws Exception {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(notificacion);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            throw new Exception("Se produjo un error, tus cambios no fueron guardados");
+        }
     }
 
     @Override
-    public NotificacionModel obtenerNotificacionPorId(int id) {
-        return null;
+    public NotificacionModel obtenerNotificacionPorId(int id) throws Exception {
+        try {
+            return entityManager.find(NotificacionModel.class, id);
+        } catch (Exception e) {
+            throw new Exception("Error al obtener el registro solicitado");
+        }
     }
 
     @Override
-    public void actualizarNotificacion(NotificacionModel notificacion) {
-
+    public void actualizarNotificacion(NotificacionModel notificacion) throws Exception {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(notificacion);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            throw new Exception("Error al actualizar el registro");
+        }
     }
 
     @Override
-    public void eliminarNotificacion(NotificacionModel notificacion) {
-
+    public void eliminarNotificacion(NotificacionModel notificacion) throws Exception {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.remove(entityManager.contains(notificacion) ? notificacion : entityManager.merge(notificacion));
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            throw new Exception("Error al eliminar el registro");
+        }
     }
 }

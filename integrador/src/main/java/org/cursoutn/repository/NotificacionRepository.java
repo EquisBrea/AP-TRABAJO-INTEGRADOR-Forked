@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface NotificacionRepository {
 
-    public List<NotificacionModel> obtenerTodasLasNotificaciones();
+    public List<NotificacionModel> obtenerTodasLasNotificaciones() throws Exception;
 
-    public void guardarNotificacion(NotificacionModel notificacion);
+    public void guardarNotificacion(NotificacionModel notificacion) throws Exception;
 
-    public NotificacionModel obtenerNotificacionPorId(int id);
+    public NotificacionModel obtenerNotificacionPorId(int id) throws Exception;
 
-    public void actualizarNotificacion(NotificacionModel notificacion);
+    public void actualizarNotificacion(NotificacionModel notificacion) throws Exception;
 
-    public void eliminarNotificacion(NotificacionModel notificacion);
+    public void eliminarNotificacion(NotificacionModel notificacion) throws Exception;
 }
