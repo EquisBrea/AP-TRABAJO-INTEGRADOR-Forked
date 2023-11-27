@@ -1,4 +1,4 @@
 package org.cursoutn.repository;
 
-public interface ServicioRepository {
+public interface ServicioRepository extends IRepository{
 }

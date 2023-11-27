@@ -1,4 +1,4 @@
 package org.cursoutn.repository;
 
-public interface TipoProblemaRepository {
+public interface TipoProblemaRepository extends IRepository{
 }

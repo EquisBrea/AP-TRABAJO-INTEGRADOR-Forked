@@ -2,8 +2,10 @@ package org.cursoutn.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
-@Table(name="especialidades")
+@Table(name="especialidad")
 public class EspecialidadModel {
     @Id
     @Column
@@ -11,4 +13,7 @@ public class EspecialidadModel {
     private int id;
     @Column
     private String nombreEspecialidad;
+    @ManyToMany(mappedBy = "especialidad")
+    private List<TecnicoModel> tecnicos;
+
 }

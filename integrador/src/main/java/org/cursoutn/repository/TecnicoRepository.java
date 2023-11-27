@@ -1,4 +1,4 @@
 package org.cursoutn.repository;
 
-public interface TecnicoRepository {
+public interface TecnicoRepository extends IRepository{
 }

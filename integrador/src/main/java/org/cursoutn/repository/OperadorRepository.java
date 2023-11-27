@@ -1,4 +1,4 @@
 package org.cursoutn.repository;
 
-public interface OperadorRepository {
+public interface OperadorRepository extends IRepository {
 }

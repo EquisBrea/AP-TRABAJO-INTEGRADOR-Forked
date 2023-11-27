@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="tecnicos")
+@Table(name="tecnico")
 public class TecnicoModel {
     @Id
     @Column
@@ -13,9 +13,8 @@ public class TecnicoModel {
     private int id;
     @Column
     private String nombreTecnico;
-    @Column
-    private List<IncidenteModel> incidentesResueltos;
-    @ManyToOne
-    @JoinColumn(name="tecnico_id", nullable = false)
-    private IncidenteModel incidente;
+    @ManyToMany
+    private List<IncidenteModel> incidentes;
+    @ManyToMany
+    private List<EspecialidadModel> especialidades;
 }

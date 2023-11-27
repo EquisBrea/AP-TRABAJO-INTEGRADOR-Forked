@@ -1,4 +1,5 @@
 package org.cursoutn.repository;
 
-public interface ClienteRepository {
+public interface ClienteRepository extends IRepository {
+
 }

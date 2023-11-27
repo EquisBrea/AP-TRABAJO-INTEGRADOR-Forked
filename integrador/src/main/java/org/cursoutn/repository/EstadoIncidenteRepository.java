@@ -1,4 +1,4 @@
 package org.cursoutn.repository;
 
-public interface EstadoIncidenteRepository {
+public interface EstadoIncidenteRepository extends IRepository{
 }

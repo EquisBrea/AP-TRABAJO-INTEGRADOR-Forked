@@ -3,7 +3,7 @@ package org.cursoutn.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="notificaciones")
+@Table(name="notificacion")
 public class NotificacionModel {
     @Id
     @Column

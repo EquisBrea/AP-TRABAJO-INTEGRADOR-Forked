@@ -1,4 +1,4 @@
 package org.cursoutn.repository;
 
-public interface EspecialidadRepository {
+public interface EspecialidadRepository extends IRepository {
 }
