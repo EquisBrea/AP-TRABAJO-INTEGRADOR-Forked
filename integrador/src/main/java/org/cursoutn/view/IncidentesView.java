@@ -1,6 +1,7 @@
 package org.cursoutn.view;
 
 import org.cursoutn.model.*;
+import org.cursoutn.state.EstadoIncidente;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,4 +23,6 @@ public class IncidentesView {
         return esComplejo >=1;
     }
 
+    public void mostrarIncidente(int id, LocalDateTime fechaHoraIncidente, int tiempoNecesario, int esComplejo, EstadoIncidente estadoIncidenteActual, List<OperadorModel> operadores, ClienteModel cliente, List<TecnicoModel> tecnicos) {
+    }
 }
