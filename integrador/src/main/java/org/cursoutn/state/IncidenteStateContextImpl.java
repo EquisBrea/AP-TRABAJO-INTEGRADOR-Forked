@@ -14,7 +14,7 @@ public class IncidenteStateContextImpl implements IncidenteStateContext {
 
     @Override
     public void iniciar() {
-        this.incidente.setEstadoIncidenteActual(this.estado);
+        this.incidente.setEstadoIncidenteActual(new EstadoIniciado());
     }
 
     @Override
