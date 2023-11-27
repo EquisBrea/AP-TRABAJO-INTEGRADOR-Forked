@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface TipoProblemaRepository {
 
-    public List<TipoProblemaModel> obtenerTodosLosTipoProblema();
+    public List<TipoProblemaModel> obtenerTodosLosTipoProblema() throws Exception;
 
-    public void guardarTipoProblema(TipoProblemaModel tipoProblema);
+    public void guardarTipoProblema(TipoProblemaModel tipoProblema) throws Exception;
 
-    public TipoProblemaModel obtenerTipoProblemaPorId(int id);
+    public TipoProblemaModel obtenerTipoProblemaPorId(int id) throws Exception;
 
-    public void actualizarTipoProblema(TipoProblemaModel tipoProblema);
+    public void actualizarTipoProblema(TipoProblemaModel tipoProblema) throws Exception;
 
-    public void eliminarTipoProblema(TipoProblemaModel tipoProblema);
+    public void eliminarTipoProblema(TipoProblemaModel tipoProblema) throws Exception;
 }
