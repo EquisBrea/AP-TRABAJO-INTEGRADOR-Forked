@@ -8,10 +8,12 @@ import org.cursoutn.state.EstadoIniciado;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
-@Table(name="incidentes")
+@Table(name="incidente")
 public class IncidenteModel implements Serializable {
     @Id
     @Column
@@ -23,17 +25,20 @@ public class IncidenteModel implements Serializable {
     private int tiempoNecesario;
     @Column
     private int esComplejo;
-    @Transient
+    @Column //Esto es para evitar que se almacene el estado en la tabla//
     private EstadoIncidente estadoIncidenteActual;
-    @OneToMany
-    @MapsId
-    @JoinColumn(name="tipo_problema",referencedColumnName = "id")
-    private List<TipoProblemaModel> tipoProblema;
-    @OneToMany
-    @MapsId
-    @JoinColumn(name = "tecnico", referencedColumnName = "id")
+    @ManyToMany
+    @JoinColumn(name="operador_id",referencedColumnName = "id")
+    private List<OperadorModel> operadores;
+    @ManyToOne
+    @JoinColumn(name="cliente_id", referencedColumnName = "id")
+    private ClienteModel cliente;
+    @ManyToMany(mappedBy = "incidente")
     private List<TecnicoModel> tecnicos;
-
+    @OneToMany
+    @MapsId
+    @JoinColumn(name="tipo_problema_id",referencedColumnName = "id")
+    private List<TipoProblemaModel> tipoProblema;
     public IncidenteModel() {
     }
 
