@@ -2,6 +2,9 @@ package org.cursoutn.repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import org.cursoutn.model.TecnicoModel;
+
+import java.util.List;
 
 public class JpaTecnicoRepository implements TecnicoRepository {
 
@@ -9,22 +12,27 @@ public class JpaTecnicoRepository implements TecnicoRepository {
     private EntityManager entityManager;
 
     @Override
-    public void crear(Object item) {
+    public List<TecnicoModel> obtenerTodosLosTecnicos() {
+        return null;
+    }
+
+    @Override
+    public void guardarTecnico(TecnicoModel tecnico) {
 
     }
 
     @Override
-    public void leer(Object item) {
+    public TecnicoModel obtenerTecnicoPorId(int id) {
+        return null;
+    }
+
+    @Override
+    public void actualizarTecnico(TecnicoModel tecnico) {
 
     }
 
     @Override
-    public void actualizar(Object item) {
-
-    }
-
-    @Override
-    public void eliminar(Object item) {
+    public void eliminarTecnico(TecnicoModel tecnico) {
 
     }
 }

@@ -4,29 +4,36 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.cursoutn.model.ClienteModel;
 
+import java.util.List;
+
 public class JpaClienteRepository implements ClienteRepository{
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Override
-    public void crear(Object item) {
-
-    }
-
 
     @Override
-    public void leer(Object item) {
-
+    public List<ClienteModel> obtenerTodosLosClientes() {
+        return null;
     }
 
     @Override
-    public void actualizar(Object item) {
+    public void guardarCliente(ClienteModel cliente) {
 
     }
 
     @Override
-    public void eliminar(Object item) {
+    public ClienteModel obtenerClientePorId(int id) {
+        return null;
+    }
+
+    @Override
+    public void actualizarCliente(ClienteModel cliente) {
+
+    }
+
+    @Override
+    public void eliminarCliente(ClienteModel cliente) {
 
     }
 }
