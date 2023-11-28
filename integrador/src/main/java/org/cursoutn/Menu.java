@@ -1,5 +1,6 @@
 package org.cursoutn;
 
+import jakarta.persistence.PersistenceUnit;
 import org.cursoutn.controller.ClientesController;
 
 import java.util.Scanner;
@@ -20,8 +21,8 @@ public class Menu {
                 menuRegistrarIncidente();
                 break;
             case 2:
-                ClientesController nuevo = MainController.abrirCliente();
-                MainController.registrarNuevoCliente(nuevo);
+               // ClientesController nuevo = Main.abrirCliente();
+               // Main.registrarNuevoCliente(nuevo);
                 break;
             case 3:
                 break;
@@ -32,40 +33,7 @@ public class Menu {
         }
     }
 /*
-        Scanner teclado = new Scanner(System.in);
-        System.out.println ("Por favor ingrese la razón social del cliente:");
-        String nombre = teclado.nextLine ();
-        System.out.println ("Por favor ingrese el cuit del cliente:");
-        Long cuit = Long parseLong(teclado.nextLine ());
-        System.out.println ("Por favor ingrese el domicilio del cliente:");
-        String domicilio = teclado.nextLine ();
-        System.out.println ("Por favor ingrese el telefono del cliente:");
-        Long teleTonO = parseLong teclado.nextLineO);
-        System.out.printIn ("Por favor ingrese el maill del cliente:");
-        string mail = teclado. nexto;
-        int opcionServicio;
-        ServicioContratado contratacion = ServicioContratado. PACK_BASICO;
-        do {
-            System.out.println ("Por favor ingrese el servicio contratado por el cliente:");
-            System.out.printIn ("1 - Pack básico");
-            System.out.printin ("2
-                            - Pack intermedio");
-                    System.out.printin ("3 - Pack full");
-            opcionServicio = teclado.nextInt ();
-            T
-            switch (opcionServicio) {
-                case 1:
-                    contratacion = ServicioContratado.PACK_ BASICO;
-                    break;
-                case 2:
-                    contratacion = ServicioContratado. PACK_INTERMEDIO;
-                    break;
-                case 3:
-                    contratacion = ServicioContratado.PACK_FULL;
-                    break;
-                default:
-                    System.out.println ("La opción ingresada no es valida por favor ingrese una opción valida.");
-    }
+
 
  */
     public static void menuInicial() throws Exception {
