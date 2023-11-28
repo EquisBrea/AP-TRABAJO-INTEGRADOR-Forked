@@ -1,5 +1,7 @@
 package org.cursoutn;
 
+import org.cursoutn.controller.ClientesController;
+
 import java.util.Scanner;
 
 import static java.lang.Long.parseLong;
@@ -18,6 +20,8 @@ public class Menu {
                 menuRegistrarIncidente();
                 break;
             case 2:
+                ClientesController nuevo = MainController.abrirCliente();
+                MainController.registrarNuevoCliente(nuevo);
                 break;
             case 3:
                 break;
@@ -92,11 +96,7 @@ public class Menu {
     private static void menuConsultas() throws Exception {
         Scanner teclado = new Scanner(System.in);
         System.out.println ("Por favor ingrese la opción deseada:");
-        System.out.println ("1- Buscar Incidente por ID");
-        System.out.println ("2- Buscar Cliente por ID");
-        System.out.println ("3- Buscar Tecnico por ID");
-        System.out.println ("4- Buscar Especialidad por ID");
-        System.out.println ("5- Consultas e informes");
+        System.out.println ("1- Tecnico con más incidentes resueltos:");
         int seleccion = teclado.nextInt();
         switch(seleccion) {
             case 1:
@@ -133,7 +133,6 @@ public class Menu {
                 System.out.println("Introduzca ID");
                 id = teclado.nextInt();
                 return id;
-
             case 3:
                 System.out.println("Introduzca ID");
                 id = teclado.nextInt();
@@ -153,9 +152,7 @@ public class Menu {
     private static void menuBuscarIncidentePorId() throws Exception {
         Scanner teclado = new Scanner(System.in);
         System.out.println ("Por favor ingrese el id del cliente:");
-        int clienteId = teclado.nextInt();
-        MainController.buscarClientePorId(clienteId);
-    }
+        int clienteId = teclado.nextInt();}
 
     public static void menuRegistrarIncidente() {
         Scanner teclado = new Scanner(System.in);

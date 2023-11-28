@@ -1,3 +1,1 @@
 # Ignorar persistence.xml, para que cada colaborador pueda tener su propia configuración de persistencia de manera local
-\integrador\src\main\resources\META_INF\persistence.xml
-integrador/src/main/resources/META_INF/persistence.xml

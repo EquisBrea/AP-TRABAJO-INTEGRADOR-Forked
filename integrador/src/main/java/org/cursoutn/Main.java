@@ -4,7 +4,10 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
+import org.cursoutn.controller.ClientesController;
 import org.cursoutn.model.ClienteModel;
+import org.cursoutn.view.ClientesView;
+
 
 public class Main {
 
@@ -22,7 +25,9 @@ public class Main {
 
     }
     public static void main(String[] args) throws Exception {
+
         Menu.menuInicial();
+
     }
 }
 
