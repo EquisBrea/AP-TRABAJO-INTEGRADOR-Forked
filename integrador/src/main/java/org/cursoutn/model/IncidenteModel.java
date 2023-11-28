@@ -14,26 +14,38 @@ public class IncidenteModel implements Serializable {
     @Column
     @GeneratedValue
     private int id;
+
     @Column
     private LocalDateTime fechaHoraIncidente;
+
     @Column
     private int tiempoNecesario;
+
     @Column
     private int esComplejo;
+
     @Column
     private IncidenteState estadoIncidente;
+
     @ManyToMany
     @JoinColumn(name="operador_id",referencedColumnName = "id")
     private List<OperadorModel> operadores;
+
     @ManyToOne
     @JoinColumn(name="cliente_id", referencedColumnName = "id")
     private ClienteModel cliente;
+
     @ManyToMany(mappedBy = "incidente")
     private List<TecnicoModel> tecnicos;
-    @OneToMany
-    @MapsId
-    @JoinColumn(name="tipo_problema_id",referencedColumnName = "id")
+    
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @JoinTable(
+            name = "tipo_problema_incidente",
+            joinColumns = @JoinColumn(name = "tipo_problema_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "incidente_id", referencedColumnName = "id")
+    )
     private List<TipoProblemaModel> tipoProblema;
+
     public IncidenteModel() {
     }
 

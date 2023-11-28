@@ -14,11 +14,14 @@ public class TipoProblemaModel {
     @Column
     @GeneratedValue
     private int id;
+
     @Column
     private String nombreTipoProblema;
-    @ManyToMany
+
+    @ManyToMany(mappedBy = "tipoProblema")
     @JoinColumn(name="incidente_id", nullable = false)
     private List<IncidenteModel> incidentes;
+
     @OneToMany
     @JoinColumn(name="tipo_problema_id", referencedColumnName = "id")
     private List<EspecialidadModel> especialidades;
