@@ -1,11 +1,7 @@
 package org.cursoutn.controller;
 
-import org.cursoutn.model.ClienteModel;
-import org.cursoutn.model.IncidenteModel;
-import org.cursoutn.model.OperadorModel;
-import org.cursoutn.model.TecnicoModel;
+import org.cursoutn.model.*;
 import org.cursoutn.state.EstadoIncidente;
-import org.cursoutn.view.ClientesView;
 import org.cursoutn.view.IncidentesView;
 
 import java.time.LocalDateTime;
@@ -27,8 +23,8 @@ public class IncidentesController {
     public int getTiempoNecesario (){return this.model.getTiempoNecesario();}
     public void setEsComplejo (int esComplejo){this.model.setEsComplejo(esComplejo);}
     public int getEsComplejo (){return this.model.getEsComplejo();}
-    public void setEstadoIncidenteActual (EstadoIncidente estadoIncidenteActual){this.model.setEstadoIncidenteActual(estadoIncidenteActual);}
-    public EstadoIncidente getEstadoIncidenteActual(){return this.model.getEstadoIncidenteActual();}
+    public void setEstadoIncidenteActual (IncidenteState estadoIncidente){this.model.setEstadoIncidente(estadoIncidente);}
+    public IncidenteState getEstadoIncidenteActual(){return this.model.getEstadoIncidente();}
     public void setOperadores (OperadorModel operador){this.model.getOperadores().add(operador);}
     public List<OperadorModel> operadores (){return this.model.getOperadores();}
     public void setCliente (ClienteModel cliente) {this.model.setCliente(cliente);}
@@ -36,6 +32,6 @@ public class IncidentesController {
     public void setTecnicos (TecnicoModel tecnico){this.model.getTecnicos().add(tecnico);}
     public List<TecnicoModel> getTecnicos (){return this.model.getTecnicos();}
     public void actualizarView (){
-        view.mostrarIncidente(model.getId(), model.getFechaHoraIncidente(), model.getTiempoNecesario(), model.getEsComplejo(), model.getEstadoIncidenteActual(), model.getOperadores(), model.getCliente(), model.getTecnicos());
+        view.mostrarIncidente(model.getId(), model.getFechaHoraIncidente(), model.getTiempoNecesario(), model.getEsComplejo(), this.model.getEstadoIncidente(), model.getOperadores(), model.getCliente(), model.getTecnicos(), model.getTipoProblema());
     }
 }

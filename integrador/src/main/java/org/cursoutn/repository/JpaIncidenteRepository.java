@@ -3,6 +3,7 @@ package org.cursoutn.repository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.cursoutn.model.IncidenteModel;
+import org.cursoutn.model.IncidenteState;
 import org.cursoutn.state.EstadoIncidente;
 
 import java.util.List;
@@ -67,10 +68,10 @@ public class JpaIncidenteRepository implements IncidenteRepository{
     }
 
     @Override
-    public void actualizarEstadoIncidente(IncidenteModel incidente, EstadoIncidente nuevoEstado) throws Exception {
+    public void actualizarEstadoIncidente(IncidenteModel incidente, IncidenteState nuevoEstado) throws Exception {
         try {
             // switch para modificar el estado con los métodos de IncidenteModel, con nuevoEstado como condición
-            incidente.setEstadoIncidenteActual(nuevoEstado);
+            incidente.setEstadoIncidente(nuevoEstado);
             entityManager.getTransaction().begin();
             entityManager.merge(incidente);
             entityManager.getTransaction().commit();

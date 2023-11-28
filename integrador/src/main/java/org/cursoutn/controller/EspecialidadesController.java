@@ -27,9 +27,7 @@ public class EspecialidadesController {
     public String getNombreEspecialidad (){
         return this.model.getNombreEspecialidad();
     }
-    public void setListadoTecnicos (TecnicoModel tecnico){
-        this.model.getTecnicos().add(tecnico);
-    }
+    public void setListadoTecnicos (TecnicoModel tecnico){this.model.getTecnicos().add(tecnico);}
     public List<TecnicoModel> listadoTecnicos() {
         return this.model.getTecnicos();
     }

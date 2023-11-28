@@ -1,11 +1,9 @@
 package org.cursoutn.state;
 
 import org.cursoutn.model.IncidenteModel;
+import org.cursoutn.model.IncidenteState;
 
 public interface EstadoIncidente {
-
-    void iniciar(IncidenteModel incidente);
-    void enCurso(IncidenteModel incidente);
-    void finalizar(IncidenteModel incidente);
+    void cambiarEstado(IncidenteEstado incidenteEstado);
 
 }

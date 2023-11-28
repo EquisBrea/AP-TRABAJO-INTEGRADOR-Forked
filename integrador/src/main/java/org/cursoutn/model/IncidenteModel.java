@@ -1,18 +1,14 @@
 package org.cursoutn.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import org.cursoutn.state.EstadoEnCurso;
-import org.cursoutn.state.EstadoFinalizado;
+import org.cursoutn.state.IncidenteAsignado;
+import org.cursoutn.state.IncidenteFinalizado;
 import org.cursoutn.state.EstadoIncidente;
-import org.cursoutn.state.EstadoIniciado;
+import org.cursoutn.state.IncidenteEstado;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name="incidente")
@@ -28,7 +24,7 @@ public class IncidenteModel implements Serializable {
     @Column
     private int esComplejo;
     @Column
-    private EstadoIncidente estadoIncidenteActual;
+    private IncidenteState estadoIncidente;
     @ManyToMany
     @JoinColumn(name="operador_id",referencedColumnName = "id")
     private List<OperadorModel> operadores;
@@ -44,12 +40,12 @@ public class IncidenteModel implements Serializable {
     public IncidenteModel() {
     }
 
-    public IncidenteModel(int id, LocalDateTime fechaHoraIncidente, int tiempoNecesario, int esComplejo, EstadoIncidente estadoIncidenteActual, List<TipoProblemaModel> tipoProblema, List<TecnicoModel> tecnicos) {
+    public IncidenteModel(int id, LocalDateTime fechaHoraIncidente, int tiempoNecesario, int esComplejo, IncidenteState estadoIncidente, List<TipoProblemaModel> tipoProblema, List<TecnicoModel> tecnicos) {
         this.id = id;
         this.fechaHoraIncidente = fechaHoraIncidente;
         this.tiempoNecesario = tiempoNecesario;
         this.esComplejo = esComplejo;
-        this.estadoIncidenteActual = estadoIncidenteActual;
+        this.estadoIncidente = estadoIncidente;
         this.tipoProblema = tipoProblema;
         this.tecnicos = tecnicos;
     }
@@ -86,12 +82,12 @@ public class IncidenteModel implements Serializable {
         this.esComplejo = esComplejo;
     }
 
-    public EstadoIncidente getEstadoIncidenteActual() {
-        return estadoIncidenteActual;
+    public IncidenteState getEstadoIncidente() {
+        return this.estadoIncidente;
     }
 
-    public void setEstadoIncidenteActual(EstadoIncidente estadoIncidenteActual) {
-        this.estadoIncidenteActual = estadoIncidenteActual;
+    public void setEstadoIncidente(IncidenteState estadoIncidente) {
+        this.estadoIncidente = estadoIncidente;
     }
 
     public void setOperadores(List<OperadorModel> operadores) {
@@ -99,11 +95,11 @@ public class IncidenteModel implements Serializable {
     }
 
     public List<OperadorModel> getOperadores() {
-        return operadores;
+        return this.operadores;
     }
 
     public ClienteModel getCliente() {
-        return cliente;
+        return this.cliente;
     }
 
     public void setCliente(ClienteModel cliente) {
@@ -126,18 +122,7 @@ public class IncidenteModel implements Serializable {
         this.tecnicos = tecnicos;
     }
 
-    public void iniciar() {
-        estadoIncidenteActual = new EstadoIniciado();
-        estadoIncidenteActual.iniciar(this);
-    }
 
-    public void enCurso() {
-        estadoIncidenteActual = new EstadoEnCurso();
-        estadoIncidenteActual.enCurso(this);
-    }
 
-    public void finalizar() {
-        estadoIncidenteActual = new EstadoFinalizado();
-        estadoIncidenteActual.finalizar(this);
-    }
+
 }

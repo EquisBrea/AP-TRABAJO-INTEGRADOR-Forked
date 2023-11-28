@@ -5,6 +5,8 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import org.cursoutn.controller.IncidentesController;
 import org.cursoutn.model.IncidenteModel;
+import org.cursoutn.repository.JpaClienteRepository;
+import org.cursoutn.repository.JpaIncidenteRepository;
 import org.cursoutn.view.IncidentesView;
 
 public class Main {
