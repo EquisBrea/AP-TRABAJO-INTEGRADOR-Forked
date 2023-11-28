@@ -3,6 +3,7 @@ package org.cursoutn.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.cursoutn.repository.JpaClienteRepository;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
 @Entity
 @Table(name="cliente")
 public class ClienteModel {
+    private JpaClienteRepository repository;
     @Id
     @Column
     @GeneratedValue
@@ -32,4 +34,14 @@ public class ClienteModel {
     @JoinColumn(name="cliente_id", referencedColumnName = "id")
     private List<IncidenteModel> incidentes;
 
+    public void guardarCliente (ClienteModel cliente) throws Exception {
+            repository.guardarCliente(cliente);
+    }
+    public ClienteModel obtenerClientePorId(int id) throws Exception {
+        return repository.obtenerClientePorId(id);
+    }
+    public void actualizarCliente(ClienteModel cliente) throws Exception {
+        repository.actualizarCliente(cliente);
+    }
+    public void eliminarCliente(ClienteModel cliente) throws Exception {repository.eliminarCliente(cliente);}
 }

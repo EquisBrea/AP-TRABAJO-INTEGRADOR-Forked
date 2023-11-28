@@ -9,7 +9,7 @@ import org.cursoutn.view.ClientesView;
 import java.util.List;
 
 public class ClientesController {
-    private ClienteModel model;
+    public ClienteModel model;
     private ClientesView view;
 
     public ClientesController(ClienteModel model, ClientesView view) {

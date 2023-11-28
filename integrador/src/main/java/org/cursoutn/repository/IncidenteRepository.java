@@ -1,8 +1,7 @@
 package org.cursoutn.repository;
 
 import org.cursoutn.model.IncidenteModel;
-import org.cursoutn.model.IncidenteState;
-import org.cursoutn.state.EstadoIncidente;
+import org.cursoutn.state.IncidenteState;
 
 import java.util.List;
 

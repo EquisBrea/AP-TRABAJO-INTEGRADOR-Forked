@@ -1,9 +1,8 @@
 package org.cursoutn.state;
 
-import org.cursoutn.model.IncidenteModel;
-import org.cursoutn.model.IncidenteState;
+import org.cursoutn.model.TecnicoModel;
 
 public interface EstadoIncidente {
-    void cambiarEstado(IncidenteEstado incidenteEstado);
+    void cambiarEstado(TecnicoModel tecnicoModel, IncidenteEstado incidenteEstado);
 
 }

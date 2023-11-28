@@ -1,6 +1,7 @@
 package org.cursoutn.view;
 
 import org.cursoutn.model.*;
+import org.cursoutn.state.IncidenteState;
 
 import java.time.LocalDateTime;
 import java.util.List;

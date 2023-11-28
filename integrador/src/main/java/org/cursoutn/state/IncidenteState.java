@@ -1,4 +1,4 @@
-package org.cursoutn.model;
+package org.cursoutn.state;
 
 public enum IncidenteState {
     INICIADO,

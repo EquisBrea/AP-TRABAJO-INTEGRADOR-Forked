@@ -2,12 +2,9 @@ package org.cursoutn;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
-import org.cursoutn.controller.IncidentesController;
-import org.cursoutn.model.IncidenteModel;
-import org.cursoutn.repository.JpaClienteRepository;
-import org.cursoutn.repository.JpaIncidenteRepository;
-import org.cursoutn.view.IncidentesView;
+import org.cursoutn.model.ClienteModel;
 
 public class Main {
 
@@ -24,7 +21,8 @@ public class Main {
          */
 
     }
-    public static void main(String[] args) {
-        saludarAlMundo();
+    public static void main(String[] args) throws Exception {
+        Menu.menuInicial();
     }
 }
+

@@ -1,10 +1,7 @@
 package org.cursoutn.model;
 
 import jakarta.persistence.*;
-import org.cursoutn.state.IncidenteAsignado;
-import org.cursoutn.state.IncidenteFinalizado;
-import org.cursoutn.state.EstadoIncidente;
-import org.cursoutn.state.IncidenteEstado;
+import org.cursoutn.state.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

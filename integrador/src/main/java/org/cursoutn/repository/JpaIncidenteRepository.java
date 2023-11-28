@@ -3,8 +3,7 @@ package org.cursoutn.repository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.cursoutn.model.IncidenteModel;
-import org.cursoutn.model.IncidenteState;
-import org.cursoutn.state.EstadoIncidente;
+import org.cursoutn.state.IncidenteState;
 
 import java.util.List;
 
