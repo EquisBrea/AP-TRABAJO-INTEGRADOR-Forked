@@ -1,5 +1,8 @@
 package org.cursoutn;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import jakarta.persistence.*;
 import jakarta.persistence.EntityManager;
 import org.cursoutn.controller.ClientesController;
@@ -22,7 +25,7 @@ public class Main {
 
      //   return clienteController;
     //}
-   public static void registrarNuevoCliente(ClientesController clientesController){
+   /* public static void registrarNuevoCliente(ClientesController clientesController){
         Scanner scn = new Scanner(System.in);
         System.out.println("Ingrese Razon Social:");
         String txt = scn.nextLine();
@@ -34,6 +37,8 @@ public class Main {
     public static ClienteModel buscarClientePorId(ClientesController cliente, int id) throws Exception {
         return cliente.model.getRepository().obtenerClientePorId(id);
     }
+
+
    /* public static void mostrarInfo(Process process, List<String> datos){
         ClientesController cliente = abrirCliente();
         cliente.actualizarView();
@@ -56,8 +61,5 @@ public class Main {
 
 }
 
-package org.example.util;
-        import jakarta.persistence.EntityManager;
-        import jakarta.persistence.EntityManagerFactory;
-        import jakarta.persistence.Persistence;
+
 
