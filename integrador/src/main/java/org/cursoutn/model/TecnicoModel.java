@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Time;
 import java.util.List;
 @Getter
 @Setter
@@ -15,12 +16,31 @@ public class TecnicoModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column
+    @Column(nullable = false)
     private String nombreTecnico;
 
-    @ManyToMany
+    private String colchonHoras;
+
+    @ManyToMany(mappedBy = "tecnicos")
     private List<IncidenteModel> incidentes;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "tecnicos")
+    @Column(nullable = false)
     private List<EspecialidadModel> especialidades;
+
+    public TecnicoModel() {
+    }
+
+    public TecnicoModel(String nombreTecnico, List<EspecialidadModel> especialidades) {
+        this.nombreTecnico = nombreTecnico;
+        this.especialidades = especialidades;
+    }
+
+    public TecnicoModel(String nombreTecnico, String colchonHoras, List<IncidenteModel> incidentes,
+                        List<EspecialidadModel> especialidades) {
+        this.nombreTecnico = nombreTecnico;
+        this.colchonHoras = colchonHoras;
+        this.incidentes = incidentes;
+        this.especialidades = especialidades;
+    }
 }

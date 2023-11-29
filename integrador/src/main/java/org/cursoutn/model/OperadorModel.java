@@ -25,4 +25,16 @@ public class OperadorModel {
             inverseJoinColumns = @JoinColumn(name = "incidente_id", referencedColumnName = "id")
     )
     private List<IncidenteModel> incidentes;
+
+    public OperadorModel() {
+    }
+
+    public OperadorModel(String nombreOperador) {
+        this.nombreOperador = nombreOperador;
+    }
+
+    public OperadorModel(String nombreOperador, List<IncidenteModel> incidentes) {
+        this.nombreOperador = nombreOperador;
+        this.incidentes = incidentes;
+    }
 }

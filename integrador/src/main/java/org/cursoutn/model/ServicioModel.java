@@ -23,7 +23,19 @@ public class ServicioModel {
 
     //Esta relación no está en el disenio original, pero puede ayudar al seguimiento de problemas de los servicios
     //ofrecidos.>>>>
-    @OneToMany
-    @JoinColumn(name="servicio_id", referencedColumnName = "id")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "servicio")
     private List<TipoProblemaModel> tiposDeProblemas;
+
+    public ServicioModel() {
+    }
+
+    public ServicioModel(String nombreServicio) {
+        this.nombreServicio = nombreServicio;
+    }
+
+    public ServicioModel(String nombreServicio, List<ClienteModel> clientes, List<TipoProblemaModel> tiposDeProblemas) {
+        this.nombreServicio = nombreServicio;
+        this.clientes = clientes;
+        this.tiposDeProblemas = tiposDeProblemas;
+    }
 }

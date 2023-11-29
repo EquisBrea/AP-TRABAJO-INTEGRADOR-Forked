@@ -18,12 +18,33 @@ public class EspecialidadModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column
+    @Column(nullable = false)
     private String nombreEspecialidad;
 
-    @ManyToMany(mappedBy = "especialidad")
+    @ManyToMany
+    @JoinTable(
+            name = "especialidad_tenico",
+            joinColumns = @JoinColumn(name = "especialidad_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "tecnico_id", referencedColumnName = "id")
+    )
     private List<TecnicoModel> tecnicos;
 
+    @ManyToOne
+    @JoinColumn(name = "tipo_problema_id")
+    private TipoProblemaModel tipoProblema;
+
+    public EspecialidadModel() {
+    }
+
+    public EspecialidadModel(String nombreEspecialidad) {
+        this.nombreEspecialidad = nombreEspecialidad;
+    }
+
+    public EspecialidadModel(String nombreEspecialidad, List<TecnicoModel> tecnicos, TipoProblemaModel tipoProblema) {
+        this.nombreEspecialidad = nombreEspecialidad;
+        this.tecnicos = tecnicos;
+        this.tipoProblema = tipoProblema;
+    }
 
     public List<EspecialidadModel> obtenerTodasLasEspecialidades() throws Exception {
         return repository.obtenerTodasLasEspecialidades();

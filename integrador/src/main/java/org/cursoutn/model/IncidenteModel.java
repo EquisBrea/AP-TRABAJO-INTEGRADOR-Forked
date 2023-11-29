@@ -34,7 +34,12 @@ public class IncidenteModel implements Serializable {
     @JoinColumn(name="cliente_id", referencedColumnName = "id", nullable = false)
     private ClienteModel cliente;
 
-    @ManyToMany(mappedBy = "incidentes")
+    @ManyToMany
+    @JoinTable(
+            name = "incidente_tecnico",
+            joinColumns = @JoinColumn(name = "incidente_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "tecnico_id", referencedColumnName = "id")
+    )
     private List<TecnicoModel> tecnicos;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
@@ -48,14 +53,26 @@ public class IncidenteModel implements Serializable {
     public IncidenteModel() {
     }
 
-    public IncidenteModel(int id, LocalDateTime fechaHoraIncidente, int tiempoNecesario, int esComplejo, IncidenteState estadoIncidente, List<TipoProblemaModel> tipoProblema, List<TecnicoModel> tecnicos) {
-        this.id = id;
+    public IncidenteModel(LocalDateTime fechaHoraIncidente, int tiempoNecesario, int esComplejo, IncidenteState estadoIncidente,
+                          List<TipoProblemaModel> tipoProblema, List<TecnicoModel> tecnicos) {
         this.fechaHoraIncidente = fechaHoraIncidente;
         this.tiempoNecesario = tiempoNecesario;
         this.esComplejo = esComplejo;
         this.estadoIncidente = estadoIncidente;
         this.tipoProblema = tipoProblema;
+    }
+
+    public IncidenteModel(LocalDateTime fechaHoraIncidente, int tiempoNecesario, int esComplejo, IncidenteState estadoIncidente,
+                          List<OperadorModel> operadores, ClienteModel cliente, List<TecnicoModel> tecnicos,
+                          List<TipoProblemaModel> tipoProblema) {
+        this.fechaHoraIncidente = fechaHoraIncidente;
+        this.tiempoNecesario = tiempoNecesario;
+        this.esComplejo = esComplejo;
+        this.estadoIncidente = estadoIncidente;
+        this.operadores = operadores;
+        this.cliente = cliente;
         this.tecnicos = tecnicos;
+        this.tipoProblema = tipoProblema;
     }
 
     public int getId() {

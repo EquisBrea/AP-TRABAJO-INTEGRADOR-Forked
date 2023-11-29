@@ -43,10 +43,8 @@ public class ClienteModel {
     public ClienteModel() {
     }
 
-    public ClienteModel(JpaClienteRepository repository, int id, String razon_social, long cuil, List<NotificacionModel> notificaciones,
+    public ClienteModel(String razon_social, long cuil, List<NotificacionModel> notificaciones,
                         List<ServicioModel> servicios, List<IncidenteModel> incidentes) {
-        this.repository = repository;
-        this.id = id;
         this.razon_social = razon_social;
         this.cuil = cuil;
         this.notificaciones = notificaciones;
@@ -55,8 +53,7 @@ public class ClienteModel {
     }
 
     //Para crear un cliente por primera vez
-    public ClienteModel(int id, String razon_social, long cuil) {
-        this.id = id;
+    public ClienteModel(String razon_social, long cuil) {
         this.razon_social = razon_social;
         this.cuil = cuil;
     }

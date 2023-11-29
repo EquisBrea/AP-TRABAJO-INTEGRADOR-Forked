@@ -20,4 +20,14 @@ public class NotificacionModel {
     @ManyToOne
     @JoinColumn(name = "cliente_id", referencedColumnName = "id", nullable = false)
     private ClienteModel cliente;
+
+    public NotificacionModel() {
+    }
+
+    public NotificacionModel(String nombreNotificacion, ClienteModel cliente) {
+        this.nombreNotificacion = nombreNotificacion;
+        this.cliente = cliente;
+    }
+
+
 }

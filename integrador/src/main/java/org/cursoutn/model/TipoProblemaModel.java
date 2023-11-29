@@ -22,7 +22,18 @@ public class TipoProblemaModel {
     @Column(name="incidente_id", nullable = false)
     private List<IncidenteModel> incidentes;
 
-    @OneToMany
-    @JoinColumn(name="tipo_problema_id", referencedColumnName = "id")
+    @OneToMany(mappedBy = "tipoProblema")
     private List<EspecialidadModel> especialidades;
+
+    @ManyToOne
+    @JoinColumn(name = "servicio_id", referencedColumnName = "id")
+    private ServicioModel servicio;
+
+    public TipoProblemaModel() {
+    }
+
+    public TipoProblemaModel(List<EspecialidadModel> especialidades, ServicioModel servicio) {
+        this.especialidades = especialidades;
+        this.servicio = servicio;
+    }
 }
