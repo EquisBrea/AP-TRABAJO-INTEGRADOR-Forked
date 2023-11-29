@@ -15,10 +15,12 @@ public class EspecialidadModel {
     JpaEspecialidadRepository repository;
     @Id
     @Column
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column
     private String nombreEspecialidad;
+
     @ManyToMany(mappedBy = "especialidad")
     private List<TecnicoModel> tecnicos;
 

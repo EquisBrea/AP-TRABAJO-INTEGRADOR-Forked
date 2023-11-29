@@ -12,14 +12,14 @@ import java.util.List;
 public class TipoProblemaModel {
     @Id
     @Column
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column
+    @Column(nullable = false)
     private String nombreTipoProblema;
 
     @ManyToMany(mappedBy = "tipoProblema")
-    @JoinColumn(name="incidente_id", nullable = false)
+    @Column(name="incidente_id", nullable = false)
     private List<IncidenteModel> incidentes;
 
     @OneToMany

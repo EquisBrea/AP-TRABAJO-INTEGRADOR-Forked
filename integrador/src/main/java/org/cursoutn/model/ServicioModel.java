@@ -12,10 +12,14 @@ import java.util.List;
 public class ServicioModel {
     @Id
     @Column
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column
+
+    @Column(nullable = false)
     private String nombreServicio;
+
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "servicios")
+    private List<ClienteModel> clientes;
 
     //Esta relación no está en el disenio original, pero puede ayudar al seguimiento de problemas de los servicios
     //ofrecidos.>>>>

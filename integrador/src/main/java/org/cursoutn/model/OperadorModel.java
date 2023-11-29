@@ -12,11 +12,17 @@ import java.util.List;
 public class OperadorModel {
     @Id
     @Column
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column
+
+    @Column(nullable = false)
     private String nombreOperador;
-    @ManyToMany
-    @JoinColumn(name="incidente_id", referencedColumnName = "id")
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "operador_incidente",
+            joinColumns = @JoinColumn(name = "operador_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "incidente_id", referencedColumnName = "id")
+    )
     private List<IncidenteModel> incidentes;
 }

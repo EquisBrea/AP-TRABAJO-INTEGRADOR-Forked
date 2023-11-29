@@ -12,12 +12,15 @@ import java.util.List;
 public class TecnicoModel {
     @Id
     @Column
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column
     private String nombreTecnico;
+
     @ManyToMany
     private List<IncidenteModel> incidentes;
+
     @ManyToMany
     private List<EspecialidadModel> especialidades;
 }

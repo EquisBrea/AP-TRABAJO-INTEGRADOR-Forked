@@ -11,8 +11,13 @@ import lombok.Setter;
 public class NotificacionModel {
     @Id
     @Column
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column
+
+    @Column(nullable = false)
     private String nombreNotificacion;
+
+    @ManyToOne
+    @JoinColumn(name = "cliente_id", referencedColumnName = "id", nullable = false)
+    private ClienteModel cliente;
 }

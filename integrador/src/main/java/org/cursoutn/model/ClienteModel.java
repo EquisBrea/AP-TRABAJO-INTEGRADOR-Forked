@@ -15,24 +15,51 @@ public class ClienteModel {
     private JpaClienteRepository repository;
     @Id
     @Column
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column
+
+    @Column(nullable = false)
     private String razon_social;
-    @Column
+
+    @Column(nullable = false)
     private long cuil;
+
     @OneToMany
-    @MapsId
     @JoinColumn(name = "cliente_id", referencedColumnName = "id")
     private List<NotificacionModel> notificaciones;
+
+    @ManyToMany
+    @JoinTable(
+            name = "cliente_servicio",
+            joinColumns = @JoinColumn(name = "servicio_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "cliente_id", referencedColumnName = "id")
+    )
+    private List<ServicioModel> servicios;
+
     @OneToMany
-    @MapsId
-    @JoinColumn(name="cliente_id",referencedColumnName = "id")
-    private List<ServicioModel> servicio;
-    @OneToMany
-    @MapsId
     @JoinColumn(name="cliente_id", referencedColumnName = "id")
     private List<IncidenteModel> incidentes;
+
+    public ClienteModel() {
+    }
+
+    public ClienteModel(JpaClienteRepository repository, int id, String razon_social, long cuil, List<NotificacionModel> notificaciones,
+                        List<ServicioModel> servicios, List<IncidenteModel> incidentes) {
+        this.repository = repository;
+        this.id = id;
+        this.razon_social = razon_social;
+        this.cuil = cuil;
+        this.notificaciones = notificaciones;
+        this.servicios = servicios;
+        this.incidentes = incidentes;
+    }
+
+    //Para crear un cliente por primera vez
+    public ClienteModel(int id, String razon_social, long cuil) {
+        this.id = id;
+        this.razon_social = razon_social;
+        this.cuil = cuil;
+    }
 
     public void guardarCliente (ClienteModel cliente) throws Exception {
             repository.guardarCliente(cliente);

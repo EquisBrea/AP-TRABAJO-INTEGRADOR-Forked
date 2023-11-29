@@ -12,7 +12,7 @@ import java.util.List;
 public class IncidenteModel implements Serializable {
     @Id
     @Column
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column
@@ -27,22 +27,21 @@ public class IncidenteModel implements Serializable {
     @Column
     private IncidenteState estadoIncidente;
 
-    @ManyToMany
-    @JoinColumn(name="operador_id",referencedColumnName = "id")
+    @ManyToMany(mappedBy = "incidentes")
     private List<OperadorModel> operadores;
 
     @ManyToOne
-    @JoinColumn(name="cliente_id", referencedColumnName = "id")
+    @JoinColumn(name="cliente_id", referencedColumnName = "id", nullable = false)
     private ClienteModel cliente;
 
-    @ManyToMany(mappedBy = "incidente")
+    @ManyToMany(mappedBy = "incidentes")
     private List<TecnicoModel> tecnicos;
-    
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinTable(
-            name = "tipo_problema_incidente",
-            joinColumns = @JoinColumn(name = "tipo_problema_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "incidente_id", referencedColumnName = "id")
+            name = "incidente_tipo_problema",
+            joinColumns = @JoinColumn(name = "incidente_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "tipo_problema_id", referencedColumnName = "id")
     )
     private List<TipoProblemaModel> tipoProblema;
 
