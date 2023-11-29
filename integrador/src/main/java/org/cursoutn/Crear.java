@@ -11,6 +11,7 @@ import org.cursoutn.view.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Crear {
@@ -64,10 +65,14 @@ public class Crear {
             long cuil = scn.nextLong();
 
             System.out.println("Ingrese especialidad: ");
-            String nottxt = scn.nextLine();
+            String nottxt = scn.nextLine().toUpperCase();
+            if (!Consultas.existeEspecialidad(nottxt)){
+                Crear.registrarNuevaEspecialidad();
+            }
 
             tC.setNombreTecnico(txt);
             tC.agregarEspecialidad(nottxt);
+
 
             tC.repository.actualizarTecnico(tC.model);
 
@@ -95,10 +100,9 @@ public class Crear {
             System.out.println("Problema no existente con anterioridad, por favor registrar: ");
             Crear.registrarNuevoTipoDeProblema();
 
-
-
             control.setFechaHoraIncidente(LocalDateTime.now());
             control.setEsComplejo(0);
+            repository.actualizarIncidente(control.model);
         } catch (Exception e) {
             System.out.println("Problema:" + e);
         }
@@ -111,7 +115,7 @@ public class Crear {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try{
-            TipoProblemaModel i = new TipoProblemaModel(new ArrayList<EspecialidadModel>(), new ServicioModel());
+            TipoProblemaModel i = new TipoProblemaModel(new ArrayList<>(), new ServicioModel());
             TipoProblemaView incidentesView = new TipoProblemaView();
             JpaTipoProblemaRepository repository = new JpaTipoProblemaRepository();
             TipoProblemaController control = new TipoProblemaController(i, incidentesView);
@@ -119,10 +123,10 @@ public class Crear {
             Scanner teclado = new Scanner(System.in);
 
             System.out.println ("Ingrese descripcion problema:");
-            String desc = teclado.nextLine();
+            String desc = teclado.nextLine().toUpperCase();
 
             System.out.println ("Especialidades que lo atienden:");
-            String espec = teclado.nextLine();
+            String espec = teclado.nextLine().toUpperCase();
             if(!Consultas.existeEspecialidad(espec)) {
                 Crear.registrarNuevaEspecialidad();
             };
@@ -133,7 +137,7 @@ public class Crear {
 
     }
 
-    private static void registrarNuevaEspecialidad() {
+    public static void registrarNuevaEspecialidad() {
         EntityManager em = Main.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
@@ -142,18 +146,17 @@ public class Crear {
             EspecialidadesView incidentesView = new EspecialidadesView();
             JpaEspecialidadRepository repository = new JpaEspecialidadRepository();
             EspecialidadesController control = new EspecialidadesController(i, incidentesView);
+            control.repository = repository;
 
             Scanner teclado = new Scanner(System.in);
 
             System.out.println ("Ingrese descripcion problema:");
             String desc = teclado.nextLine();
 
-            System.out.println ("Tecnicos que lo atienden (inserte id):");
-            String idtec = teclado.nextLine();
-            if(!Consultas.existeTecnicoParaEspecialidad(i)){
-                System.out.println("No existen técnicos para esta especialidad.");
-            };
 
+            control.setNombreEspecialidad(desc);
+            control.setListadoTecnicos(new ArrayList<>());
+            repository.guardarEspecialidad(i);
 
         } catch (Exception e) {
             System.out.println("Problema:" + e);

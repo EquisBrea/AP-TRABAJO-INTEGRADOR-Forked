@@ -2,7 +2,6 @@ package org.cursoutn;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
-import org.cursoutn.model.EspecialidadModel;
 import org.cursoutn.repository.JpaEspecialidadRepository;
 import org.cursoutn.repository.JpaTecnicoRepository;
 import org.cursoutn.repository.JpaTipoProblemaRepository;
@@ -10,8 +9,6 @@ import org.cursoutn.repository.JpaTipoProblemaRepository;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.time.temporal.ChronoUnit;
-import java.util.Date;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -28,8 +25,13 @@ public class Consultas {
     public static void listarTecnicos() throws Exception {
         EntityManager em = Main.getEntityManager();
         EntityTransaction tx = em.getTransaction();
-        JpaTecnicoRepository repository = new JpaTecnicoRepository();
-        System.out.println(repository.obtenerTodosLosTecnicos().stream().toString());
+        JpaTecnicoRepository r1 = new JpaTecnicoRepository();
+        JpaEspecialidadRepository r2 = new JpaEspecialidadRepository();
+
+        r1.obtenerTodosLosTecnicos().stream().
+                forEachOrdered(tecnico -> System.out.println(tecnico.getNombreTecnico() + " "));
+        r2.obtenerTodasLasEspecialidades().stream().
+                forEachOrdered(espec -> System.out.println(espec.getNombreEspecialidad()));
     }
 
     public static void consultarDesempenioTecnicos() throws Exception {
@@ -57,7 +59,7 @@ public class Consultas {
 
     }
 
-    public static boolean existeTecnicoParaEspecialidad(EspecialidadModel especialidad) throws Exception {
+    public static boolean existeTecnico(int especialidad) throws Exception {
         EntityManager em = Main.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         JpaTecnicoRepository repository = new JpaTecnicoRepository();

@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class IncidentesController {
-    private IncidenteModel model;
+    public IncidenteModel model;
     private IncidentesView view;
 
     public IncidentesController(IncidenteModel model, IncidentesView view) {

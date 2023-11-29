@@ -1,6 +1,7 @@
 package org.cursoutn.controller;
 
 import org.cursoutn.model.EspecialidadModel;
+import org.cursoutn.model.NotificacionModel;
 import org.cursoutn.model.TecnicoModel;
 import org.cursoutn.repository.JpaEspecialidadRepository;
 import org.cursoutn.view.EspecialidadesView;
@@ -11,7 +12,7 @@ import java.util.List;
 public class EspecialidadesController {
     private EspecialidadModel model;
     private EspecialidadesView view;
-    private JpaEspecialidadRepository repository;
+    public JpaEspecialidadRepository repository;
 
     public EspecialidadesController(EspecialidadModel model, EspecialidadesView view) {
         this.model = model;
@@ -29,7 +30,12 @@ public class EspecialidadesController {
     public String getNombreEspecialidad (){
         return this.model.getNombreEspecialidad();
     }
-    public void setListadoTecnicos (TecnicoModel tecnico){this.model.getTecnicos().add(tecnico);}
+    public void setListadoTecnicos (List<TecnicoModel> listadoTecnicos){this.model.setTecnicos(listadoTecnicos);}
+    public void agregarTecnico (String nombreTecnico){
+        TecnicoModel notif = new TecnicoModel();
+        notif.setNombreTecnico(nombreTecnico);
+        model.getTecnicos().add(notif);
+    }
     public List<TecnicoModel> listadoTecnicos() {
         return this.model.getTecnicos();
     }

@@ -22,8 +22,8 @@ public class Menu {
         System.out.println("1- Ingresar nuevo incidente");
         System.out.println("2- Registrar nuevo cliente:");
         System.out.println("3- Registrar nuevo técnico:");
-        //--Quizás se pueda necesitar más adelante?
-        // System.out.println("4- Registrar especialidad:");
+        System.out.println("4- Registrar especialidad:");
+        System.out.println("5- Volver al menu inicial:");
         int seleccion = teclado.nextInt();
         switch (seleccion) {
             case 1:
@@ -36,10 +36,14 @@ public class Menu {
                 break;
             case 3:
                 Crear.registrarNuevoTecnico();
-                menuInicial();
+                menuIngresarDatos();
                 break;
+            case 4:
+                Crear.registrarNuevaEspecialidad();
+                menuIngresarDatos();
             default:
                 System.out.println("La opción seleccionada no es válida");
+                menuInicial();
         }
     }
 
