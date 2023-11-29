@@ -31,15 +31,15 @@ public class Crear {
             String txt = scn.nextLine();
             clienteController.setRazonSocialCliente(txt);
 
-            System.out.println("Ingrese modo de comunicación preferido: ");
-            String nottxt = scn.nextLine();
-            clienteController.agregarNotificacion(nottxt);
-
             System.out.println("Ingrese Cuil:");
             long cuil = scn.nextLong();
             clienteController.setCuilCliente(cuil);
 
+            Scanner notif = new Scanner(System.in);
 
+            System.out.println("Ingrese modo de comunicación preferido: ");
+            String ntxt = notif.nextLine();
+            clienteController.agregarNotificacion(ntxt);
 
             clienteController.repository.actualizarCliente(clienteController.model);
 

@@ -24,7 +24,7 @@ public class ClienteModel {
     private String razon_social;
 
     @Column(nullable = false)
-    private Long cuil;
+    private long cuil;
 
     @OneToMany
     @JoinColumn(name = "cliente_id", referencedColumnName = "id")
