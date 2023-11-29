@@ -25,7 +25,7 @@ public class IncidenteModel implements Serializable {
     private Integer esComplejo;
 
     @Column
-    private IncidenteEstado estadoIncidente;
+    private State estadoIncidente;
 
     @ManyToMany(mappedBy = "incidentes")
     private List<OperadorModel> operadores;
@@ -53,7 +53,7 @@ public class IncidenteModel implements Serializable {
     public IncidenteModel() {
     }
 
-    public IncidenteModel(LocalDateTime fechaHoraIncidente, int tiempoNecesario, int esComplejo, IncidenteEstado estadoIncidente,
+    public IncidenteModel(LocalDateTime fechaHoraIncidente, int tiempoNecesario, int esComplejo, State estadoIncidente,
                           List<TipoProblemaModel> tipoProblema, List<TecnicoModel> tecnicos) {
         this.fechaHoraIncidente = fechaHoraIncidente;
         this.tiempoNecesario = tiempoNecesario;
@@ -62,7 +62,7 @@ public class IncidenteModel implements Serializable {
         this.tipoProblema = tipoProblema;
     }
 
-    public IncidenteModel(LocalDateTime fechaHoraIncidente, int tiempoNecesario, int esComplejo, IncidenteEstado estadoIncidente,
+    public IncidenteModel(LocalDateTime fechaHoraIncidente, int tiempoNecesario, int esComplejo, State estadoIncidente,
                           List<OperadorModel> operadores, ClienteModel cliente, List<TecnicoModel> tecnicos,
                           List<TipoProblemaModel> tipoProblema) {
         this.fechaHoraIncidente = fechaHoraIncidente;
@@ -107,11 +107,11 @@ public class IncidenteModel implements Serializable {
         this.esComplejo = esComplejo;
     }
 
-    public IncidenteState getEstadoIncidente() {
+    public State getEstadoIncidente() {
         return this.estadoIncidente;
     }
 
-    public void setEstadoIncidente(IncidenteState estadoIncidente) {
+    public void setEstadoIncidente(State estadoIncidente) {
         this.estadoIncidente = estadoIncidente;
     }
 

@@ -1,7 +1,7 @@
 package org.cursoutn.controller;
 
 import org.cursoutn.model.*;
-import org.cursoutn.state.IncidenteState;
+import org.cursoutn.state.State;
 import org.cursoutn.view.IncidentesView;
 
 import java.time.LocalDateTime;
@@ -23,8 +23,8 @@ public class IncidentesController {
     public Integer getTiempoNecesario (){return this.model.getTiempoNecesario();}
     public void setEsComplejo (int esComplejo){this.model.setEsComplejo(esComplejo);}
     public Integer getEsComplejo (){return this.model.getEsComplejo();}
-    public void setEstadoIncidenteActual (IncidenteState estadoIncidente){this.model.setEstadoIncidente(estadoIncidente);}
-    public IncidenteState getEstadoIncidenteActual(){return this.model.getEstadoIncidente();}
+    public void setEstadoIncidenteActual (State estadoIncidente){this.model.setEstadoIncidente(estadoIncidente);}
+    public State getEstadoIncidenteActual(){return this.model.getEstadoIncidente();}
     public void setOperadores (OperadorModel operador){this.model.getOperadores().add(operador);}
     public List<OperadorModel> operadores (){return this.model.getOperadores();}
     public void setCliente (ClienteModel cliente) {this.model.setCliente(cliente);}

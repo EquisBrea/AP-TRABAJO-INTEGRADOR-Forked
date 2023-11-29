@@ -28,12 +28,15 @@ public class Menu {
         switch (seleccion) {
             case 1:
                 Crear.menuRegistrarIncidente();
+                menuInicial();
                 break;
             case 2:
                 Crear.registrarNuevoCliente();
+                menuInicial();
                 break;
             case 3:
                 Crear.registrarNuevoTecnico();
+                menuInicial();
                 break;
             default:
                 System.out.println("La opción seleccionada no es válida");
@@ -123,6 +126,7 @@ public class Menu {
             case 2:
                 break;
             case 3:
+                Consultas.listarTecnicos();
                 break;
             case 4:
                 Consultas.consultarDesempenioTecnicos();

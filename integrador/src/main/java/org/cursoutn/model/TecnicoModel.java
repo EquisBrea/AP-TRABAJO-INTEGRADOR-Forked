@@ -3,8 +3,9 @@ package org.cursoutn.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.cursoutn.state.State;
 
-import java.sql.Time;
+import java.time.LocalDate;
 import java.util.List;
 @Getter
 @Setter
@@ -42,5 +43,8 @@ public class TecnicoModel {
         this.colchonHoras = colchonHoras;
         this.incidentes = incidentes;
         this.especialidades = especialidades;
+    }
+    public long cantidadDeIncidentesResueltos (){
+        return this.getIncidentes().stream().filter(caso ->  caso.getEstadoIncidente().equals(State.RESUELTO)).count();
     }
 }

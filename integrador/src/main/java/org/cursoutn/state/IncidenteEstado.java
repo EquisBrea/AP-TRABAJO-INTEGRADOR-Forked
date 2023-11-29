@@ -5,9 +5,9 @@ import org.cursoutn.model.TecnicoModel;
 
 public class IncidenteEstado{
     protected IncidentesController incidentesController;
-    private IncidenteState estadoIncidente;
+    protected EstadoIncidente estadoIncidente;
 
-    protected IncidenteState state;
+    protected State state;
     protected TecnicoModel tecnico;
 
     public EstadoIncidente getEstadoIncidente() {
@@ -18,11 +18,11 @@ public class IncidenteEstado{
         this.estadoIncidente = estadoIncidente;
     }
 
-    public IncidenteState getState() {
+    public State getState() {
         return state;
     }
 
-    public void setState(IncidenteState state) {
+    public void setState(State state) {
         this.state = state;
     }
 

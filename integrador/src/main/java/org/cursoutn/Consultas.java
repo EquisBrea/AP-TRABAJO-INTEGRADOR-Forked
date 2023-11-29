@@ -25,8 +25,11 @@ public class Consultas {
 
     }
 
-    public static void listarTecnicos() {
-
+    public static void listarTecnicos() throws Exception {
+        EntityManager em = Main.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        JpaTecnicoRepository repository = new JpaTecnicoRepository();
+        System.out.println(repository.obtenerTodosLosTecnicos().stream().toString());
     }
 
     public static void consultarDesempenioTecnicos() throws Exception {
@@ -35,7 +38,7 @@ public class Consultas {
         JpaTecnicoRepository repository = new JpaTecnicoRepository();
             Scanner scn = new Scanner(System.in);
             System.out.println("Introduzca fecha(ddmmaaaa):");
-            LocalDate date = LocalDate.parse(scn.nextLine(), DateTimeFormatter.ofLocalizedDate(FormatStyle.valueOf("ddmmaaaa")))
+            LocalDate date = LocalDate.parse(scn.nextLine(), DateTimeFormatter.ofLocalizedDate(FormatStyle.valueOf("ddmmaaaa")));
     }
     public static boolean existeTipoDeProblema(String tipoDescripcion) throws Exception {
         EntityManager em = Main.getEntityManager();
@@ -60,6 +63,5 @@ public class Consultas {
         JpaTecnicoRepository repository = new JpaTecnicoRepository();
         return repository.obtenerTodosLosTecnicos().stream().
                 anyMatch(problema -> Objects.equals(problema.getEspecialidades(), especialidad));
-
     }
 }

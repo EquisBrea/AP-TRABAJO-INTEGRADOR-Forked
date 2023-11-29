@@ -1,7 +1,7 @@
 package org.cursoutn.repository;
 
 import org.cursoutn.model.IncidenteModel;
-import org.cursoutn.state.IncidenteState;
+import org.cursoutn.state.State;
 
 import java.util.List;
 
@@ -17,5 +17,5 @@ public interface IncidenteRepository {
 
     public void eliminarIncidente(IncidenteModel incidente) throws Exception;
 
-    public void actualizarEstadoIncidente(IncidenteModel incidente, IncidenteState nuevoEstado) throws Exception;
+    public void actualizarEstadoIncidente(IncidenteModel incidente, State nuevoEstado) throws Exception;
 }

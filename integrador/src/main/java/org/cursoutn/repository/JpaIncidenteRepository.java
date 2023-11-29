@@ -1,10 +1,9 @@
 package org.cursoutn.repository;
 
 import jakarta.persistence.*;
-import jakarta.transaction.Transaction;
 import org.cursoutn.Main;
 import org.cursoutn.model.IncidenteModel;
-import org.cursoutn.state.IncidenteState;
+import org.cursoutn.state.State;
 
 import java.util.List;
 
@@ -69,7 +68,7 @@ public class JpaIncidenteRepository implements IncidenteRepository{
     }
 
     @Override
-    public void actualizarEstadoIncidente(IncidenteModel incidente, IncidenteState nuevoEstado) throws Exception {
+    public void actualizarEstadoIncidente(IncidenteModel incidente, State nuevoEstado) throws Exception {
         try {
             // switch para modificar el estado con los métodos de IncidenteModel, con nuevoEstado como condición
             incidente.setEstadoIncidente(nuevoEstado);

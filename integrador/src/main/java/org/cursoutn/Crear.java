@@ -5,12 +5,10 @@ import jakarta.persistence.EntityTransaction;
 import org.cursoutn.controller.*;
 import org.cursoutn.model.*;
 import org.cursoutn.repository.*;
-import org.cursoutn.state.IncidenteAbierto;
 import org.cursoutn.state.IncidenteEstado;
-import org.cursoutn.state.IncidenteState;
+import org.cursoutn.state.State;
 import org.cursoutn.view.*;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -50,26 +48,28 @@ public class Crear {
         EntityManager em = Main.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         try {
-            TecnicoModel tecnico = new TecnicoModel("cliente", 1, new ArrayList<IncidenteModel>(), new ArrayList<EspecialidadModel>());
+            TecnicoModel t = new TecnicoModel("cliente", 1, new ArrayList<IncidenteModel>(), new ArrayList<EspecialidadModel>());
             TecnicosView tecnicosView = new TecnicosView();
             JpaTecnicoRepository repository = new JpaTecnicoRepository();
-            TecnicosController tecnicosController = new TecnicosController(tecnico, tecnicosView);
-            tecnicosController.repository = repository;
+            TecnicosController tC = new TecnicosController(t, tecnicosView);
+            tC.repository = repository;
 
             Scanner scn = new Scanner(System.in);
 
-            System.out.println("Ingrese Razon Social:");
+            System.out.println("Nombre:");
             String txt = scn.nextLine();
-            tecnicosController.setNombreTecnico(txt);
+            tC.setNombreTecnico(txt);
 
-            System.out.println("Ingrese Cuil:");
+            System.out.println("Ingrese horas extras estimadas:");
             long cuil = scn.nextLong();
 
             System.out.println("Ingrese especialidad: ");
             String nottxt = scn.nextLine();
-            tecnicosController.agregarEspecialidad(nottxt);
 
-            tecnicosController.repository.actualizarTecnico(tecnicosController.model);
+            tC.setNombreTecnico(txt);
+            tC.agregarEspecialidad(nottxt);
+
+            tC.repository.actualizarTecnico(tC.model);
 
         } catch (Exception e) {
             System.out.println("Error al crear nuevo registro: \n" + e);
@@ -80,7 +80,7 @@ public class Crear {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try{
-            IncidenteModel i = new IncidenteModel(LocalDateTime.now(), 1, 0, new IncidenteEstado(), new ArrayList<OperadorModel>(), new ClienteModel(), new ArrayList<TecnicoModel>(), new ArrayList<TipoProblemaModel>());
+            IncidenteModel i = new IncidenteModel(LocalDateTime.now(), 1, 0, State.INICIADO, new ArrayList<OperadorModel>(), new ClienteModel(), new ArrayList<TecnicoModel>(), new ArrayList<TipoProblemaModel>());
             IncidentesView incidentesView = new IncidentesView();
             JpaIncidenteRepository repository = new JpaIncidenteRepository();
             IncidentesController control = new IncidentesController(i, incidentesView);
@@ -89,9 +89,12 @@ public class Crear {
             System.out.println ("Por favor ingrese el id del cliente:");
             int clienteId = teclado.nextInt();
             System.out.println ("Ingrese problemas involucrados en incidente:");
-            String tp = teclado.nextLine();
+            String tp = teclado.nextLine().toUpperCase();
             if (!Consultas.existeTipoDeProblema(tp));
+
+            System.out.println("Problema no existente con anterioridad, por favor registrar: ");
             Crear.registrarNuevoTipoDeProblema();
+
 
 
             control.setFechaHoraIncidente(LocalDateTime.now());

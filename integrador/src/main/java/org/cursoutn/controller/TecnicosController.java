@@ -20,9 +20,9 @@ public class TecnicosController {
     public void setNombreTecnico(String nombreTecnico){this.model.setNombreTecnico(nombreTecnico);}
     public void setIncidentes(IncidenteModel incidentes){this.model.getIncidentes().add(incidentes);}
     public void setEspecialidades(EspecialidadModel especialidad){this.model.getEspecialidades().add(especialidad);}
-    public void agregarEspecialidad (String nombreNotificacion){
+    public void agregarEspecialidad (String nombreEspecialidad){
         EspecialidadModel espec = new EspecialidadModel();
-        espec.setNombreEspecialidad(nombreNotificacion);
+        espec.setNombreEspecialidad(nombreEspecialidad);
         model.getEspecialidades().add(espec);
     }
     public void actualizarView (){

@@ -3,14 +3,19 @@ package org.cursoutn.state;
 import org.cursoutn.model.TecnicoModel;
 
 public class IncidenteAsignado extends IncidenteEstado implements EstadoIncidente {
-    private final IncidenteState state;
+    private final State state;
 
     {
-    state = IncidenteState.ASIGNADO;
+    state = State.ASIGNADO;
     }
 
     @Override
     public void cambiarEstado(TecnicoModel tecnicoModel, IncidenteEstado incidenteEstado) {
+
+    }
+
+    @Override
+    public void mostrarEstado() {
 
     }
 

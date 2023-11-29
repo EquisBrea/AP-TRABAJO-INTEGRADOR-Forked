@@ -1,6 +1,6 @@
 package org.cursoutn.state;
 
-public enum IncidenteState {
+public enum State {
     INICIADO,
     ASIGNADO,
     RESUELTO,
