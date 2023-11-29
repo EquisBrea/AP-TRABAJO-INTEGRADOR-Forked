@@ -27,7 +27,7 @@ public class Menu {
         int seleccion = teclado.nextInt();
         switch (seleccion) {
             case 1:
-                menuRegistrarIncidente();
+                Crear.menuRegistrarIncidente();
                 break;
             case 2:
                 Crear.registrarNuevoCliente();
@@ -67,6 +67,7 @@ public class Menu {
                 menuEliminarDatos();
                 break;
             case 4:
+                menuConsultas();
                 break;
             case 5:
                 break;
@@ -85,7 +86,7 @@ public class Menu {
         int seleccion = teclado.nextInt();
         switch (seleccion) {
             case 1:
-                menuRegistrarIncidente();
+                Crear.menuRegistrarIncidente();
                 break;
             case 2:
                 Eliminar.borrarCliente();
@@ -109,7 +110,11 @@ public class Menu {
     private static void menuConsultas() throws Exception {
         Scanner teclado = new Scanner(System.in);
         System.out.println ("Por favor ingrese la opción deseada:");
-        System.out.println ("1- Tecnico con más incidentes resueltos:");
+        System.out.println ("1- Listar clientes:");
+        System.out.println ("2- Listar incidentes:");
+        System.out.println ("3- Listar tecnicos:");
+        System.out.println ("4- Desempenio Tecnicos:");
+
         int seleccion = teclado.nextInt();
         switch(seleccion) {
             case 1:
@@ -120,6 +125,7 @@ public class Menu {
             case 3:
                 break;
             case 4:
+                Consultas.consultarDesempenioTecnicos();
                 break;
             default:
                 System.out.println("La opción seleccionada no es válida");
@@ -167,10 +173,6 @@ public class Menu {
         System.out.println ("Por favor ingrese el id del cliente:");
         int clienteId = teclado.nextInt();}
 
-    public static void menuRegistrarIncidente() {
-        Scanner teclado = new Scanner(System.in);
-        System.out.println ("Por favor ingrese el id del cliente:");
-        int clienteId = teclado.nextInt();
-    }
+
 
 }

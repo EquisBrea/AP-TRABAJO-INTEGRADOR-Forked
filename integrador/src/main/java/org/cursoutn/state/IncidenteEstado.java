@@ -5,7 +5,8 @@ import org.cursoutn.model.TecnicoModel;
 
 public class IncidenteEstado{
     protected IncidentesController incidentesController;
-    public EstadoIncidente estadoIncidente;
+    private IncidenteState estadoIncidente;
+
     protected IncidenteState state;
     protected TecnicoModel tecnico;
 

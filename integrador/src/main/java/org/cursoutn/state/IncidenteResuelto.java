@@ -10,6 +10,6 @@ public class IncidenteResuelto extends IncidenteEstado implements EstadoIncident
 
     @Override
     public void cambiarEstado(TecnicoModel tecnicoModel, IncidenteEstado incidenteEstado) {
-        incidenteEstado.estadoIncidente.cambiarEstado(tecnicoModel, new IncidenteFinalizado());
+        incidenteEstado.getEstadoIncidente().cambiarEstado(tecnicoModel, new IncidenteFinalizado());
     }
 }

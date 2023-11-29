@@ -8,7 +8,7 @@ public class IncidenteAbierto extends IncidenteEstado implements EstadoIncidente
     @Override
     public void cambiarEstado(TecnicoModel tecnicoModel, IncidenteEstado incidenteEstado) {
         if (tecnicoModel != null) {
-            incidenteEstado.estadoIncidente.cambiarEstado(tecnicoModel,new IncidenteAsignado());
+            incidenteEstado.getEstadoIncidente().cambiarEstado(tecnicoModel,new IncidenteAsignado());
             super.incidentesController.setEstadoIncidenteActual(super.state);
         }
     }
