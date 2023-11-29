@@ -2,20 +2,15 @@ package org.cursoutn;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
-import org.cursoutn.controller.ClientesController;
-import org.cursoutn.controller.IncidentesController;
-import org.cursoutn.controller.TecnicosController;
+import org.cursoutn.controller.*;
 import org.cursoutn.model.*;
-import org.cursoutn.repository.JpaClienteRepository;
-import org.cursoutn.repository.JpaIncidenteRepository;
-import org.cursoutn.repository.JpaTecnicoRepository;
+import org.cursoutn.repository.*;
 import org.cursoutn.state.IncidenteAbierto;
 import org.cursoutn.state.IncidenteEstado;
 import org.cursoutn.state.IncidenteState;
-import org.cursoutn.view.ClientesView;
-import org.cursoutn.view.IncidentesView;
-import org.cursoutn.view.TecnicosView;
+import org.cursoutn.view.*;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -94,6 +89,9 @@ public class Crear {
             System.out.println ("Por favor ingrese el id del cliente:");
             int clienteId = teclado.nextInt();
             System.out.println ("Ingrese problemas involucrados en incidente:");
+            String tp = teclado.nextLine();
+            if (!Consultas.existeTipoDeProblema(tp));
+            Crear.registrarNuevoTipoDeProblema();
 
 
             control.setFechaHoraIncidente(LocalDateTime.now());
@@ -103,6 +101,60 @@ public class Crear {
         }
 
 
+    }
+
+    private static void registrarNuevoTipoDeProblema() {
+        EntityManager em = Main.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+        try{
+            TipoProblemaModel i = new TipoProblemaModel(new ArrayList<EspecialidadModel>(), new ServicioModel());
+            TipoProblemaView incidentesView = new TipoProblemaView();
+            JpaTipoProblemaRepository repository = new JpaTipoProblemaRepository();
+            TipoProblemaController control = new TipoProblemaController(i, incidentesView);
+
+            Scanner teclado = new Scanner(System.in);
+
+            System.out.println ("Ingrese descripcion problema:");
+            String desc = teclado.nextLine();
+
+            System.out.println ("Especialidades que lo atienden:");
+            String espec = teclado.nextLine();
+            if(!Consultas.existeEspecialidad(espec)) {
+                Crear.registrarNuevaEspecialidad();
+            };
+
+        } catch (Exception e) {
+            System.out.println("Problema:" + e);
+        }
+
+    }
+
+    private static void registrarNuevaEspecialidad() {
+        EntityManager em = Main.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+        try{
+            EspecialidadModel i = new EspecialidadModel("Especialidad nueva", new ArrayList<TecnicoModel>(), new TipoProblemaModel());
+            EspecialidadesView incidentesView = new EspecialidadesView();
+            JpaEspecialidadRepository repository = new JpaEspecialidadRepository();
+            EspecialidadesController control = new EspecialidadesController(i, incidentesView);
+
+            Scanner teclado = new Scanner(System.in);
+
+            System.out.println ("Ingrese descripcion problema:");
+            String desc = teclado.nextLine();
+
+            System.out.println ("Tecnicos que lo atienden (inserte id):");
+            String idtec = teclado.nextLine();
+            if(!Consultas.existeTecnicoParaEspecialidad(i)){
+                System.out.println("No existen técnicos para esta especialidad.");
+            };
+
+
+        } catch (Exception e) {
+            System.out.println("Problema:" + e);
+        }
     }
 
 }
