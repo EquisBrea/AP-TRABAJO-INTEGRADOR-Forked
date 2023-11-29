@@ -13,16 +13,16 @@ public class IncidenteModel implements Serializable {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column
     private LocalDateTime fechaHoraIncidente;
 
     @Column
-    private int tiempoNecesario;
+    private Integer tiempoNecesario;
 
     @Column
-    private int esComplejo;
+    private Integer esComplejo;
 
     @Column
     private IncidenteState estadoIncidente;

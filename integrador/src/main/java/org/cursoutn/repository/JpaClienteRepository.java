@@ -11,7 +11,6 @@ public class JpaClienteRepository implements ClienteRepository{
     @PersistenceContext
     private EntityManager entityManager;
 
-
     @Override
     public List<ClienteModel> obtenerTodosLosClientes() throws Exception {
         try{
@@ -34,7 +33,7 @@ public class JpaClienteRepository implements ClienteRepository{
     }
 
     @Override
-    public ClienteModel obtenerClientePorId(int id)  throws Exception {
+    public ClienteModel obtenerClientePorId(Integer id)  throws Exception {
         try {
             return entityManager.find(ClienteModel.class, id);
         } catch (Exception e) {

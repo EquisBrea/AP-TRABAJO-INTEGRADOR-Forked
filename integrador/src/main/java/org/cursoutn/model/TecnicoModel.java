@@ -14,7 +14,7 @@ public class TecnicoModel {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(nullable = false)
     private String nombreTecnico;

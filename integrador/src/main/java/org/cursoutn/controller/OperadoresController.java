@@ -15,7 +15,7 @@ public class OperadoresController {
         this.view = view;
     }
     public void setOperadorId (int operadorId){this.model.setId(operadorId);}
-    public int getOperadorId(){return this.model.getId();}
+    public Integer getOperadorId(){return this.model.getId();}
     public void setNombreOperador(String nombreOperador){this.model.setNombreOperador(nombreOperador);}
     public String getNombreOperador(){return this.model.getNombreOperador();}
     public void setIncidentes(IncidenteModel incidentes){this.model.getIncidentes().add(incidentes);}

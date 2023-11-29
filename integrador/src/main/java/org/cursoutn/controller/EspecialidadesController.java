@@ -18,7 +18,7 @@ public class EspecialidadesController {
     public void setEspecialidadId(int especialidadId) {
         this.model.setId(especialidadId);
     }
-    public int getEspecialidadId(){
+    public Integer getEspecialidadId(){
         return this.model.getId();
     }
     public void setNombreEspecialidad (String nombreEspecialidad){

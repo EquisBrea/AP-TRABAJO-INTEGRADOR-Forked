@@ -1,14 +1,19 @@
 package org.cursoutn;
 
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceUnit;
 import org.cursoutn.controller.ClientesController;
+import org.cursoutn.model.ClienteModel;
+import org.cursoutn.repository.ClienteRepository;
+import org.cursoutn.repository.JpaClienteRepository;
 
 import java.util.Scanner;
 
 import static java.lang.Long.parseLong;
+import static org.cursoutn.Main.getEntityManager;
 
 public class Menu {
-    public static void menuIngresarDatos() {
+    public static void menuIngresarDatos() throws Exception {
         Scanner teclado = new Scanner(System.in);
         System.out.println("Por favor ingrese la opción deseada:");
         System.out.println("1- Ingresar nuevo incidente");
@@ -23,6 +28,12 @@ public class Menu {
             case 2:
                // ClientesController nuevo = Main.abrirCliente();
                // Main.registrarNuevoCliente(nuevo);
+                /* Prueba de persistencia:*/
+                ClienteModel cliente1 = new ClienteModel("El Sapo Pepe", 5734188749L);
+                System.out.println("\n" + cliente1.getRazon_social() +
+                                    "\n" + cliente1.getCuil());
+                cliente1.guardarCliente(cliente1);
+                System.out.println("\n\n" +  cliente1.obtenerClientePorId(1));
                 break;
             case 3:
                 break;

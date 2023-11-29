@@ -10,7 +10,7 @@ public interface ClienteRepository {
 
     public void guardarCliente(ClienteModel cliente) throws Exception;
 
-    public ClienteModel obtenerClientePorId(int id) throws Exception;
+    public ClienteModel obtenerClientePorId(Integer id) throws Exception;
 
     public void actualizarCliente(ClienteModel cliente) throws Exception;
 

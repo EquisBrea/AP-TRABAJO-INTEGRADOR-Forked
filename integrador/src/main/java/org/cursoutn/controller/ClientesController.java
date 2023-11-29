@@ -16,10 +16,11 @@ public class ClientesController {
         this.model = model;
         this.view = view;
     }
+
     public void setClienteId (int clienteId){
         model.setId(clienteId);
     }
-    public int getClienteId(){
+    public Integer getClienteId(){
         return model.getId();
     }
     public void setRazonSocialCliente(String razonSocialCliente){
@@ -31,7 +32,7 @@ public class ClientesController {
     public void setCuilCliente (long cuilCliente) {
         model.setCuil(cuilCliente);
     }
-    public long getCuilCliente (){
+    public Long getCuilCliente (){
         return model.getCuil();
     }
     public void setNotificaciones(NotificacionModel notificacion){
@@ -41,10 +42,10 @@ public class ClientesController {
         return model.getNotificaciones();
     }
    public void setServicios(ServicioModel servicios) {
-       model.getServicio().add(servicios);
+       model.getServicios().add(servicios);
    }
    public List<ServicioModel> listadoServicios (){
-        return this.model.getServicio();
+        return this.model.getServicios();
    }
     public void setIncidentes(IncidenteModel incidente){
         model.getIncidentes().add(incidente);
@@ -53,6 +54,7 @@ public class ClientesController {
         return model.getIncidentes();
     }
     public void actualizarView() {
-        view.mostrarDetallesCliente(model.getId(), model.getRazon_social(), model.getNotificaciones(), model.getServicio(), model.getIncidentes());
+        view.mostrarDetallesCliente(model.getId(), model.getRazon_social(), model.getNotificaciones(),
+                model.getServicios(), model.getIncidentes());
     }
 }

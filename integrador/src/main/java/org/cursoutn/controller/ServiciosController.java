@@ -15,7 +15,7 @@ public class ServiciosController {
         this.view = view;
     }
     public void setServicioId (int servicioId){this.model.setId(servicioId);}
-    public int getServicioId (){return this.model.getId();}
+    public Integer getServicioId (){return this.model.getId();}
     public void setNombreServicio (String nombreServicio){this.model.setNombreServicio(nombreServicio);}
     public String getNombreServicio(){return this.model.getNombreServicio();}
     public void setProblema(TipoProblemaModel tipoProblema){this.model.getTiposDeProblemas().add(tipoProblema);}

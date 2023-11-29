@@ -7,26 +7,30 @@ import org.cursoutn.repository.JpaClienteRepository;
 
 import java.util.List;
 
+import static org.cursoutn.Main.getEntityManager;
+
 @Getter
 @Setter
 @Entity
 @Table(name="cliente")
 public class ClienteModel {
-    private JpaClienteRepository repository;
+
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(nullable = false)
     private String razon_social;
 
     @Column(nullable = false)
-    private long cuil;
+    private Long cuil;
 
     @OneToMany
     @JoinColumn(name = "cliente_id", referencedColumnName = "id")
     private List<NotificacionModel> notificaciones;
+
+    private JpaClienteRepository repository;
 
     @ManyToMany
     @JoinTable(
@@ -43,7 +47,7 @@ public class ClienteModel {
     public ClienteModel() {
     }
 
-    public ClienteModel(String razon_social, long cuil, List<NotificacionModel> notificaciones,
+    public ClienteModel(String razon_social, Long cuil, List<NotificacionModel> notificaciones,
                         List<ServicioModel> servicios, List<IncidenteModel> incidentes) {
         this.razon_social = razon_social;
         this.cuil = cuil;
@@ -53,15 +57,18 @@ public class ClienteModel {
     }
 
     //Para crear un cliente por primera vez
-    public ClienteModel(String razon_social, long cuil) {
+    public ClienteModel(String razon_social, Long cuil) {
         this.razon_social = razon_social;
         this.cuil = cuil;
     }
 
+    EntityManager entityManager = getEntityManager();
+    JpaClienteRepository repo = new JpaClienteRepository();
+
     public void guardarCliente (ClienteModel cliente) throws Exception {
             repository.guardarCliente(cliente);
     }
-    public ClienteModel obtenerClientePorId(int id) throws Exception {
+    public ClienteModel obtenerClientePorId(Integer id) throws Exception {
         return repository.obtenerClientePorId(id);
     }
     public void actualizarCliente(ClienteModel cliente) throws Exception {

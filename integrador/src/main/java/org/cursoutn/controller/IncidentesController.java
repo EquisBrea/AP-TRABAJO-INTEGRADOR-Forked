@@ -16,13 +16,13 @@ public class IncidentesController {
         this.view = view;
     }
     public void setIncidenteId (int incidenteId){this.model.setId(incidenteId);}
-    public int getIncidenteId () {return this.model.getId();}
+    public Integer getIncidenteId () {return this.model.getId();}
     public void setFechaHoraIncidente(LocalDateTime fechaHoraIncidente){this.model.setFechaHoraIncidente(fechaHoraIncidente);}
     public LocalDateTime getFechaHoraIncidente(){return this.model.getFechaHoraIncidente();}
     public void setTiempoNecesario (int tiempoNecesario){this.model.setTiempoNecesario(tiempoNecesario);}
-    public int getTiempoNecesario (){return this.model.getTiempoNecesario();}
+    public Integer getTiempoNecesario (){return this.model.getTiempoNecesario();}
     public void setEsComplejo (int esComplejo){this.model.setEsComplejo(esComplejo);}
-    public int getEsComplejo (){return this.model.getEsComplejo();}
+    public Integer getEsComplejo (){return this.model.getEsComplejo();}
     public void setEstadoIncidenteActual (IncidenteState estadoIncidente){this.model.setEstadoIncidente(estadoIncidente);}
     public IncidenteState getEstadoIncidenteActual(){return this.model.getEstadoIncidente();}
     public void setOperadores (OperadorModel operador){this.model.getOperadores().add(operador);}

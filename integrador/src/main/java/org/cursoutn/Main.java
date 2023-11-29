@@ -10,6 +10,7 @@ import org.cursoutn.model.ClienteModel;
 import org.cursoutn.view.ClientesView;
 
 import java.util.List;
+import java.util.Properties;
 import java.util.Scanner;
 
 
@@ -47,16 +48,24 @@ public class Main {
 
 
 
-    public static void main(String[] args) throws Exception {
-        EntityManager em = getEntityManager();
+    public static void main(String[] args) {
+        /*EntityManager em = getEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         //ClienteModel cliente = new ClienteModel();
         //ClientesView clientesView = new ClientesView();
         //ClientesController clienteController = new ClientesController(cliente, clientesView); //← Seteamos todos los atributos em.persist(empleado);
-        tx.commit();
+        tx.commit();*/
 
+        Menu menu = new Menu();
+
+        try {
+            menu.menuInicial();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
+
 
 
 }
