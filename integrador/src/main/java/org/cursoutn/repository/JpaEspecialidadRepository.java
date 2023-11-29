@@ -15,7 +15,7 @@ public class JpaEspecialidadRepository implements EspecialidadRepository{
     @Override
     public List<EspecialidadModel> obtenerTodasLasEspecialidades() throws Exception {
         try{
-            return entityManager.createQuery("SELECT a FROM especialidad a", EspecialidadModel.class).getResultList();
+            return entityManager.createQuery("SELECT a FROM EspecialidadModel a", EspecialidadModel.class).getResultList();
         } catch (Exception e) {
             throw new Exception("Error al obtener todos los registros");
         }
@@ -38,7 +38,7 @@ public class JpaEspecialidadRepository implements EspecialidadRepository{
         try {
             return entityManager.find(EspecialidadModel.class, id);
         } catch (Exception e) {
-            throw new Exception("Error al obtener el registro solicitado");
+            throw new Exception("Error al obtener el registro solicitado" + e);
         }
     }
 
@@ -50,7 +50,7 @@ public class JpaEspecialidadRepository implements EspecialidadRepository{
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
-            throw new Exception("Error al actualizar el registro");
+            throw new Exception(" 1231 Error al actualizar el registro" + e);
         }
     }
 

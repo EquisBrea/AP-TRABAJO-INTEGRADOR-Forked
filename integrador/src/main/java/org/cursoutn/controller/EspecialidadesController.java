@@ -3,6 +3,7 @@ package org.cursoutn.controller;
 import org.cursoutn.model.EspecialidadModel;
 import org.cursoutn.model.NotificacionModel;
 import org.cursoutn.model.TecnicoModel;
+import org.cursoutn.model.TipoProblemaModel;
 import org.cursoutn.repository.JpaEspecialidadRepository;
 import org.cursoutn.view.EspecialidadesView;
 import org.cursoutn.view.TecnicosView;
@@ -36,6 +37,9 @@ public class EspecialidadesController {
         notif.setNombreTecnico(nombreTecnico);
         model.getTecnicos().add(notif);
     }
+    public TipoProblemaModel tipoProblemaModel(){
+        return model.getTipoProblema();
+    }
     public List<TecnicoModel> listadoTecnicos() {
         return this.model.getTecnicos();
     }
@@ -56,5 +60,9 @@ public class EspecialidadesController {
     }
     public void actualizarView(){
         view.mostrarDetallesEspecialidad(this.model.getId(), this.model.getNombreEspecialidad(), this.model.getTecnicos());
+    }
+
+    public void setTipoProblema(TipoProblemaModel tipoProblemaModel) {
+        model.setTipoProblema(tipoProblemaModel);
     }
 }

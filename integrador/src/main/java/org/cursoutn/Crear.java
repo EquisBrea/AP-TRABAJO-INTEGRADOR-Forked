@@ -31,13 +31,15 @@ public class Crear {
             String txt = scn.nextLine();
             clienteController.setRazonSocialCliente(txt);
 
+            System.out.println("Ingrese modo de comunicación preferido: ");
+            String nottxt = scn.nextLine();
+            clienteController.agregarNotificacion(nottxt);
+
             System.out.println("Ingrese Cuil:");
             long cuil = scn.nextLong();
             clienteController.setCuilCliente(cuil);
 
-            System.out.println("Ingrese modo de comunicación preferido: ");
-            String nottxt = scn.nextLine();
-            clienteController.agregarNotificacion(nottxt);
+
 
             clienteController.repository.actualizarCliente(clienteController.model);
 
@@ -146,17 +148,23 @@ public class Crear {
             EspecialidadesView incidentesView = new EspecialidadesView();
             JpaEspecialidadRepository repository = new JpaEspecialidadRepository();
             EspecialidadesController control = new EspecialidadesController(i, incidentesView);
+
             control.repository = repository;
 
             Scanner teclado = new Scanner(System.in);
-
-            System.out.println ("Ingrese descripcion problema:");
+            System.out.println ("Describir especialidad: ");
             String desc = teclado.nextLine();
 
+            System.out.println ("Describir tipo problema: ");
+            String descpr = teclado.nextLine();
 
             control.setNombreEspecialidad(desc);
             control.setListadoTecnicos(new ArrayList<>());
-            repository.guardarEspecialidad(i);
+            TipoProblemaModel tipoProblemaModel = new TipoProblemaModel();
+            tipoProblemaModel.setNombreTipoProblema(descpr);
+            control.setTipoProblema(tipoProblemaModel);
+
+            control.repository.actualizarEspecialidad(i);
 
         } catch (Exception e) {
             System.out.println("Problema:" + e);

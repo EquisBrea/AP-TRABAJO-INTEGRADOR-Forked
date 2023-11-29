@@ -19,13 +19,13 @@ public class TipoProblemaModel {
     private String nombreTipoProblema;
 
     @ManyToMany(mappedBy = "tipoProblema")
-    @Column(name="incidente_id", nullable = false)
+    @Column(name="incidente_id")
     private List<IncidenteModel> incidentes;
 
-    @OneToMany(mappedBy = "tipoProblema")
+    @OneToMany(mappedBy = "tipoProblema", cascade = CascadeType.ALL)
     private List<EspecialidadModel> especialidades;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "servicio_id", referencedColumnName = "id")
     private ServicioModel servicio;
 

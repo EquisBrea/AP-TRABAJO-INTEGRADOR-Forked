@@ -28,7 +28,7 @@ public class EspecialidadModel {
     )
     private List<TecnicoModel> tecnicos;
 
-    @ManyToOne
+    @ManyToOne(cascade= CascadeType.ALL)
     @JoinColumn(name = "tipo_problema_id")
     private TipoProblemaModel tipoProblema;
 
