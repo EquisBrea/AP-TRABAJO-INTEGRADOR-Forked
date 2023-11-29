@@ -2,6 +2,8 @@ package org.cursoutn.repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import org.cursoutn.Main;
+import org.cursoutn.MainController;
 import org.cursoutn.model.TipoProblemaModel;
 
 import java.util.List;
@@ -9,7 +11,7 @@ import java.util.List;
 public class JpaTipoProblemaRepository implements TipoProblemaRepository {
 
     @PersistenceContext
-    private EntityManager entityManager;
+    private EntityManager entityManager = Main.getEntityManager();
 
     @Override
     public List<TipoProblemaModel> obtenerTodosLosTipoProblema() throws Exception {

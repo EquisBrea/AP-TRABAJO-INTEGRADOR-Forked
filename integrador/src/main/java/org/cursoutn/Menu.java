@@ -1,16 +1,19 @@
 package org.cursoutn;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceUnit;
+import jakarta.persistence.EntityTransaction;
 import org.cursoutn.controller.ClientesController;
 import org.cursoutn.model.ClienteModel;
-import org.cursoutn.repository.ClienteRepository;
+import org.cursoutn.model.IncidenteModel;
+import org.cursoutn.model.NotificacionModel;
+import org.cursoutn.model.ServicioModel;
 import org.cursoutn.repository.JpaClienteRepository;
+import org.cursoutn.view.ClientesView;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static java.lang.Long.parseLong;
-import static org.cursoutn.Main.getEntityManager;
 
 public class Menu {
     public static void menuIngresarDatos() throws Exception {
@@ -19,31 +22,28 @@ public class Menu {
         System.out.println("1- Ingresar nuevo incidente");
         System.out.println("2- Registrar nuevo cliente:");
         System.out.println("3- Registrar nuevo técnico:");
-        System.out.println("4- Registrar especialidad:");
+        //--Quizás se pueda necesitar más adelante?
+        // System.out.println("4- Registrar especialidad:");
         int seleccion = teclado.nextInt();
         switch (seleccion) {
             case 1:
                 menuRegistrarIncidente();
                 break;
             case 2:
-               // ClientesController nuevo = Main.abrirCliente();
-               // Main.registrarNuevoCliente(nuevo);
-                /* Prueba de persistencia:*/
-                ClienteModel cliente1 = new ClienteModel("El Sapo Pepe", 5734188749L);
-                System.out.println("\n" + cliente1.getRazon_social() +
-                                    "\n" + cliente1.getCuil());
-                cliente1.guardarCliente(cliente1);
-                System.out.println("\n\n" +  cliente1.obtenerClientePorId(1));
+                Crear.registrarNuevoCliente();
                 break;
             case 3:
-                break;
-            case 4:
+                Crear.registrarNuevoTecnico();
                 break;
             default:
                 System.out.println("La opción seleccionada no es válida");
         }
     }
-/*
+
+    private static void registrarNuevoCliente() throws Exception {
+
+    }
+    /*
 
 
  */
@@ -52,8 +52,9 @@ public class Menu {
         System.out.println ("Por favor ingrese la opción deseada");
         System.out.println ("1- Ingresar datos");
         System.out.println ("2- Buscar datos");
-        System.out.println ("3- Consultas");
-        System.out.println ("4- Salir");
+        System.out.println ("3- Eliminar datos");
+        System.out.println ("4- Consultas");
+        System.out.println ("5- Salir");
         int seleccion = teclado.nextInt();
         switch(seleccion) {
             case 1:
@@ -63,13 +64,46 @@ public class Menu {
                 menuBuscarDatos();
                 break;
             case 3:
-                menuConsultas();
+                menuEliminarDatos();
                 break;
             case 4:
+                break;
+            case 5:
                 break;
             default:
                 System.out.println("La opción seleccionada no es válida");
         }
+    }
+
+    private static void menuEliminarDatos() throws Exception {
+        Scanner teclado = new Scanner(System.in);
+        System.out.println("Por favor ingrese la opción deseada:");
+        System.out.println("1- Borrar incidente");
+        System.out.println("2- Borrar cliente:");
+        System.out.println("3- Borrar técnico:");
+        System.out.println("4- Borrar especialidad:");
+        int seleccion = teclado.nextInt();
+        switch (seleccion) {
+            case 1:
+                menuRegistrarIncidente();
+                break;
+            case 2:
+                Eliminar.borrarCliente();
+                menuInicial();
+                break;
+            case 3:
+                Eliminar.borrarTecnico();
+                break;
+            case 4:
+                Eliminar.borrarEspecialidad();
+                break;
+            default:
+                System.out.println("La opción seleccionada no es válida");
+        }
+    }
+
+    private static void borrarCliente(ClientesController cliente) throws Exception {
+        cliente.eliminarCliente(cliente.model);
     }
 
     private static void menuConsultas() throws Exception {

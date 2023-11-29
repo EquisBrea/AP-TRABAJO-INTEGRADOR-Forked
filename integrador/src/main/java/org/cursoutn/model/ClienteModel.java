@@ -30,7 +30,6 @@ public class ClienteModel {
     @JoinColumn(name = "cliente_id", referencedColumnName = "id")
     private List<NotificacionModel> notificaciones;
 
-    private JpaClienteRepository repository;
 
     @ManyToMany
     @JoinTable(
@@ -41,7 +40,7 @@ public class ClienteModel {
     private List<ServicioModel> servicios;
 
     @OneToMany
-    @JoinColumn(name="cliente_id", referencedColumnName = "id")
+    @JoinColumn(name = "cliente_id", referencedColumnName = "id")
     private List<IncidenteModel> incidentes;
 
     public ClienteModel() {
@@ -61,18 +60,9 @@ public class ClienteModel {
         this.razon_social = razon_social;
         this.cuil = cuil;
     }
-
-    EntityManager entityManager = getEntityManager();
-    JpaClienteRepository repo = new JpaClienteRepository();
-
-    public void guardarCliente (ClienteModel cliente) throws Exception {
-            repository.guardarCliente(cliente);
-    }
-    public ClienteModel obtenerClientePorId(Integer id) throws Exception {
-        return repository.obtenerClientePorId(id);
-    }
-    public void actualizarCliente(ClienteModel cliente) throws Exception {
-        repository.actualizarCliente(cliente);
-    }
-    public void eliminarCliente(ClienteModel cliente) throws Exception {repository.eliminarCliente(cliente);}
 }
+
+
+
+
+

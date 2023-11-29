@@ -19,7 +19,7 @@ public class TecnicoModel {
     @Column(nullable = false)
     private String nombreTecnico;
 
-    private String colchonHoras;
+    private int colchonHoras;
 
     @ManyToMany(mappedBy = "tecnicos")
     private List<IncidenteModel> incidentes;
@@ -36,7 +36,7 @@ public class TecnicoModel {
         this.especialidades = especialidades;
     }
 
-    public TecnicoModel(String nombreTecnico, String colchonHoras, List<IncidenteModel> incidentes,
+    public TecnicoModel(String nombreTecnico, int colchonHoras, List<IncidenteModel> incidentes,
                         List<EspecialidadModel> especialidades) {
         this.nombreTecnico = nombreTecnico;
         this.colchonHoras = colchonHoras;

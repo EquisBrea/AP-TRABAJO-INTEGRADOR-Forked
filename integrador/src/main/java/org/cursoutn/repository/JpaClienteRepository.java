@@ -1,22 +1,22 @@
 package org.cursoutn.repository;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.*;
+import org.cursoutn.Main;
 import org.cursoutn.model.ClienteModel;
 
 import java.util.List;
 
 public class JpaClienteRepository implements ClienteRepository{
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    @PersistenceUnit
+    private EntityManager entityManager = Main.getEntityManager();
 
     @Override
     public List<ClienteModel> obtenerTodosLosClientes() throws Exception {
         try{
-            return entityManager.createQuery("SELECT a FROM cliente a", ClienteModel.class).getResultList();
+            return entityManager.createQuery("SELECT a FROM ClienteModel a WHERE id IS NOT NULL", ClienteModel.class).getResultList();
         } catch (Exception e) {
-            throw new Exception("Error al obtener todos los registros");
+            throw new Exception("Error al obtener todos los registros " + e);
         }
     }
 

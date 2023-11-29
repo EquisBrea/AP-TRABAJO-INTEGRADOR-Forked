@@ -1,7 +1,8 @@
 package org.cursoutn.repository;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.*;
+import jakarta.transaction.Transaction;
+import org.cursoutn.Main;
 import org.cursoutn.model.IncidenteModel;
 import org.cursoutn.state.IncidenteState;
 
@@ -10,7 +11,8 @@ import java.util.List;
 public class JpaIncidenteRepository implements IncidenteRepository{
 
     @PersistenceContext
-    private EntityManager entityManager;
+    private EntityManager entityManager = Main.getEntityManager();
+    private EntityTransaction tx = entityManager.getTransaction();
 
     @Override
     public List<IncidenteModel> obtenerTodosLosIncidentes() throws Exception {

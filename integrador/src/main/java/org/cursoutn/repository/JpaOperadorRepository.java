@@ -2,6 +2,7 @@ package org.cursoutn.repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import org.cursoutn.Main;
 import org.cursoutn.model.OperadorModel;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
 public class JpaOperadorRepository implements OperadorRepository {
 
     @PersistenceContext
-    private EntityManager entityManager;
+    private EntityManager entityManager = Main.getEntityManager();
 
     @Override
     public List<OperadorModel> obtenerTodosLosOperadores() throws Exception {

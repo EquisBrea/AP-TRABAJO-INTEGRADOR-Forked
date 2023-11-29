@@ -2,6 +2,7 @@ package org.cursoutn.controller;
 
 import org.cursoutn.model.EspecialidadModel;
 import org.cursoutn.model.TecnicoModel;
+import org.cursoutn.repository.JpaEspecialidadRepository;
 import org.cursoutn.view.EspecialidadesView;
 import org.cursoutn.view.TecnicosView;
 
@@ -10,6 +11,7 @@ import java.util.List;
 public class EspecialidadesController {
     private EspecialidadModel model;
     private EspecialidadesView view;
+    private JpaEspecialidadRepository repository;
 
     public EspecialidadesController(EspecialidadModel model, EspecialidadesView view) {
         this.model = model;
@@ -30,6 +32,21 @@ public class EspecialidadesController {
     public void setListadoTecnicos (TecnicoModel tecnico){this.model.getTecnicos().add(tecnico);}
     public List<TecnicoModel> listadoTecnicos() {
         return this.model.getTecnicos();
+    }
+    public List<EspecialidadModel> obtenerTodasLasEspecialidades() throws Exception {
+        return repository.obtenerTodasLasEspecialidades();
+    }
+    public void guardarEspecialidad(EspecialidadModel especialidadModel) throws Exception {
+        repository.guardarEspecialidad(especialidadModel);
+    }
+    public EspecialidadModel obtenerEspecialidadPorId (int id) throws Exception {
+        return repository.obtenerEspecialidadPorId(id);
+    }
+    public void actualizarEspecialidad(EspecialidadModel especialidadModel) throws Exception {
+        repository.actualizarEspecialidad(especialidadModel);
+    }
+    public void eliminarEspecialidad (EspecialidadModel especialidadModel) throws Exception {
+        repository.eliminarEspecialidad(especialidadModel);
     }
     public void actualizarView(){
         view.mostrarDetallesEspecialidad(this.model.getId(), this.model.getNombreEspecialidad(), this.model.getTecnicos());

@@ -4,26 +4,32 @@ import org.cursoutn.model.ClienteModel;
 import org.cursoutn.model.IncidenteModel;
 import org.cursoutn.model.NotificacionModel;
 import org.cursoutn.model.ServicioModel;
+import org.cursoutn.repository.JpaClienteRepository;
 import org.cursoutn.view.ClientesView;
 
 import java.util.List;
 
 public class ClientesController {
     public ClienteModel model;
-    private ClientesView view;
+    public ClientesView view;
+    public JpaClienteRepository repository;
 
     public ClientesController(ClienteModel model, ClientesView view) {
         this.model = model;
         this.view = view;
     }
+    public void guardarCliente (ClienteModel cliente) throws Exception {
+        repository.guardarCliente(cliente);
+    }
+    public ClienteModel obtenerClientePorId(Integer id) throws Exception {
+        return repository.obtenerClientePorId(id);
+    }
+    public void actualizarCliente(ClienteModel cliente) throws Exception {
+        repository.actualizarCliente(cliente);
+    }
+    public void eliminarCliente(ClienteModel cliente) throws Exception {repository.eliminarCliente(cliente);}
 
-    public void setClienteId (int clienteId){
-        model.setId(clienteId);
-    }
-    public Integer getClienteId(){
-        return model.getId();
-    }
-    public void setRazonSocialCliente(String razonSocialCliente){
+    public void setRazonSocialCliente(String razonSocialCliente) throws Exception {
         model.setRazon_social(razonSocialCliente);
     }
     public String getRazonSocialCliente (){
@@ -35,8 +41,13 @@ public class ClientesController {
     public Long getCuilCliente (){
         return model.getCuil();
     }
-    public void setNotificaciones(NotificacionModel notificacion){
-        model.getNotificaciones().add(notificacion);
+    public void setNotificaciones(List<NotificacionModel> notificacion){
+        model.setNotificaciones(notificacion);
+    }
+    public void agregarNotificacion (String nombreNotificacion){
+        NotificacionModel notif = new NotificacionModel();
+        notif.setNombreNotificacion(nombreNotificacion);
+        model.getNotificaciones().add(notif);
     }
     public List<NotificacionModel> getNotificaciones(){
         return model.getNotificaciones();

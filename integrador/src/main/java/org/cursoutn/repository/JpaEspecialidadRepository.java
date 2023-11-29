@@ -2,6 +2,7 @@ package org.cursoutn.repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import org.cursoutn.Main;
 import org.cursoutn.model.EspecialidadModel;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
 public class JpaEspecialidadRepository implements EspecialidadRepository{
 
     @PersistenceContext
-    private EntityManager entityManager;
+    private EntityManager entityManager = Main.getEntityManager();
 
     @Override
     public List<EspecialidadModel> obtenerTodasLasEspecialidades() throws Exception {
