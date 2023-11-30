@@ -118,6 +118,7 @@ public class Crear {
             String salir;
             String tp;
 
+<<<<<<< Updated upstream
             do {
                 tp = JOptionPane.showInputDialog("Ingrese problemas involucrados en el incidente: ");
                 //Verificar si existe un problema
@@ -177,6 +178,16 @@ public class Crear {
 
            /* if (!em.contains(cM)){
                 cM = em.merge(cM);
+=======
+            String userinput = JOptionPane.showInputDialog("Ingrese problemas involucrados en incidente: ");
+          /*  System.out.println ("Ingrese problemas involucrados en incidente:");
+            String tp = teclado.nextLine();
+            System.out.println(Consultas.existeTipoDeProblema(tp));
+            */
+            if (!Consultas.existeTipoDeProblema(userinput)) {
+                System.out.println("Problema no existente con anterioridad, por favor registrar: ");
+                Crear.registrarNuevoTipoDeProblema();
+>>>>>>> Stashed changes
             }
             i.setCliente(cM);*/
             control.setTecnicos(tecnicoModel);
