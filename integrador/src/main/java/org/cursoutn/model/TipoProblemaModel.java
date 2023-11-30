@@ -11,17 +11,22 @@ import java.util.List;
 @Entity
 @DynamicInsert
 @Table(name="tipo_problema")
+
 public class TipoProblemaModel {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
+    @Column(nullable = false /*, columnDefinition = "varchar(255) default 'Sistema caido'"*/)
     private String nombreTipoProblema;
 
-    @ManyToMany(mappedBy = "tipoProblema")
-    @Column(name="incidente_id")
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "incidente_tipo_problema",
+            joinColumns = @JoinColumn(name = "tipo_problema_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "incidente_id", referencedColumnName = "id")
+    )
     private List<IncidenteModel> incidentes;
 
     @OneToMany

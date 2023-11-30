@@ -19,7 +19,7 @@ public class EspecialidadModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "varchar(255) default 'Sistemas'")
     private String nombreEspecialidad;
 
     @ManyToMany

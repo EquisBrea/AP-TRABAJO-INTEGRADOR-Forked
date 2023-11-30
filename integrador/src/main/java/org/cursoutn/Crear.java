@@ -2,6 +2,8 @@ package org.cursoutn;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Subgraph;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.cursoutn.controller.*;
 import org.cursoutn.model.*;
 import org.cursoutn.repository.*;
@@ -91,7 +93,9 @@ public class Crear {
             IncidentesView incidentesView = new IncidentesView();
             JpaIncidenteRepository repository = new JpaIncidenteRepository();
             IncidentesController control = new IncidentesController(i, incidentesView);
+
             JpaClienteRepository clienteRepository = new JpaClienteRepository();
+
             JpaTecnicoRepository tecnicoRepository = new JpaTecnicoRepository();
 
             Scanner teclado = new Scanner(System.in);
@@ -99,8 +103,12 @@ public class Crear {
             int clienteId = teclado.nextInt();
             ClienteModel cM = clienteRepository.obtenerClientePorId(clienteId);
 
+            teclado.nextLine();
+
             System.out.println ("Ingrese problemas involucrados en incidente:");
             String tp = teclado.nextLine();
+            System.out.println(Consultas.existeTipoDeProblema(tp));
+
             if (!Consultas.existeTipoDeProblema(tp)) {
                 System.out.println("Problema no existente con anterioridad, por favor registrar: ");
                 Crear.registrarNuevoTipoDeProblema();
@@ -121,23 +129,27 @@ public class Crear {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try{
-            TipoProblemaModel i = new TipoProblemaModel(new ArrayList<>(), new ServicioModel());
-            TipoProblemaView incidentesView = new TipoProblemaView();
+            TipoProblemaModel p = new TipoProblemaModel(new ArrayList<>(), new ServicioModel());
+            TipoProblemaView tipoProblemaView = new TipoProblemaView();
+            List listaDeIncidentes = new ArrayList<>();
+            
+            IncidenteModel incidenteModel = new IncidenteModel();
+            listaDeIncidentes.add(incidenteModel);
             JpaTipoProblemaRepository repository = new JpaTipoProblemaRepository();
-            TipoProblemaController control = new TipoProblemaController(i, incidentesView);
+            TipoProblemaController control = new TipoProblemaController(p, tipoProblemaView);
+
 
             Scanner teclado = new Scanner(System.in);
 
-            System.out.println ("Ingrese descripcion problema:");
+            System.out.println ("Ingrese tipo de problema:");
             String desc = teclado.nextLine();
 
-
+            control.setIncidentes(listaDeIncidentes);
             control.setNombreTipoProblema(desc);
             repository.actualizarTipoProblema(control.model);
 
-
         } catch (Exception e) {
-            System.out.println("Problema:" + e);
+            System.out.println("Problema grave: " + e);
         }
 
     }
@@ -145,7 +157,7 @@ public class Crear {
     public static void registrarNuevaEspecialidad() {
         EntityManager em = Main.getEntityManager();
         EntityTransaction tx = em.getTransaction();
-        tx.begin();
+
         try{
             EspecialidadModel i = new EspecialidadModel("Especialidad nueva", new ArrayList<TecnicoModel>(), new TipoProblemaModel());
             EspecialidadesView incidentesView = new EspecialidadesView();

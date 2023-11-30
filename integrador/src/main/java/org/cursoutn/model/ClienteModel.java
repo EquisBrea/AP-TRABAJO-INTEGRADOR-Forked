@@ -22,10 +22,10 @@ public class ClienteModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "varchar(255) default 'Juan Perez'")
     private String razon_social;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "unsigned bigint default 12222222222")
     private long cuil;
 
     @OneToMany

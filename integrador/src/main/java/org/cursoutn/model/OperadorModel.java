@@ -17,7 +17,7 @@ public class OperadorModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "varchar(255) default 'Elsa Balo'")
     private String nombreOperador;
 
     @ManyToMany(fetch = FetchType.EAGER)

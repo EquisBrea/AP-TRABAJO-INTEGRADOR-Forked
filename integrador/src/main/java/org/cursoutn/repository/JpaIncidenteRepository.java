@@ -16,7 +16,7 @@ public class JpaIncidenteRepository implements IncidenteRepository{
     @Override
     public List<IncidenteModel> obtenerTodosLosIncidentes() throws Exception {
         try{
-            return entityManager.createQuery("SELECT a FROM incidente a", IncidenteModel.class).getResultList();
+            return entityManager.createQuery("SELECT a FROM IncidenteModel a", IncidenteModel.class).getResultList();
         } catch (Exception e) {
             throw new Exception("Error al obtener todos los registros" + e);
         }

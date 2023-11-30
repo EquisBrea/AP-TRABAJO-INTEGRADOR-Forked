@@ -17,7 +17,7 @@ public class ServicioModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "varchar(255) default 'Windows'")
     private String nombreServicio;
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "servicios")

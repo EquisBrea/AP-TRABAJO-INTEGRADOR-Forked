@@ -44,7 +44,7 @@ public class IncidenteModel implements Serializable {
     )
     private List<TecnicoModel> tecnicos;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "incidente_tipo_problema",
             joinColumns = @JoinColumn(name = "incidente_id", referencedColumnName = "id"),

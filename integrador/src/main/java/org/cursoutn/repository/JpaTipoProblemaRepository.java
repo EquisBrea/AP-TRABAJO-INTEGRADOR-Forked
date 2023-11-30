@@ -51,7 +51,7 @@ public class JpaTipoProblemaRepository implements TipoProblemaRepository {
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
-            throw new Exception("Error al actualizar el registro" + e);
+            throw new Exception("Error al actualizar el registro tipoProblema " + e);
         }
     }
 

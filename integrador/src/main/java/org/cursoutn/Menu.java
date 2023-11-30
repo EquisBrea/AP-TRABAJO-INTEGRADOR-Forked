@@ -1,16 +1,10 @@
 package org.cursoutn;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
 import org.cursoutn.controller.ClientesController;
-import org.cursoutn.model.ClienteModel;
-import org.cursoutn.model.IncidenteModel;
-import org.cursoutn.model.NotificacionModel;
-import org.cursoutn.model.ServicioModel;
-import org.cursoutn.repository.JpaClienteRepository;
-import org.cursoutn.view.ClientesView;
+import org.cursoutn.controller.TecnicosController;
+import org.cursoutn.model.TecnicoModel;
+import org.cursoutn.repository.JpaTecnicoRepository;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import static java.lang.Long.parseLong;
@@ -128,6 +122,8 @@ public class Menu {
                 menuBuscarIncidentePorId();
                 break;
             case 2:
+                menuListarIncidentesPor();
+                Consultas.listarIncidentesPor();
                 break;
             case 3:
                 Consultas.listarTecnicos();
@@ -137,6 +133,36 @@ public class Menu {
                 break;
             default:
                 System.out.println("La opción seleccionada no es válida");
+        }
+    }
+
+    private static void menuListarIncidentesPor() throws Exception {
+        Scanner teclado = new Scanner(System.in);
+        System.out.println ("Por favor ingrese la opción deseada:");
+        System.out.println ("1- ...cliente:");
+        System.out.println ("2- ...problema:");
+        System.out.println ("3- ...tecnico:");
+        System.out.println ("3- Salir:");
+        int seleccion = teclado.nextInt();
+        switch (seleccion) {
+            case 1:
+                break;
+                case 2:
+                    break;
+            case 3:
+                Scanner tecl = new Scanner(System.in);
+                System.out.println("Ingrese ID de Tecnico");
+                int busq =  tecl.nextInt();
+                JpaTecnicoRepository repo1 = new JpaTecnicoRepository();
+                TecnicoModel tecni = repo1.obtenerTecnicoPorId(busq);
+                Consultas.listarIncidentesPorTecnico(tecni);
+                break;
+            case 4:
+                menuConsultas();
+                break;
+            default:
+                System.out.println("Opcion no disponible.");
+                menuListarIncidentesPor();
         }
     }
 

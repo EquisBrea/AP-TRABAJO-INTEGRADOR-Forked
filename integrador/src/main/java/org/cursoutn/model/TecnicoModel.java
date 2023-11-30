@@ -20,7 +20,7 @@ public class TecnicoModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "varchar(255) default 'Facundo Vargas'")
     private String nombreTecnico;
 
     private int colchonHoras;
