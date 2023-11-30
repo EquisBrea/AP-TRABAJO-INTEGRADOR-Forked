@@ -48,7 +48,7 @@ public class Main {
         Menu menu = new Menu();
 
         try {
-            menu.menuInicial();
+            menu.showMenu();
         }catch (Exception e){
             System.out.println(e.getMessage());
         }

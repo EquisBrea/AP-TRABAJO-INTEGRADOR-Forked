@@ -5,12 +5,47 @@ import org.cursoutn.controller.TecnicosController;
 import org.cursoutn.model.TecnicoModel;
 import org.cursoutn.repository.JpaTecnicoRepository;
 
-import java.util.Scanner;
+import javax.swing.*;
+import java.util.*;
 
 import static java.lang.Long.parseLong;
 
 public class Menu {
     public static void menuIngresarDatos() throws Exception {
+        String[] opciones = {"1- Ingresar nuevo incidente", "2- Ingresar nuevo cliente", "3- Ingresar nuevo tecnico", "4- Ingresar nuevo Especialidad", "6- Salir"};
+
+        int choice = JOptionPane.showOptionDialog(
+                null,
+                "Select an option:",
+                "Menu",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                opciones,
+                opciones[0]
+        );
+
+        // Verificar la eleccion del usuario
+        switch (choice) {
+            case 0:
+                Crear.menuRegistrarIncidente();
+                break;
+            case 1:
+                Crear.registrarNuevoCliente();
+                break;
+            case 2:
+                Crear.registrarNuevoTecnico();
+                break;
+            case 3:
+                Crear.registrarNuevaEspecialidad();
+            case 4:
+                showMenu();
+                break;
+            case 5:
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "La opción seleccionada no es válida");
+        }/*
         Scanner teclado = new Scanner(System.in);
         System.out.println("Por favor ingrese la opción deseada:");
         System.out.println("1- Ingresar nuevo incidente");
@@ -39,42 +74,62 @@ public class Menu {
                 System.out.println("La opción seleccionada no es válida");
                 menuInicial();
         }
+        */
     }
 
     private static void registrarNuevoCliente() throws Exception {
 
     }
+
     /*
 
 
- */
-    public static void menuInicial() throws Exception {
-        Scanner teclado = new Scanner(System.in);
-        System.out.println ("Por favor ingrese la opción deseada");
-        System.out.println ("1- Ingresar datos");
-        System.out.println ("2- Buscar datos");
-        System.out.println ("3- Eliminar datos");
-        System.out.println ("4- Consultas");
-        System.out.println ("5- Salir");
-        int seleccion = teclado.nextInt();
-        switch(seleccion) {
-            case 1:
+     */
+    public static void menuInicial() {
+        // Scanner teclado = new Scanner(System.in);
+        //System.out.println("Por favor ingrese la opción deseada");
+        //int seleccion = teclado.nextInt();
+
+    }
+
+    public static void showMenu() throws Exception {
+        String[] opciones = {"1- Ingresar datos", "2- Buscar datos", "3- Eliminar datos", "4- Actualizar datos", "5- Consultas", "6- Salir"};
+
+        int choice = JOptionPane.showOptionDialog(
+                null,
+                "Select an option:",
+                "Menu Inicial",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                opciones,
+                opciones[0]
+        );
+
+        // Check the user's choice
+        switch (choice) {
+            case 0:
                 menuIngresarDatos();
                 break;
-            case 2:
+            case 1:
                 menuBuscarDatos();
                 break;
-            case 3:
+            case 2:
                 menuEliminarDatos();
                 break;
+            case 3:
+                menuActualizarDatos();
             case 4:
                 menuConsultas();
                 break;
             case 5:
                 break;
             default:
-                System.out.println("La opción seleccionada no es válida");
+                JOptionPane.showMessageDialog(null, "La opción seleccionada no es válida");
         }
+    }
+
+    private static void menuActualizarDatos() {
     }
 
     private static void menuEliminarDatos() throws Exception {
@@ -110,50 +165,96 @@ public class Menu {
     }
 
     private static void menuConsultas() throws Exception {
-        Scanner teclado = new Scanner(System.in);
+        String[] opciones = {"1- Listar clientes", "2- Buscar incidentes", "3- Eliminar tecnicos", "4- Desempeño tecnicos", "5- Salir"};
+
+        int choice = JOptionPane.showOptionDialog(
+                null,
+                "Select an option:",
+                "Menu Inicial",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                opciones,
+                opciones[0]
+        );
+
+        // Check the user's choice
+        switch (choice) {
+            case 0:
+                Listar.listarClientes();
+                menuConsultas();
+                break;
+            case 1:
+                Listar.listarIncidentes();
+                menuConsultas();
+                break;
+            case 2:
+                Listar.listarTecnicos();
+                menuConsultas();
+                break;
+            case 3:
+                TecnicoModel tecnicazo = new TecnicoModel();
+                Consultas.tecnicoConMayorCantidadDeIncidentesResueltos();
+                JOptionPane.showMessageDialog(null, tecnicazo.getNombreTecnico());
+                menuConsultas();
+            case 4:
+                showMenu();
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "La opción seleccionada no es válida");
+        }
+        /*Scanner teclado = new Scanner(System.in);
         System.out.println ("Por favor ingrese la opción deseada:");
         System.out.println ("1- Listar clientes:");
         System.out.println ("2- Listar incidentes:");
         System.out.println ("3- Listar tecnicos:");
         System.out.println ("4- Desempenio Tecnicos:");
+        System.out.println ("5- Salir");
 
         int seleccion = teclado.nextInt();
         switch(seleccion) {
             case 1:
                 Listar.listarClientes();
+                menuConsultas();
                 break;
             case 2:
                 menuListarIncidentesPor();
                 Consultas.listarIncidentesPor();
+                menuConsultas();
                 break;
             case 3:
-                Consultas.listarTecnicos();
+                Listar.listarTecnicos();
+                menuConsultas();
                 break;
             case 4:
                 Consultas.tecnicoConMayorCantidadDeIncidentesResueltos();
+                menuConsultas();
+                break;
+            case 5:
+                menuInicial();
                 break;
             default:
                 System.out.println("La opción seleccionada no es válida");
-        }
+        }*/
     }
 
     private static void menuListarIncidentesPor() throws Exception {
         Scanner teclado = new Scanner(System.in);
-        System.out.println ("Por favor ingrese la opción deseada:");
-        System.out.println ("1- ...cliente:");
-        System.out.println ("2- ...problema:");
-        System.out.println ("3- ...tecnico:");
-        System.out.println ("3- Salir:");
+        System.out.println("Por favor ingrese la opción deseada:");
+        System.out.println("1- ...cliente:");
+        System.out.println("2- ...problema:");
+        System.out.println("3- ...tecnico:");
+        System.out.println("3- Salir:");
         int seleccion = teclado.nextInt();
         switch (seleccion) {
             case 1:
                 break;
-                case 2:
-                    break;
+            case 2:
+                break;
             case 3:
                 Scanner tecl = new Scanner(System.in);
                 System.out.println("Ingrese ID de Tecnico");
-                int busq =  tecl.nextInt();
+                int busq = tecl.nextInt();
                 JpaTecnicoRepository repo1 = new JpaTecnicoRepository();
                 TecnicoModel tecni = repo1.obtenerTecnicoPorId(busq);
                 Consultas.listarIncidentesPorTecnico(tecni);
@@ -170,15 +271,15 @@ public class Menu {
 
     public static int menuBuscarDatos() throws Exception {
         Scanner teclado = new Scanner(System.in);
-        System.out.println ("Por favor ingrese la opción deseada:");
-        System.out.println ("1- Buscar Incidente por ID");
-        System.out.println ("2- Buscar Cliente por ID");
-        System.out.println ("3- Buscar Tecnico por ID");
-        System.out.println ("4- Buscar Especialidad por ID");
-        System.out.println ("5- Consultas e informes");
+        System.out.println("Por favor ingrese la opción deseada:");
+        System.out.println("1- Buscar Incidente por ID");
+        System.out.println("2- Buscar Cliente por ID");
+        System.out.println("3- Buscar Tecnico por ID");
+        System.out.println("4- Buscar Especialidad por ID");
+        System.out.println("5- Consultas e informes");
         int seleccion = teclado.nextInt();
         int id;
-        switch(seleccion) {
+        switch (seleccion) {
             case 1:
                 System.out.println("Introduzca ID");
                 id = teclado.nextInt();
@@ -199,14 +300,35 @@ public class Menu {
             default:
                 System.out.println("La opción seleccionada no es válida");
         }
-    return 0;
+        return 0;
     }
 
     private static void menuBuscarIncidentePorId() throws Exception {
         Scanner teclado = new Scanner(System.in);
-        System.out.println ("Por favor ingrese el id del cliente:");
-        int clienteId = teclado.nextInt();}
+        System.out.println("Por favor ingrese el id del cliente:");
+        int clienteId = teclado.nextInt();
+    }
+
+
+    public static void mostrarOpcionesConId(String[] opcion, List<Par<Integer, String>> lista) {
+        String[] opciones  = opcion;
+        Arrays.stream(opciones).toList().stream().forEach(caso -> System.out.println(caso));
+        int choice = JOptionPane.showOptionDialog(
+                null,
+                "Select an option:",
+                "Menu Inicial",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                opciones,
+                opciones[0]
+        );
+
+
+        // Check the user's choice
+                JOptionPane.showMessageDialog(null, "La opción seleccionada no es válida");
+        }
+    }
 
 
 
-}

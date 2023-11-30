@@ -22,7 +22,7 @@ public class ClienteModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column
+    @Column(nullable = false, columnDefinition = "varchar (255) default XBSystems")
     private String razon_social;
 
     @Column

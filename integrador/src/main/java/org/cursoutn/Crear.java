@@ -18,6 +18,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
+import static org.cursoutn.Consultas.devolverArrayDeStrings;
+import static org.cursoutn.Menu.mostrarOpcionesConId;
+
 public class Crear {
     @PersistenceContext
     private EntityManager em;
@@ -89,7 +92,7 @@ public class Crear {
     }
     public static void menuRegistrarIncidente() {
 
-        try{
+        try {
             IncidenteModel i = new IncidenteModel(LocalDateTime.now(), 1, 0, State.INICIADO, new ArrayList<OperadorModel>(), new ClienteModel(), new ArrayList<TecnicoModel>(), new ArrayList<TipoProblemaModel>());
             IncidentesView incidentesView = new IncidentesView();
             JpaIncidenteRepository repository = new JpaIncidenteRepository();
@@ -100,16 +103,50 @@ public class Crear {
             JpaTecnicoRepository tecnicoRepository = new JpaTecnicoRepository();
 
             Scanner teclado = new Scanner(System.in);
-            System.out.println ("Por favor ingrese el id del cliente:");
+            System.out.println("Por favor ingrese el id del cliente:");
             int clienteId = teclado.nextInt();
             ClienteModel cM = clienteRepository.obtenerClientePorId(clienteId);
+            i.setCliente(cM);
 
             teclado.nextLine();
             String salir;
             String tp;
 
             do {
-                System.out.println ("Ingrese problemas involucrados en incidente:");
+                System.out.println("Ingrese problemas involucrados en incidente:");
+                tp = teclado.nextLine();
+                //Verificar si existe un problema
+                if (Consultas.existeTipoDeProblema(tp)) {
+                    i.agregarProblemas(i.obtenerTipoDeProblemaPorNombre(tp));
+                } else {
+                    System.out.println("Problema no existente con anterioridad, agregar al registro?(S/N) ");
+                    String agregar = teclado.nextLine();
+                    if (agregar.equalsIgnoreCase("S")) {
+                        Crear.registrarNuevoTipoDeProblema(tp);
+                        System.out.println("Problema agregado al registro:  \n" + tp);
+                    } else {
+                        System.out.println("Problema no agregado al registro");
+                    }
+                }   
+                System.out.println(Consultas.existeTipoDeProblema(tp));
+                System.out.println ("Agregar problema? (S/N):");
+                salir = teclado.nextLine();
+                boolean n = salir.equalsIgnoreCase("n");
+                System.out.println(salir + " " +  n);
+            } while(!salir.equalsIgnoreCase("n"));
+
+            salir = "s";
+            do {
+                Scanner agr = new Scanner(System.in);
+
+                //esto se puede mover a la clase IncidenteModel (necesito tenerlo acá por claridad)
+                String[] opciones = devolverArrayDeStrings(i.listarProblemas());
+                mostrarOpcionesConId(opciones, i.listarProblemas());
+                System.out.println ("Seleccione id de problema:");
+                int idProblema = agr.nextInt();
+
+                System.out.println ("Ingrese tecnicos involucrados en incidente:");
+
                 tp = teclado.nextLine();
                 //Verificar si existe un problema
                 if (!Consultas.existeTipoDeProblema(tp)) {
@@ -128,8 +165,6 @@ public class Crear {
                 boolean n = salir.equalsIgnoreCase("n");
                 System.out.println(salir + " " +  n);
             } while(!salir.equalsIgnoreCase("n"));
-
-
 
 
             control.setCliente(cM);

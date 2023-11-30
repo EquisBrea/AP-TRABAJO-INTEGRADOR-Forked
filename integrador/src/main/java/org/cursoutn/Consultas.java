@@ -14,6 +14,7 @@ import java.time.chrono.ChronoLocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -26,17 +27,7 @@ public class Consultas {
 
 
 
-    public static void listarTecnicos() throws Exception {
-        EntityManager em = Main.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        JpaTecnicoRepository r1 = new JpaTecnicoRepository();
-        JpaEspecialidadRepository r2 = new JpaEspecialidadRepository();
 
-        r1.obtenerTodosLosTecnicos().stream().
-                forEachOrdered(tecnico -> System.out.println(tecnico.getNombreTecnico() + " "));
-        r2.obtenerTodasLasEspecialidades().stream().
-                forEachOrdered(espec -> System.out.println(espec.getNombreEspecialidad()));
-    }
 
     public static void consultarDesempenioTecnicos() throws Exception {
         EntityManager em = Main.getEntityManager();
@@ -45,7 +36,7 @@ public class Consultas {
         JpaTecnicoRepository repository = new JpaTecnicoRepository();
             Scanner scn = new Scanner(System.in);
             System.out.println("Introduzca fecha(ddmmaaaa):");
-            LocalDate date = LocalDate.parse(scn.nextLine(), DateTimeFormatter.ofLocalizedDate(FormatStyle.valueOf("ddmmaaaa")));
+            LocalDate date = LocalDate.parse(scn.nextLine(), DateTimeFormatter.ofLocalizedDate(FormatStyle.valueOf("DD MM AAAA")));
     }
     public static boolean existeTipoDeProblema(String tipoDescripcion) throws Exception {
         EntityManager em = Main.getEntityManager();
@@ -80,18 +71,31 @@ public class Consultas {
     }
     public static TecnicoModel tecnicoConMayorCantidadDeIncidentesResueltos() throws Exception {
         Scanner scn = new Scanner(System.in);
-        System.out.println("Ingrese fecha (ddmmaaaa: ");
-        DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("ddmmyyyy");
+        System.out.println("Ingrese fecha de inicio de busqueda (ddmmaaaa): ");
+        DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("ddMMyyyy");
         LocalDate fecha = LocalDate.parse(scn.nextLine(),formatoFecha);
         ChronoLocalDateTime fechaExacta = fecha.atStartOfDay();
 
         JpaTecnicoRepository repository = new JpaTecnicoRepository();
-        return repository.obtenerTodosLosTecnicos().stream()
+        TecnicoModel tecnicazo;
+        tecnicazo = repository.obtenerTodosLosTecnicos().stream()
                 .filter(tecnico -> tecnico.getIncidentes().stream()
                         .allMatch(incidente -> incidente.getFechaHoraIncidente().isAfter(fechaExacta)))
                 .max(Comparator.comparingInt(caso -> Math.toIntExact(caso.getIncidentes().stream()
                         .filter(incidente -> incidente.getEstadoIncidente().equals(State.RESUELTO)).count())))
                 .orElse(null);
+        return tecnicazo;
     }
 
+    public static String[] devolverArrayDeStrings(List<Par<Integer,String>> listaDeIdYDescipcion) {
+        String[] message = new String[listaDeIdYDescipcion.size()];
+        for (int i = 0;i < listaDeIdYDescipcion.size(); i++) {
+            Par<Integer, String> par = listaDeIdYDescipcion.get(i);
+            int id = par.getFirst();
+            String nombreTipoProblema = par.getSecond();
+            message[i]= "ID: " + id + ", Problema: " + nombreTipoProblema + "\n";
+        }
+        return message;
+    }
 }
+

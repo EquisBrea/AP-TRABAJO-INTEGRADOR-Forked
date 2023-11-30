@@ -1,6 +1,10 @@
 package org.cursoutn.model;
 
+import com.mysql.cj.conf.ConnectionUrlParser;
 import jakarta.persistence.*;
+import org.cursoutn.Par;
+import org.cursoutn.repository.JpaIncidenteRepository;
+import org.cursoutn.repository.JpaTipoProblemaRepository;
 import org.cursoutn.state.*;
 import org.hibernate.annotations.DynamicInsert;
 
@@ -8,6 +12,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name="incidente")
@@ -146,8 +151,28 @@ public class IncidenteModel implements Serializable {
     public void setTecnicos(List<TecnicoModel> tecnicos) {
         this.tecnicos = tecnicos;
     }
+    public List<Par<Integer, String>> listarProblemas () {
+        List<Par<Integer, String>> pares = new ArrayList<>();
+        this.getTipoProblema().forEach(problemas ->
+        {
+            int id = problemas.getId();
+            String nombreProblema = problemas.getNombreTipoProblema();
+            pares.add(new Par<>(id, nombreProblema));
+        });
+
+        return pares;
+    }
 
 
+    public void agregarProblemas(TipoProblemaModel problemaNuevo) {
+        this.getTipoProblema().add(problemaNuevo);
+    }
 
+    public TipoProblemaModel obtenerTipoDeProblemaPorNombre(String tp) throws Exception {
+        JpaTipoProblemaRepository repository = new JpaTipoProblemaRepository();
+        return repository.obtenerTodosLosTipoProblema().stream().
+                filter(problema -> problema.getNombreTipoProblema().equalsIgnoreCase(tp)).
+                findAny().orElseThrow(() -> new Exception());
 
+    }
 }
