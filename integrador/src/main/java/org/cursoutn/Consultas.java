@@ -91,7 +91,6 @@ public class Consultas {
         ChronoLocalDateTime fechaExacta = fecha.atStartOfDay();
 
         JpaTecnicoRepository repository = new JpaTecnicoRepository();
-        JpaIncidenteRepository repos = new JpaIncidenteRepository();
         return repository.obtenerTodosLosTecnicos().stream()
                 .filter(tecnico -> tecnico.getIncidentes().stream()
                         .allMatch(incidente -> incidente.getFechaHoraIncidente().isAfter(fechaExacta)))
