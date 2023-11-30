@@ -15,6 +15,7 @@ import org.cursoutn.view.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Crear {
@@ -104,15 +105,32 @@ public class Crear {
             ClienteModel cM = clienteRepository.obtenerClientePorId(clienteId);
 
             teclado.nextLine();
+            String salir;
+            String tp;
 
-            System.out.println ("Ingrese problemas involucrados en incidente:");
-            String tp = teclado.nextLine();
-            System.out.println(Consultas.existeTipoDeProblema(tp));
+            do {
+                System.out.println ("Ingrese problemas involucrados en incidente:");
+                tp = teclado.nextLine();
+                //Verificar si existe un problema
+                if (!Consultas.existeTipoDeProblema(tp)) {
+                    System.out.println("Problema no existente con anterioridad, agregar al registro?(S/N) ");
+                    String agregar = teclado.nextLine();
+                    if (agregar.equalsIgnoreCase("S")) {
+                        Crear.registrarNuevoTipoDeProblema(tp);
+                        System.out.println("Problema agregado al registro:  \n" + tp);
+                    } else {
+                        System.out.println("Problema no agregado al registro");
+                    }
+                }
+                System.out.println(Consultas.existeTipoDeProblema(tp));
+                System.out.println ("Agregar problema? (S/N):");
+                salir = teclado.nextLine();
+                boolean n = salir.equalsIgnoreCase("n");
+                System.out.println(salir + " " +  n);
+            } while(!salir.equalsIgnoreCase("n"));
 
-            if (!Consultas.existeTipoDeProblema(tp)) {
-                System.out.println("Problema no existente con anterioridad, por favor registrar: ");
-                Crear.registrarNuevoTipoDeProblema();
-            }
+
+
 
             control.setCliente(cM);
             control.setEstadoIncidenteActual(State.INICIADO);
@@ -148,7 +166,26 @@ public class Crear {
         }
 
     }
+    private static void registrarNuevoTipoDeProblema(String nombreProblema) {
 
+        try{
+            TipoProblemaModel p = new TipoProblemaModel(/*new ArrayList<>(), new ServicioModel()*/);
+            TipoProblemaView tipoProblemaView = new TipoProblemaView();
+            TipoProblemaController tipoProblemaController = new TipoProblemaController(p, tipoProblemaView);
+
+            JpaTipoProblemaRepository repository = new JpaTipoProblemaRepository();
+
+            TipoProblemaController control = new TipoProblemaController(p, tipoProblemaView);
+
+            //control.setIncidentes(listaDeIncidentes);
+            control.setNombreTipoProblema(nombreProblema);
+            repository.guardarTipoProblema(control.model);
+
+        } catch (Exception e) {
+            System.out.println("Problema grave: " + e);
+        }
+
+    }
     public static void registrarNuevaEspecialidad() {
 
         try{

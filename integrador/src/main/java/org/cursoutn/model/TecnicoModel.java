@@ -53,7 +53,7 @@ public class TecnicoModel {
   //      this.incidentes = incidentes;
         this.especialidades = especialidades;
     }
-    //public long cantidadDeIncidentesResueltos (){
-      //  return this.getIncidentes().stream().filter(caso ->  caso.getEstadoIncidente().equals(State.RESUELTO)).count();
-    //}
+    public long cantidadDeIncidentesResueltos (){
+        return this.getIncidentes().stream().filter(caso ->  caso.getEstadoIncidente().equals(State.RESUELTO)).count();
+    }
 }

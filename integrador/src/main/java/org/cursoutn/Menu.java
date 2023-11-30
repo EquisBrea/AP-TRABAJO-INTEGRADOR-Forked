@@ -91,10 +91,11 @@ public class Menu {
                 break;
             case 2:
                 Eliminar.borrarCliente();
-                menuInicial();
+                menuEliminarDatos();
                 break;
             case 3:
                 Eliminar.borrarTecnico();
+                menuEliminarDatos();
                 break;
             case 4:
                 Eliminar.borrarEspecialidad();
@@ -129,7 +130,7 @@ public class Menu {
                 Consultas.listarTecnicos();
                 break;
             case 4:
-                Consultas.consultarDesempenioTecnicos();
+                Consultas.tecnicoConMayorCantidadDeIncidentesResueltos();
                 break;
             default:
                 System.out.println("La opción seleccionada no es válida");
