@@ -10,6 +10,7 @@ import org.cursoutn.repository.JpaTipoProblemaRepository;
 import org.cursoutn.state.State;
 
 import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Comparator;
@@ -87,12 +88,15 @@ public class Consultas {
         System.out.println("Ingrese fecha (ddmmaaaa: ");
         DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("ddmmyyyy");
         LocalDate fecha = LocalDate.parse(scn.nextLine(),formatoFecha);
+        ChronoLocalDateTime fechaExacta = fecha.atStartOfDay();
+
         JpaTecnicoRepository repository = new JpaTecnicoRepository();
         JpaIncidenteRepository repos = new JpaIncidenteRepository();
         return repository.obtenerTodosLosTecnicos().stream()
+                .filter(tecnico -> tecnico.getIncidentes().stream()
+                        .allMatch(incidente -> incidente.getFechaHoraIncidente().isAfter(fechaExacta)))
                 .max(Comparator.comparingInt(caso -> Math.toIntExact(caso.getIncidentes().stream()
                         .filter(incidente -> incidente.getEstadoIncidente().equals(State.RESUELTO)).count())))
                 .orElse(null);
-
     }
 }
