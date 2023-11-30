@@ -32,6 +32,9 @@ public class EspecialidadModel {
 
 
     public EspecialidadModel() {
+        this.nombreEspecialidad = "";
+        this.tiposDeProblemas = new ArrayList<>();
+        this.tecnicos = new ArrayList<>();
     }
 
     public EspecialidadModel(String nombreEspecialidad) {

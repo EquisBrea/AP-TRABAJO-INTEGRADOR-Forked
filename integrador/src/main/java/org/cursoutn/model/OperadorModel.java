@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 
+import java.util.ArrayList;
 import java.util.List;
 @Getter
 @Setter
@@ -20,10 +21,11 @@ public class OperadorModel {
     private String nombreOperador;
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "operadores")
-    @JoinTable
     private List<IncidenteModel> incidentes;
 
     public OperadorModel() {
+        this.nombreOperador ="";
+        this.incidentes = new ArrayList<>();
     }
 
     public OperadorModel(String nombreOperador) {

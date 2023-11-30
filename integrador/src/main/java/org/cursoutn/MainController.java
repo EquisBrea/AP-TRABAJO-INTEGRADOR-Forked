@@ -15,7 +15,7 @@ import java.util.List;
 public class MainController {
 
     public static void mostrarTodos() throws Exception {
-        ClienteModel cliente = new ClienteModel("cliente", (long) 1111110.013,  new ArrayList<NotificacionModel>(), new ArrayList<ServicioModel>(), new ArrayList<IncidenteModel>());
+        ClienteModel cliente = new ClienteModel("cliente", (long) 1111110.013,  new NotificacionModel(), new ArrayList<ServicioModel>(), new ArrayList<IncidenteModel>());
         ClientesView clientesView = new ClientesView();
         JpaClienteRepository repository = new JpaClienteRepository();
         ClientesController clienteController = new ClientesController(cliente, clientesView);

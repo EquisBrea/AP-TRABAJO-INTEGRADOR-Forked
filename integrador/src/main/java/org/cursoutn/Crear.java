@@ -22,7 +22,7 @@ public class Crear {
     private EntityManager em;
     public static void registrarNuevoCliente() {
         try {
-            ClienteModel cliente = new ClienteModel("cliente", (long) 0, new ArrayList<NotificacionModel>(), new ArrayList<ServicioModel>(), new ArrayList<IncidenteModel>());
+            ClienteModel cliente = new ClienteModel("cliente", (long) 0, new NotificacionModel(), new ArrayList<ServicioModel>(), new ArrayList<IncidenteModel>());
             ClientesView clientesView = new ClientesView();
             JpaClienteRepository repository = new JpaClienteRepository();
             ClientesController clienteController = new ClientesController(cliente, clientesView);
@@ -42,17 +42,17 @@ public class Crear {
 
             System.out.println("Ingrese modo de comunicación preferido: ");
             String ntxt = scn.nextLine();
-            clienteController.agregarNotificacion(ntxt);
+            clienteController.setNotificaciones(new NotificacionModel(ntxt));
 
             clienteController.repository.guardarCliente(clienteController.model);
 
         } catch (Exception e) {
-            System.out.println("Error al crear nuevo registro: \n" + e);
+            System.out.println("Error al crear nuevo registro Cliente: \n" + e);
         }
     }
     public static void registrarNuevoTecnico() {
            try {
-            TecnicoModel t = new TecnicoModel("cliente", 1, new ArrayList<IncidenteModel>(), new ArrayList<EspecialidadModel>());
+            TecnicoModel t = new TecnicoModel();
             TecnicosView tecnicosView = new TecnicosView();
             JpaTecnicoRepository repository = new JpaTecnicoRepository();
             TecnicosController tC = new TecnicosController(t, tecnicosView);
@@ -83,7 +83,7 @@ public class Crear {
             tC.repository.actualizarTecnico(tC.model);
 
         } catch (Exception e) {
-            System.out.println("Error al crear nuevo registro: \n" + e);
+            System.out.println("Error al crear nuevo registro Tecnico: \n" + e);
         }
     }
     public static void menuRegistrarIncidente() {

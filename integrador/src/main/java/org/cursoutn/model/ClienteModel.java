@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.cursoutn.repository.JpaClienteRepository;
 import org.hibernate.annotations.DynamicInsert;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.cursoutn.Main.getEntityManager;
@@ -28,18 +29,21 @@ public class ClienteModel {
     private long cuil;
 
     @ManyToOne
-    @JoinColumn(name = "notificacion_id", referencedColumnName = "id")
+    @JoinColumn(name="cliente_id",referencedColumnName = "id")
     private NotificacionModel notificacion;
 
-
-    @ManyToMany(mappedBy = "clientes")
+    @ManyToMany
     private List<ServicioModel> servicios;
 
-    @OneToMany
-    @JoinColumn(name = "cliente_id", referencedColumnName = "id")
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<IncidenteModel> incidentes;
 
     public ClienteModel() {
+        this.razon_social = "";
+        this.cuil = 0;
+        this.notificacion = new NotificacionModel();
+        this.servicios = new ArrayList<>();
+        this.incidentes = new ArrayList<>();
     }
 
     public ClienteModel(String razon_social, Long cuil, NotificacionModel notificacion,

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 
+import java.util.ArrayList;
 import java.util.List;
 @Getter
 @Setter
@@ -28,15 +29,19 @@ public class TipoProblemaModel {
     private List<EspecialidadModel> especialidades;
 
     @ManyToMany
-    private ServicioModel servicios;
+    private List<ServicioModel> servicios;
 
     public TipoProblemaModel() {
+        this.nombreTipoProblema ="";
+        this.incidentes = new ArrayList<>();
+        this.especialidades = new ArrayList<>();
+        this.servicios = new ArrayList<>();
     }
-/*
-    public TipoProblemaModel(List<EspecialidadModel> especialidades, ServicioModel servicio) {
+
+    public TipoProblemaModel(List<EspecialidadModel> especialidades, List<ServicioModel> servicio) {
         this.especialidades = especialidades;
         this.servicios = servicio;
     }
 
- */
+
 }

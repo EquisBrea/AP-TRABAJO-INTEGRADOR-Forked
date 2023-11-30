@@ -7,6 +7,7 @@ import org.cursoutn.state.State;
 import org.hibernate.annotations.DynamicInsert;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 @Getter
 @Setter
@@ -25,14 +26,17 @@ public class TecnicoModel {
     @Column
     private int colchonHoras;
 
-    @ManyToMany(mappedBy = "tecnicos")
+    @ManyToMany(mappedBy = "tecnicos", cascade = CascadeType.ALL)
     private List<IncidenteModel> incidentes;
 
-    @ManyToMany(mappedBy = "tecnicos")
-    @Column
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<EspecialidadModel> especialidades;
 
     public TecnicoModel() {
+        this.nombreTecnico = "";
+        this.colchonHoras = 1;
+        this.incidentes = new ArrayList<>();
+        this.especialidades = new ArrayList<>();
     }
     public TecnicoModel(String nombreTecnico) {
         this.nombreTecnico= nombreTecnico;

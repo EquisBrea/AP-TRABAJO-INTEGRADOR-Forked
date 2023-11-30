@@ -41,16 +41,11 @@ public class ClientesController {
     public Long getCuilCliente (){
         return model.getCuil();
     }
-    public void setNotificaciones(List<NotificacionModel> notificacion){
-        model.setNotificaciones(notificacion);
+    public void setNotificaciones(NotificacionModel notificacion){
+        model.setNotificacion(notificacion);
     }
-    public void agregarNotificacion (String nombreNotificacion){
-        NotificacionModel notif = new NotificacionModel();
-        notif.setNombreNotificacion(nombreNotificacion);
-        model.getNotificaciones().add(notif);
-    }
-    public List<NotificacionModel> getNotificaciones(){
-        return model.getNotificaciones();
+    public NotificacionModel getNotificacion(){
+        return model.getNotificacion();
     }
    public void setServicios(ServicioModel servicios) {
        model.getServicios().add(servicios);
@@ -65,7 +60,7 @@ public class ClientesController {
         return model.getIncidentes();
     }
     public void actualizarView() {
-        view.mostrarDetallesCliente(model.getId(), model.getRazon_social(), model.getNotificaciones(),
+        view.mostrarDetallesCliente(model.getId(), model.getRazon_social(), model.getNotificacion(),
                 model.getServicios(), model.getIncidentes());
     }
 }

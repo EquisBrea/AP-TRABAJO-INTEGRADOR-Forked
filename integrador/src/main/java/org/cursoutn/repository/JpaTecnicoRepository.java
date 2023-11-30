@@ -50,7 +50,7 @@ public class JpaTecnicoRepository implements TecnicoRepository {
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
-            throw new Exception("Error al actualizar el registro Tecnico" + e);
+            throw new Exception("Error al actualizar el registro Tecnico" + e.getCause());
         }
     }
 

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 
+import java.util.ArrayList;
 import java.util.List;
 @Getter
 @Setter
@@ -16,7 +17,7 @@ public class ServicioModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(columnDefinition = "varchar(255) default 'Windows'")
+    @Column
     private String nombreServicio;
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "servicios")
@@ -28,6 +29,9 @@ public class ServicioModel {
     private List<TipoProblemaModel> tiposDeProblemas;
 
     public ServicioModel() {
+        this.nombreServicio ="";
+        this.clientes = new ArrayList<>();
+        this.tiposDeProblemas = new ArrayList<>();
     }
 
     public ServicioModel(String nombreServicio) {

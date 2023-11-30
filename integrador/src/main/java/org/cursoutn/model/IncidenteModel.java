@@ -6,6 +6,7 @@ import org.hibernate.annotations.DynamicInsert;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -32,7 +33,7 @@ public class IncidenteModel implements Serializable {
     private List<OperadorModel> operadores;
 
     @ManyToOne
-    @JoinColumn(name="cliente_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name ="cliente_id", referencedColumnName = "id")
     private ClienteModel cliente;
 
     @ManyToMany
@@ -42,6 +43,14 @@ public class IncidenteModel implements Serializable {
     private List<TipoProblemaModel> tipoProblema;
 
     public IncidenteModel() {
+        this.fechaHoraIncidente = LocalDateTime.now();
+        this.tiempoNecesario = 1;
+        this.esComplejo = 0;
+        this.estadoIncidente = State.INICIADO;
+        this.operadores = new ArrayList<>();
+        this.cliente = new ClienteModel();
+        this.tecnicos = new ArrayList<>();
+        this.tipoProblema = new ArrayList<>();
     }
 
     public IncidenteModel(LocalDateTime fechaHoraIncidente, int tiempoNecesario, int esComplejo, State estadoIncidente,

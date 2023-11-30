@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -17,19 +18,20 @@ public class NotificacionModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(columnDefinition = "varchar (255) default 'Correo electronico'")
+    @Column
     private String nombreNotificacion;
 
-    @ManyToMany
-    @JoinColumn(name = "cliente_id", referencedColumnName = "id")
-    private List<ClienteModel> cliente;
+    @OneToMany(mappedBy = "notificacion")
+    private List<ClienteModel> clientes;
 
     public NotificacionModel() {
+        this.nombreNotificacion = "";
+        this.clientes = new ArrayList<>();
     }
-
-    public NotificacionModel(String nombreNotificacion, List<ClienteModel> cliente) {
+    public NotificacionModel(String nombreNotificacion){}
+    public NotificacionModel(String nombreNotificacion, List<ClienteModel> clientes) {
         this.nombreNotificacion = nombreNotificacion;
-        this.cliente = cliente;
+        this.clientes = clientes;
     }
 
 
