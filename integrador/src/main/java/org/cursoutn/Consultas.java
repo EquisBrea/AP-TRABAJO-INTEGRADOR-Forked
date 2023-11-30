@@ -24,12 +24,7 @@ public class Consultas {
 
     }
 
-    public static void listarIncidentes() throws Exception {
-        JpaIncidenteRepository r1 = new JpaIncidenteRepository();
-        r1.obtenerTodosLosIncidentes().stream().
-                forEachOrdered(tecnico -> System.out.println(tecnico.getTipoProblema() + " "));
 
-    }
 
     public static void listarTecnicos() throws Exception {
         EntityManager em = Main.getEntityManager();
@@ -98,4 +93,5 @@ public class Consultas {
                         .filter(incidente -> incidente.getEstadoIncidente().equals(State.RESUELTO)).count())))
                 .orElse(null);
     }
+
 }

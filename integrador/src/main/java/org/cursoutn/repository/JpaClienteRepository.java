@@ -28,7 +28,7 @@ public class JpaClienteRepository implements ClienteRepository{
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
-            throw new Exception("Se produjo un error, tus cambios no fueron guardados" + e);
+            throw new Exception("Se produjo un error, tus cambios no fueron guardados" + e.getCause());
         }
     }
 

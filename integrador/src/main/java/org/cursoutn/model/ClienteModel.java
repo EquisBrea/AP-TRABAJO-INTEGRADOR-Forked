@@ -28,7 +28,7 @@ public class ClienteModel {
     @Column
     private long cuil;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="cliente_id",referencedColumnName = "id")
     private NotificacionModel notificacion;
 

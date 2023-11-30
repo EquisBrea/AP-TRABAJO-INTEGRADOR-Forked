@@ -120,7 +120,7 @@ public class Menu {
         int seleccion = teclado.nextInt();
         switch(seleccion) {
             case 1:
-                menuBuscarIncidentePorId();
+                Listar.listarClientes();
                 break;
             case 2:
                 menuListarIncidentesPor();
@@ -191,7 +191,6 @@ public class Menu {
                 System.out.println("Introduzca ID");
                 id = teclado.nextInt();
                 return id;
-
             case 4:
                 System.out.println("Introduzca ID");
                 id = teclado.nextInt();
