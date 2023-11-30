@@ -37,7 +37,7 @@ public class IncidenteModel implements Serializable {
     @ManyToMany
     private List<OperadorModel> operadores;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name ="cliente_id", referencedColumnName = "id")
     private ClienteModel cliente;
 
@@ -167,7 +167,6 @@ public class IncidenteModel implements Serializable {
     public void agregarProblemas(TipoProblemaModel problemaNuevo) {
         this.getTipoProblema().add(problemaNuevo);
     }
-
     public TipoProblemaModel obtenerTipoDeProblemaPorNombre(String tp) throws Exception {
         JpaTipoProblemaRepository repository = new JpaTipoProblemaRepository();
         return repository.obtenerTodosLosTipoProblema().stream().

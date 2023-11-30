@@ -1,9 +1,6 @@
 package org.cursoutn;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Subgraph;
+import jakarta.persistence.*;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import org.cursoutn.controller.*;
 import org.cursoutn.model.*;
@@ -12,6 +9,7 @@ import org.cursoutn.state.IncidenteEstado;
 import org.cursoutn.state.State;
 import org.cursoutn.view.*;
 
+import javax.swing.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -90,44 +88,52 @@ public class Crear {
             System.out.println("Error al crear nuevo registro Tecnico: \n" + e);
         }
     }
-    public static void menuRegistrarIncidente() {
-
+    public void menuRegistrarIncidente() {
+        em = Persistence.createEntityManagerFactory("JPA_PU").createEntityManager();
         try {
             IncidenteModel i = new IncidenteModel(LocalDateTime.now(), 1, 0, State.INICIADO, new ArrayList<OperadorModel>(), new ClienteModel(), new ArrayList<TecnicoModel>(), new ArrayList<TipoProblemaModel>());
             IncidentesView incidentesView = new IncidentesView();
             JpaIncidenteRepository repository = new JpaIncidenteRepository();
             IncidentesController control = new IncidentesController(i, incidentesView);
-
+            ClienteModel cM = new ClienteModel();
             JpaClienteRepository clienteRepository = new JpaClienteRepository();
 
             JpaTecnicoRepository tecnicoRepository = new JpaTecnicoRepository();
 
             Scanner teclado = new Scanner(System.in);
-            System.out.println("Por favor ingrese el id del cliente:");
-            int clienteId = teclado.nextInt();
-            ClienteModel cM = clienteRepository.obtenerClientePorId(clienteId);
-            i.setCliente(cM);
+
+            String[] opcionesCliente = devolverArrayDeStrings(cM.listarClientesPorId());
+        String ans = (String)  JOptionPane.showInputDialog(null,
+                    "Text",
+        "Seleccion de Cliente",
+        JOptionPane.INFORMATION_MESSAGE,
+                    null,
+                        opcionesCliente,
+                    0);
+
+          //ClienteModel cM = clienteRepository.obtenerClientePorId(ans);
+
 
             teclado.nextLine();
             String salir;
             String tp;
 
             do {
-                System.out.println("Ingrese problemas involucrados en incidente:");
-                tp = teclado.nextLine();
+                tp = JOptionPane.showInputDialog("Ingrese problemas involucrados en el incidente: ");
                 //Verificar si existe un problema
                 if (Consultas.existeTipoDeProblema(tp)) {
                     i.agregarProblemas(i.obtenerTipoDeProblemaPorNombre(tp));
                 } else {
-                    System.out.println("Problema no existente con anterioridad, agregar al registro?(S/N) ");
-                    String agregar = teclado.nextLine();
+                    String agregar = JOptionPane.showInputDialog("Problema no registrado con anterioridad, \ndesea agregarlo al registro?");
+
                     if (agregar.equalsIgnoreCase("S")) {
                         Crear.registrarNuevoTipoDeProblema(tp);
                         System.out.println("Problema agregado al registro:  \n" + tp);
                     } else {
                         System.out.println("Problema no agregado al registro");
                     }
-                }   
+                }
+
                 System.out.println(Consultas.existeTipoDeProblema(tp));
                 System.out.println ("Agregar problema? (S/N):");
                 salir = teclado.nextLine();
@@ -137,13 +143,11 @@ public class Crear {
 
             salir = "s";
             do {
-                Scanner agr = new Scanner(System.in);
 
                 //esto se puede mover a la clase IncidenteModel (necesito tenerlo acá por claridad)
                 String[] opciones = devolverArrayDeStrings(i.listarProblemas());
                 mostrarOpcionesConId(opciones, i.listarProblemas());
                 System.out.println ("Seleccione id de problema:");
-                int idProblema = agr.nextInt();
 
                 System.out.println ("Ingrese tecnicos involucrados en incidente:");
 
@@ -167,9 +171,17 @@ public class Crear {
             } while(!salir.equalsIgnoreCase("n"));
 
 
-            control.setCliente(cM);
+            new TecnicoModel();
+            TecnicoModel tecnicoModel;
+            tecnicoModel = tecnicoRepository.obtenerTecnicoPorId(1);
+
+           /* if (!em.contains(cM)){
+                cM = em.merge(cM);
+            }
+            i.setCliente(cM);*/
+            control.setTecnicos(tecnicoModel);
             control.setEstadoIncidenteActual(State.INICIADO);
-            repository.guardarIncidente(control.model);
+            repository.actualizarIncidente(control.model);
         } catch (Exception e) {
             System.out.println("Problema:" + e);
         }
@@ -188,9 +200,8 @@ public class Crear {
 
             TipoProblemaController control = new TipoProblemaController(p, tipoProblemaView);
 
-            Scanner teclado = new Scanner(System.in);
-            System.out.println ("Ingrese tipo de problema:");
-            String desc = teclado.nextLine();
+
+            String desc = JOptionPane.showInputDialog("Ingrese tipo de problema");
 
             //control.setIncidentes(listaDeIncidentes);
             control.setNombreTipoProblema(desc);

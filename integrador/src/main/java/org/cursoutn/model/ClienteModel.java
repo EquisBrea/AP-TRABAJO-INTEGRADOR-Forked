@@ -3,12 +3,14 @@ package org.cursoutn.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.cursoutn.Par;
 import org.cursoutn.repository.JpaClienteRepository;
 import org.hibernate.annotations.DynamicInsert;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.cursoutn.Consultas.devolverArrayDeStrings;
 import static org.cursoutn.Main.getEntityManager;
 
 @Getter
@@ -32,7 +34,7 @@ public class ClienteModel {
     @JoinColumn(name="cliente_id",referencedColumnName = "id")
     private NotificacionModel notificacion;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<ServicioModel> servicios;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
@@ -59,6 +61,20 @@ public class ClienteModel {
     public ClienteModel(String razon_social, Long cuil) {
         this.razon_social = razon_social;
         this.cuil = cuil;
+    }
+    public List<Par<Integer, String>> listarClientesPorId () throws Exception {
+        JpaClienteRepository repository = new JpaClienteRepository();
+
+        List<Par<Integer, String>> pares = new ArrayList<>();
+        repository.obtenerTodosLosClientes().stream().forEach(problemas ->
+        {
+            int id = problemas.getId();
+            String nombreProblema = problemas.getRazon_social();
+            pares.add(new Par<>(id, nombreProblema));
+        });
+
+        return pares;
+
     }
 }
 

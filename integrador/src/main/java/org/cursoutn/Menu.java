@@ -24,7 +24,7 @@ public class Menu {
                 opciones,
                 opciones[0]
         );
-
+        Crear crear = new Crear();
         // Verificar la eleccion del usuario
         switch (choice) {
             case 0:
@@ -139,10 +139,11 @@ public class Menu {
         System.out.println("2- Borrar cliente:");
         System.out.println("3- Borrar técnico:");
         System.out.println("4- Borrar especialidad:");
+        Crear crear = new Crear();
         int seleccion = teclado.nextInt();
         switch (seleccion) {
             case 1:
-                Crear.menuRegistrarIncidente();
+                crear.menuRegistrarIncidente();
                 break;
             case 2:
                 Eliminar.borrarCliente();
@@ -313,6 +314,7 @@ public class Menu {
     public static void mostrarOpcionesConId(String[] opcion, List<Par<Integer, String>> lista) {
         String[] opciones  = opcion;
         Arrays.stream(opciones).toList().stream().forEach(caso -> System.out.println(caso));
+
         int choice = JOptionPane.showOptionDialog(
                 null,
                 "Select an option:",
@@ -323,7 +325,6 @@ public class Menu {
                 opciones,
                 opciones[0]
         );
-
 
         // Check the user's choice
                 JOptionPane.showMessageDialog(null, "La opción seleccionada no es válida");
