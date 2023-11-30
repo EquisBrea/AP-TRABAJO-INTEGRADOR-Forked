@@ -43,20 +43,15 @@ public class Consultas {
             LocalDate date = LocalDate.parse(scn.nextLine(), DateTimeFormatter.ofLocalizedDate(FormatStyle.valueOf("ddmmaaaa")));
     }
     public static boolean existeTipoDeProblema(String tipoDescripcion) throws Exception {
-        EntityManager em = Main.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
         JpaTipoProblemaRepository repository = new JpaTipoProblemaRepository();
         return repository.obtenerTodosLosTipoProblema().stream().
-                anyMatch(problema -> Objects.equals(problema.getNombreTipoProblema(), tipoDescripcion));
+                anyMatch(problema -> problema.getNombreTipoProblema() == tipoDescripcion);
     }
 
     public static boolean existeEspecialidad(String tipoDescripcion) throws Exception {
-        EntityManager em = Main.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
         JpaEspecialidadRepository repository = new JpaEspecialidadRepository();
         return repository.obtenerTodasLasEspecialidades().stream().
-                anyMatch(problema -> Objects.equals(problema.getNombreEspecialidad(), tipoDescripcion));
-
+                anyMatch(problema -> problema.getNombreEspecialidad() == tipoDescripcion);
     }
 
     public static boolean existeTecnico(int especialidad) throws Exception {

@@ -17,7 +17,7 @@ public class JpaNotificacionRepository implements NotificacionRepository {
         try{
             return entityManager.createQuery("SELECT a FROM notificacion a", NotificacionModel.class).getResultList();
         } catch (Exception e) {
-            throw new Exception("Error al obtener todos los registros");
+            throw new Exception("Error al obtener todos los registros" + e);
         }
     }
 
@@ -29,7 +29,7 @@ public class JpaNotificacionRepository implements NotificacionRepository {
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
-            throw new Exception("Se produjo un error, tus cambios no fueron guardados");
+            throw new Exception("Se produjo un error, tus cambios no fueron guardados" + e);
         }
     }
 
@@ -38,7 +38,7 @@ public class JpaNotificacionRepository implements NotificacionRepository {
         try {
             return entityManager.find(NotificacionModel.class, id);
         } catch (Exception e) {
-            throw new Exception("Error al obtener el registro solicitado");
+            throw new Exception("Error al obtener el registro solicitado" + e);
         }
     }
 
@@ -50,7 +50,7 @@ public class JpaNotificacionRepository implements NotificacionRepository {
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
-            throw new Exception("Error al actualizar el registro");
+            throw new Exception("Error al actualizar el registro" + e);
         }
     }
 
@@ -62,7 +62,7 @@ public class JpaNotificacionRepository implements NotificacionRepository {
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
-            throw new Exception("Error al eliminar el registro");
+            throw new Exception("Error al eliminar el registro" + e);
         }
     }
 }

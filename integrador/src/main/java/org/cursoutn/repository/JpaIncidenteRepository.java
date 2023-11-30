@@ -18,7 +18,7 @@ public class JpaIncidenteRepository implements IncidenteRepository{
         try{
             return entityManager.createQuery("SELECT a FROM incidente a", IncidenteModel.class).getResultList();
         } catch (Exception e) {
-            throw new Exception("Error al obtener todos los registros");
+            throw new Exception("Error al obtener todos los registros" + e);
         }
     }
 
@@ -30,7 +30,7 @@ public class JpaIncidenteRepository implements IncidenteRepository{
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
-            throw new Exception("Se produjo un error, tus cambios no fueron guardados");
+            throw new Exception("Se produjo un error, tus cambios no fueron guardados" + e);
         }
     }
 
@@ -39,7 +39,7 @@ public class JpaIncidenteRepository implements IncidenteRepository{
         try {
             return entityManager.find(IncidenteModel.class, id);
         } catch (Exception e) {
-            throw new Exception("Error al obtener el registro solicitado");
+            throw new Exception("Error al obtener el registro solicitado" + e);
         }
     }
 
@@ -51,7 +51,7 @@ public class JpaIncidenteRepository implements IncidenteRepository{
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
-            throw new Exception("Error al actualizar el registro");
+            throw new Exception("Error al actualizar el registro" + e);
         }
     }
 
@@ -63,7 +63,7 @@ public class JpaIncidenteRepository implements IncidenteRepository{
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
-            throw new Exception("Error al eliminar el registro");
+            throw new Exception("Error al eliminar el registro" + e);
         }
     }
 
@@ -77,7 +77,7 @@ public class JpaIncidenteRepository implements IncidenteRepository{
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
-            throw new Exception("Error al actualizar estado");
+            throw new Exception("Error al actualizar estado" + e);
         }
     }
 }

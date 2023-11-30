@@ -4,12 +4,14 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.cursoutn.state.State;
+import org.hibernate.annotations.DynamicInsert;
 
 import java.time.LocalDate;
 import java.util.List;
 @Getter
 @Setter
 @Entity
+@DynamicInsert
 @Table(name="tecnico")
 public class TecnicoModel {
 
@@ -26,13 +28,20 @@ public class TecnicoModel {
     @ManyToMany(mappedBy = "tecnicos")
     private List<IncidenteModel> incidentes;
 
-    @ManyToMany(mappedBy = "tecnicos")
+    @ManyToMany
     @Column(nullable = false)
+    @JoinTable(
+            name = "especialidad_tenico",
+            joinColumns = @JoinColumn(name = "tecnico_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "especialidad_id", referencedColumnName = "id")
+    )
     private List<EspecialidadModel> especialidades;
 
     public TecnicoModel() {
     }
-
+    public TecnicoModel(String nombreTecnico) {
+        this.nombreTecnico= nombreTecnico;
+    }
     public TecnicoModel(String nombreTecnico, List<EspecialidadModel> especialidades) {
         this.nombreTecnico = nombreTecnico;
         this.especialidades = especialidades;

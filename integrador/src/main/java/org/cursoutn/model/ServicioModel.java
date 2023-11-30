@@ -3,11 +3,13 @@ package org.cursoutn.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicInsert;
 
 import java.util.List;
 @Getter
 @Setter
 @Entity
+@DynamicInsert
 @Table(name="servicio")
 public class ServicioModel {
     @Id
@@ -23,7 +25,7 @@ public class ServicioModel {
 
     //Esta relación no está en el disenio original, pero puede ayudar al seguimiento de problemas de los servicios
     //ofrecidos.>>>>
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "servicio")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "servicios")
     private List<TipoProblemaModel> tiposDeProblemas;
 
     public ServicioModel() {

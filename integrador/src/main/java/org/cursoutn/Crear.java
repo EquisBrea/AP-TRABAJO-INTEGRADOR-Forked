@@ -35,10 +35,10 @@ public class Crear {
             long cuil = scn.nextLong();
             clienteController.setCuilCliente(cuil);
 
-            Scanner notif = new Scanner(System.in);
+            scn.nextLine();
 
             System.out.println("Ingrese modo de comunicación preferido: ");
-            String ntxt = notif.nextLine();
+            String ntxt = scn.nextLine();
             clienteController.agregarNotificacion(ntxt);
 
             clienteController.repository.actualizarCliente(clienteController.model);
@@ -91,19 +91,23 @@ public class Crear {
             IncidentesView incidentesView = new IncidentesView();
             JpaIncidenteRepository repository = new JpaIncidenteRepository();
             IncidentesController control = new IncidentesController(i, incidentesView);
+            JpaClienteRepository clienteRepository = new JpaClienteRepository();
+            JpaTecnicoRepository tecnicoRepository = new JpaTecnicoRepository();
 
             Scanner teclado = new Scanner(System.in);
             System.out.println ("Por favor ingrese el id del cliente:");
             int clienteId = teclado.nextInt();
+            ClienteModel cM = clienteRepository.obtenerClientePorId(clienteId);
+
             System.out.println ("Ingrese problemas involucrados en incidente:");
-            String tp = teclado.nextLine().toUpperCase();
-            if (!Consultas.existeTipoDeProblema(tp));
+            String tp = teclado.nextLine();
+            if (!Consultas.existeTipoDeProblema(tp)) {
+                System.out.println("Problema no existente con anterioridad, por favor registrar: ");
+                Crear.registrarNuevoTipoDeProblema();
+            }
 
-            System.out.println("Problema no existente con anterioridad, por favor registrar: ");
-            Crear.registrarNuevoTipoDeProblema();
-
-            control.setFechaHoraIncidente(LocalDateTime.now());
-            control.setEsComplejo(0);
+            control.setCliente(cM);
+            control.setEstadoIncidenteActual(State.INICIADO);
             repository.actualizarIncidente(control.model);
         } catch (Exception e) {
             System.out.println("Problema:" + e);
@@ -125,13 +129,12 @@ public class Crear {
             Scanner teclado = new Scanner(System.in);
 
             System.out.println ("Ingrese descripcion problema:");
-            String desc = teclado.nextLine().toUpperCase();
+            String desc = teclado.nextLine();
 
-            System.out.println ("Especialidades que lo atienden:");
-            String espec = teclado.nextLine().toUpperCase();
-            if(!Consultas.existeEspecialidad(espec)) {
-                Crear.registrarNuevaEspecialidad();
-            };
+
+            control.setNombreTipoProblema(desc);
+            repository.actualizarTipoProblema(control.model);
+
 
         } catch (Exception e) {
             System.out.println("Problema:" + e);
@@ -157,12 +160,12 @@ public class Crear {
 
             System.out.println ("Describir tipo problema: ");
             String descpr = teclado.nextLine();
+            if (!Consultas.existeTipoDeProblema(descpr)){
+                Crear.registrarNuevoTipoDeProblema();
+            }
 
             control.setNombreEspecialidad(desc);
             control.setListadoTecnicos(new ArrayList<>());
-            TipoProblemaModel tipoProblemaModel = new TipoProblemaModel();
-            tipoProblemaModel.setNombreTipoProblema(descpr);
-            control.setTipoProblema(tipoProblemaModel);
 
             control.repository.actualizarEspecialidad(i);
 

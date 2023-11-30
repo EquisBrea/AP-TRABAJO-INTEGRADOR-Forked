@@ -4,12 +4,14 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.cursoutn.repository.JpaEspecialidadRepository;
+import org.hibernate.annotations.DynamicInsert;
 
 import java.util.List;
 
 @Getter
 @Setter
 @Entity
+@DynamicInsert
 @Table(name="especialidad")
 public class EspecialidadModel {
     @Id
@@ -28,9 +30,6 @@ public class EspecialidadModel {
     )
     private List<TecnicoModel> tecnicos;
 
-    @ManyToOne(cascade= CascadeType.ALL)
-    @JoinColumn(name = "tipo_problema_id")
-    private TipoProblemaModel tipoProblema;
 
     public EspecialidadModel() {
     }
@@ -42,7 +41,6 @@ public class EspecialidadModel {
     public EspecialidadModel(String nombreEspecialidad, List<TecnicoModel> tecnicos, TipoProblemaModel tipoProblema) {
         this.nombreEspecialidad = nombreEspecialidad;
         this.tecnicos = tecnicos;
-        this.tipoProblema = tipoProblema;
     }
 
 

@@ -2,12 +2,14 @@ package org.cursoutn.model;
 
 import jakarta.persistence.*;
 import org.cursoutn.state.*;
+import org.hibernate.annotations.DynamicInsert;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
+@DynamicInsert
 @Table(name="incidente")
 public class IncidenteModel implements Serializable {
     @Id

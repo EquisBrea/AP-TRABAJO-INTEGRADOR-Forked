@@ -28,7 +28,7 @@ public class JpaClienteRepository implements ClienteRepository{
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
-            throw new Exception("Se produjo un error, tus cambios no fueron guardados");
+            throw new Exception("Se produjo un error, tus cambios no fueron guardados" + e);
         }
     }
 
@@ -37,7 +37,7 @@ public class JpaClienteRepository implements ClienteRepository{
         try {
             return entityManager.find(ClienteModel.class, id);
         } catch (Exception e) {
-            throw new Exception("Error al obtener el registro solicitado");
+            throw new Exception("Error al obtener el registro solicitado" + e);
         }
     }
 
@@ -49,7 +49,7 @@ public class JpaClienteRepository implements ClienteRepository{
         entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
-            throw new Exception("Error al actualizar el registro");
+            throw new Exception("Error al actualizar el registro" + e);
         }
     }
 
@@ -61,7 +61,7 @@ public class JpaClienteRepository implements ClienteRepository{
         entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
-            throw new Exception("Error al eliminar el registro");
+            throw new Exception("Error al eliminar el registro" + e);
         }
     }
 }

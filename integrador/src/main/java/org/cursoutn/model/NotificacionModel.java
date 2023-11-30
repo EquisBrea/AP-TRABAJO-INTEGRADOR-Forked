@@ -3,10 +3,12 @@ package org.cursoutn.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicInsert;
 
 @Getter
 @Setter
 @Entity
+@DynamicInsert
 @Table(name="notificacion")
 public class NotificacionModel {
     @Id
@@ -14,7 +16,7 @@ public class NotificacionModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = " varchar(255) default 'Correo electronico'")
     private String nombreNotificacion;
 
     @ManyToOne

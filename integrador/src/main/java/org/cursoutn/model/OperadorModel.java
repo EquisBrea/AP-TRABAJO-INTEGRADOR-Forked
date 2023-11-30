@@ -3,11 +3,13 @@ package org.cursoutn.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicInsert;
 
 import java.util.List;
 @Getter
 @Setter
 @Entity
+@DynamicInsert
 @Table(name="operador")
 public class OperadorModel {
     @Id

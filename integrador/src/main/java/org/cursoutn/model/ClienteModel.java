@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.cursoutn.repository.JpaClienteRepository;
+import org.hibernate.annotations.DynamicInsert;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import static org.cursoutn.Main.getEntityManager;
 
 @Getter
 @Setter
+@DynamicInsert
 @Entity
 @Table(name="cliente")
 public class ClienteModel {

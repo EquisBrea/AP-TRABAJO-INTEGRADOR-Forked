@@ -37,9 +37,6 @@ public class EspecialidadesController {
         notif.setNombreTecnico(nombreTecnico);
         model.getTecnicos().add(notif);
     }
-    public TipoProblemaModel tipoProblemaModel(){
-        return model.getTipoProblema();
-    }
     public List<TecnicoModel> listadoTecnicos() {
         return this.model.getTecnicos();
     }
@@ -62,7 +59,4 @@ public class EspecialidadesController {
         view.mostrarDetallesEspecialidad(this.model.getId(), this.model.getNombreEspecialidad(), this.model.getTecnicos());
     }
 
-    public void setTipoProblema(TipoProblemaModel tipoProblemaModel) {
-        model.setTipoProblema(tipoProblemaModel);
-    }
 }
