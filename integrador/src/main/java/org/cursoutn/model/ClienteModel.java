@@ -27,9 +27,9 @@ public class ClienteModel {
     @Column
     private long cuil;
 
-    @OneToMany
-    @JoinColumn(name = "cliente_id", referencedColumnName = "id")
-    private List<NotificacionModel> notificaciones;
+    @ManyToOne
+    @JoinColumn(name = "notificacion_id", referencedColumnName = "id")
+    private NotificacionModel notificacion;
 
 
     @ManyToMany(mappedBy = "clientes")
@@ -42,11 +42,11 @@ public class ClienteModel {
     public ClienteModel() {
     }
 
-    public ClienteModel(String razon_social, Long cuil, List<NotificacionModel> notificaciones,
+    public ClienteModel(String razon_social, Long cuil, NotificacionModel notificacion,
                         List<ServicioModel> servicios, List<IncidenteModel> incidentes) {
         this.razon_social = razon_social;
         this.cuil = cuil;
-        this.notificaciones = notificaciones;
+        this.notificacion = notificacion;
         this.servicios = servicios;
         this.incidentes = incidentes;
     }

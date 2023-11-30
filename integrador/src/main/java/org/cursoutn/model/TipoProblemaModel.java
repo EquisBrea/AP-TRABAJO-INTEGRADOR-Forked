@@ -25,13 +25,10 @@ public class TipoProblemaModel {
     private List<IncidenteModel> incidentes;
 
     @ManyToMany(mappedBy = "tiposDeProblemas")
-            private List<EspecialidadModel> especialidades;
+    private List<EspecialidadModel> especialidades;
 
-/*
-    @ManyToOne()
-    @JoinColumn(name = "servicio_id", referencedColumnName = "id")
+    @ManyToMany
     private ServicioModel servicios;
-*/
 
     public TipoProblemaModel() {
     }

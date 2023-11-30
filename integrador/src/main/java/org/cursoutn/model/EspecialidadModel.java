@@ -25,7 +25,7 @@ public class EspecialidadModel {
     private String nombreEspecialidad;
 
     @ManyToMany
-    private List<TipoProblemaModel> tipoProblemaModels;
+    private List<TipoProblemaModel> tiposDeProblemas;
 
     @ManyToMany(mappedBy = "especialidades")
     private List<TecnicoModel> tecnicos;

@@ -19,12 +19,8 @@ public class OperadorModel {
     @Column(columnDefinition = "varchar(255) default 'Elsa Balo'")
     private String nombreOperador;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "operador_incidente",
-            joinColumns = @JoinColumn(name = "operador_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "incidente_id", referencedColumnName = "id")
-    )
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "operadores")
+    @JoinTable
     private List<IncidenteModel> incidentes;
 
     public OperadorModel() {

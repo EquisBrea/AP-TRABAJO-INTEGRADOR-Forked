@@ -28,7 +28,7 @@ public class IncidenteModel implements Serializable {
     @Column
     private State estadoIncidente;
 
-    @ManyToMany(mappedBy = "incidentes")
+    @ManyToMany
     private List<OperadorModel> operadores;
 
     @ManyToOne

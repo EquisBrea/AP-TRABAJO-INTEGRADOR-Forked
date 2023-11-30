@@ -24,9 +24,9 @@ public class ServicioModel {
 
     //Esta relación no está en el disenio original, pero puede ayudar al seguimiento de problemas de los servicios
     //ofrecidos.>>>>
-   /* @OneToMany(fetch = FetchType.EAGER, mappedBy = "servicios")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "servicios")
     private List<TipoProblemaModel> tiposDeProblemas;
-*/
+
     public ServicioModel() {
     }
 
