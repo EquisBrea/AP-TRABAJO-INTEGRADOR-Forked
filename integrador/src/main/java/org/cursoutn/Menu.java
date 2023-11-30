@@ -9,6 +9,8 @@ import javax.swing.*;
 import java.util.*;
 
 import static java.lang.Long.parseLong;
+import static org.cursoutn.Menu.*;
+import static org.cursoutn.Crear.*;
 
 public class Menu {
     public static void menuIngresarDatos() throws Exception {
@@ -31,13 +33,13 @@ public class Menu {
                 crear.menuRegistrarIncidente();
                 break;
             case 1:
-                Crear.registrarNuevoCliente();
+                registrarNuevoCliente();
                 break;
             case 2:
-                Crear.registrarNuevoTecnico();
+                crear.registrarNuevoTecnico();
                 break;
             case 3:
-                Crear.registrarNuevaEspecialidad();
+                crear.registrarNuevaEspecialidad();
             case 4:
                 showMenu();
                 break;
@@ -139,11 +141,11 @@ public class Menu {
         System.out.println("2- Borrar cliente:");
         System.out.println("3- Borrar técnico:");
         System.out.println("4- Borrar especialidad:");
-        Crear crear = new Crear();
+
         int seleccion = teclado.nextInt();
         switch (seleccion) {
             case 1:
-                crear.menuRegistrarIncidente();
+                Crear.menuRegistrarIncidente();
                 break;
             case 2:
                 Eliminar.borrarCliente();

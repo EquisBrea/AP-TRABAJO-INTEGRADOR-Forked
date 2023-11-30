@@ -17,6 +17,8 @@ import java.util.Objects;
 import java.util.Scanner;
 
 import static org.cursoutn.Consultas.devolverArrayDeStrings;
+import static org.cursoutn.Consultas.*;
+import static org.cursoutn.Crear.*;
 import static org.cursoutn.Menu.mostrarOpcionesConId;
 
 public class Crear {
@@ -74,7 +76,7 @@ public class Crear {
             System.out.println("Ingrese especialidad: ");
             String nottxt = scn.nextLine().toUpperCase();
             if (!Consultas.existeEspecialidad(nottxt)){
-                Crear.registrarNuevaEspecialidad();
+                registrarNuevaEspecialidad();
             }
 
             tC.model.setColchonHoras((int)cuil);
