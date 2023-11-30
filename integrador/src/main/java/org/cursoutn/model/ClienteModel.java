@@ -12,7 +12,6 @@ import static org.cursoutn.Main.getEntityManager;
 
 @Getter
 @Setter
-@DynamicInsert
 @Entity
 @Table(name="cliente")
 public class ClienteModel {
@@ -22,10 +21,10 @@ public class ClienteModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, columnDefinition = "varchar(255) default 'Juan Perez'")
+    @Column
     private String razon_social;
 
-    @Column(nullable = false, columnDefinition = "unsigned bigint default 12222222222")
+    @Column
     private long cuil;
 
     @OneToMany

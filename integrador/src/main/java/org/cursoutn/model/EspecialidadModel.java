@@ -4,14 +4,15 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.cursoutn.repository.JpaEspecialidadRepository;
+import org.cursoutn.view.TipoProblemaView;
 import org.hibernate.annotations.DynamicInsert;
 
 import java.util.List;
+import java.util.zip.ZipEntry;
 
 @Getter
 @Setter
 @Entity
-@DynamicInsert
 @Table(name="especialidad")
 public class EspecialidadModel {
     @Id
@@ -19,8 +20,16 @@ public class EspecialidadModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, columnDefinition = "varchar(255) default 'Sistemas'")
+    @Column(columnDefinition = "varchar(255) default 'Sistemas'")
     private String nombreEspecialidad;
+
+    @ManyToMany
+    @JoinTable(
+            name = "tipo_problema_especialidad",
+            joinColumns = @JoinColumn(name = "tipo_problema_id",referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn (name = "especialidad_id",referencedColumnName = "id")
+    )
+    private List<TipoProblemaModel> tipoProblemaModels;
 
     @ManyToMany
     @JoinTable(

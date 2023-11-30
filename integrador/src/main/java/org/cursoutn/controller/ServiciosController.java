@@ -18,9 +18,9 @@ public class ServiciosController {
     public Integer getServicioId (){return this.model.getId();}
     public void setNombreServicio (String nombreServicio){this.model.setNombreServicio(nombreServicio);}
     public String getNombreServicio(){return this.model.getNombreServicio();}
-    public void setProblema(TipoProblemaModel tipoProblema){this.model.getTiposDeProblemas().add(tipoProblema);}
-    public List<TipoProblemaModel> getProblemas (){return this.model.getTiposDeProblemas();}
+  //  public void setProblema(TipoProblemaModel tipoProblema){this.model.getTiposDeProblemas().add(tipoProblema);}
+   // public List<TipoProblemaModel> getProblemas (){return this.model.getTiposDeProblemas();}
     public void actualizarView (){
-        view.mostrarServicios(this.model.getId(),this.model.getNombreServicio(), this.model.getTiposDeProblemas());
+        view.mostrarServicios(this.model.getId(),this.model.getNombreServicio()/*, this.model.getTiposDeProblemas()*/);
     }
 }

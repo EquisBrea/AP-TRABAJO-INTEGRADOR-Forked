@@ -129,22 +129,30 @@ public class Crear {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try{
-            TipoProblemaModel p = new TipoProblemaModel(new ArrayList<>(), new ServicioModel());
+            TipoProblemaModel p = new TipoProblemaModel(/*new ArrayList<>(), new ServicioModel()*/);
             TipoProblemaView tipoProblemaView = new TipoProblemaView();
+            TipoProblemaController tipoProblemaController = new TipoProblemaController(p, tipoProblemaView);
+            /*
             List listaDeIncidentes = new ArrayList<>();
-            
+            ClienteModel cliente = new ClienteModel();
             IncidenteModel incidenteModel = new IncidenteModel();
+            incidenteModel.setCliente(cliente);
+            JpaClienteRepository repositoryCliente = new JpaClienteRepository();
+            JpaIncidenteRepository incidenteRepository = new JpaIncidenteRepository();
+            repositoryCliente.actualizarCliente(cliente);
+            incidenteRepository.actualizarIncidente(incidenteModel);
             listaDeIncidentes.add(incidenteModel);
+            tipoProblemaController.setIncidentes(listaDeIncidentes);
+            */
             JpaTipoProblemaRepository repository = new JpaTipoProblemaRepository();
+
             TipoProblemaController control = new TipoProblemaController(p, tipoProblemaView);
 
-
             Scanner teclado = new Scanner(System.in);
-
             System.out.println ("Ingrese tipo de problema:");
             String desc = teclado.nextLine();
 
-            control.setIncidentes(listaDeIncidentes);
+            //control.setIncidentes(listaDeIncidentes);
             control.setNombreTipoProblema(desc);
             repository.actualizarTipoProblema(control.model);
 

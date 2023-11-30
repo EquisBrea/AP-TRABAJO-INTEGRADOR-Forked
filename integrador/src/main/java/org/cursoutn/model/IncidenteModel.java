@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@DynamicInsert
 @Table(name="incidente")
 public class IncidenteModel implements Serializable {
     @Id
@@ -33,23 +32,13 @@ public class IncidenteModel implements Serializable {
     private List<OperadorModel> operadores;
 
     @ManyToOne
-    @JoinColumn(name="cliente_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name="cliente_id", referencedColumnName = "id")
     private ClienteModel cliente;
 
     @ManyToMany
-    @JoinTable(
-            name = "incidente_tecnico",
-            joinColumns = @JoinColumn(name = "incidente_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "tecnico_id", referencedColumnName = "id")
-    )
     private List<TecnicoModel> tecnicos;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "incidente_tipo_problema",
-            joinColumns = @JoinColumn(name = "incidente_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "tipo_problema_id", referencedColumnName = "id")
-    )
+    @ManyToMany(mappedBy = "incidentes")
     private List<TipoProblemaModel> tipoProblema;
 
     public IncidenteModel() {

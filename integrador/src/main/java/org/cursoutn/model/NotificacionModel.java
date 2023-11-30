@@ -8,7 +8,6 @@ import org.hibernate.annotations.DynamicInsert;
 @Getter
 @Setter
 @Entity
-@DynamicInsert
 @Table(name="notificacion")
 public class NotificacionModel {
     @Id
@@ -16,11 +15,11 @@ public class NotificacionModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, columnDefinition = " varchar(255) default 'Correo electronico'")
+    @Column(columnDefinition = " varchar(255) default 'Correo electronico'")
     private String nombreNotificacion;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "cliente_id", referencedColumnName = "id")
     private ClienteModel cliente;
 
     public NotificacionModel() {

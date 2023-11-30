@@ -9,7 +9,6 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@DynamicInsert
 @Table(name="servicio")
 public class ServicioModel {
     @Id
@@ -17,7 +16,7 @@ public class ServicioModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, columnDefinition = "varchar(255) default 'Windows'")
+    @Column(columnDefinition = "varchar(255) default 'Windows'")
     private String nombreServicio;
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "servicios")
@@ -25,9 +24,9 @@ public class ServicioModel {
 
     //Esta relación no está en el disenio original, pero puede ayudar al seguimiento de problemas de los servicios
     //ofrecidos.>>>>
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "servicios")
+   /* @OneToMany(fetch = FetchType.EAGER, mappedBy = "servicios")
     private List<TipoProblemaModel> tiposDeProblemas;
-
+*/
     public ServicioModel() {
     }
 
@@ -38,6 +37,6 @@ public class ServicioModel {
     public ServicioModel(String nombreServicio, List<ClienteModel> clientes, List<TipoProblemaModel> tiposDeProblemas) {
         this.nombreServicio = nombreServicio;
         this.clientes = clientes;
-        this.tiposDeProblemas = tiposDeProblemas;
+       // this.tiposDeProblemas = tiposDeProblemas;
     }
 }

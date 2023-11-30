@@ -11,7 +11,6 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@DynamicInsert
 @Table(name="tecnico")
 public class TecnicoModel {
 
@@ -20,7 +19,7 @@ public class TecnicoModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, columnDefinition = "varchar(255) default 'Facundo Vargas'")
+    @Column(columnDefinition = "varchar(255) default 'Facundo Vargas'")
     private String nombreTecnico;
 
     private int colchonHoras;
@@ -29,7 +28,7 @@ public class TecnicoModel {
     private List<IncidenteModel> incidentes;
 
     @ManyToMany
-    @Column(nullable = false)
+    @Column()
     @JoinTable(
             name = "especialidad_tenico",
             joinColumns = @JoinColumn(name = "tecnico_id", referencedColumnName = "id"),
