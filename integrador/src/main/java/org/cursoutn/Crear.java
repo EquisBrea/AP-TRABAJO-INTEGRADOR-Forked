@@ -22,7 +22,7 @@ import static org.cursoutn.Menu.mostrarOpcionesConId;
 public class Crear {
     @PersistenceContext
     private EntityManager em;
-    public static void registrarNuevoCliente() {
+    public void registrarNuevoCliente() {
         try {
             ClienteModel cliente = new ClienteModel("cliente", (long) 0, new NotificacionModel(), new ArrayList<ServicioModel>(), new ArrayList<IncidenteModel>());
             ClientesView clientesView = new ClientesView();
@@ -52,7 +52,7 @@ public class Crear {
             System.out.println("Error al crear nuevo registro Cliente: \n" + e);
         }
     }
-    public static void registrarNuevoTecnico() {
+    public void registrarNuevoTecnico() {
            try {
             TecnicoModel t = new TecnicoModel();
             TecnicosView tecnicosView = new TecnicosView();
@@ -189,7 +189,7 @@ public class Crear {
 
     }
 
-    private static void registrarNuevoTipoDeProblema() {
+    private void registrarNuevoTipoDeProblema() {
 
         try{
             TipoProblemaModel p = new TipoProblemaModel(/*new ArrayList<>(), new ServicioModel()*/);
@@ -212,7 +212,7 @@ public class Crear {
         }
 
     }
-    private static void registrarNuevoTipoDeProblema(String nombreProblema) {
+    private void registrarNuevoTipoDeProblema(String nombreProblema) {
 
         try{
             TipoProblemaModel p = new TipoProblemaModel(/*new ArrayList<>(), new ServicioModel()*/);
@@ -232,7 +232,7 @@ public class Crear {
         }
 
     }
-    public static void registrarNuevaEspecialidad() {
+    public void registrarNuevaEspecialidad() {
 
         try{
             EspecialidadModel i = new EspecialidadModel("Especialidad nueva", new ArrayList<TecnicoModel>(), new TipoProblemaModel());

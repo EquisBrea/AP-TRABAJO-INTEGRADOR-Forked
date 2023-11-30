@@ -28,7 +28,7 @@ public class Menu {
         // Verificar la eleccion del usuario
         switch (choice) {
             case 0:
-                Crear.menuRegistrarIncidente();
+                crear.menuRegistrarIncidente();
                 break;
             case 1:
                 Crear.registrarNuevoCliente();
