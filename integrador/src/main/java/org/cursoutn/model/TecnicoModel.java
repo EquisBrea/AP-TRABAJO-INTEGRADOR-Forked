@@ -19,21 +19,17 @@ public class TecnicoModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(columnDefinition = "varchar(255) default 'Facundo Vargas'")
+    @Column
     private String nombreTecnico;
 
+    @Column
     private int colchonHoras;
 
     @ManyToMany(mappedBy = "tecnicos")
     private List<IncidenteModel> incidentes;
 
-    @ManyToMany
-    @Column()
-    @JoinTable(
-            name = "especialidad_tenico",
-            joinColumns = @JoinColumn(name = "tecnico_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "especialidad_id", referencedColumnName = "id")
-    )
+    @ManyToMany(mappedBy = "tecnicos")
+    @Column
     private List<EspecialidadModel> especialidades;
 
     public TecnicoModel() {
@@ -50,10 +46,10 @@ public class TecnicoModel {
                         List<EspecialidadModel> especialidades) {
         this.nombreTecnico = nombreTecnico;
         this.colchonHoras = colchonHoras;
-        this.incidentes = incidentes;
+  //      this.incidentes = incidentes;
         this.especialidades = especialidades;
     }
-    public long cantidadDeIncidentesResueltos (){
-        return this.getIncidentes().stream().filter(caso ->  caso.getEstadoIncidente().equals(State.RESUELTO)).count();
-    }
+    //public long cantidadDeIncidentesResueltos (){
+      //  return this.getIncidentes().stream().filter(caso ->  caso.getEstadoIncidente().equals(State.RESUELTO)).count();
+    //}
 }

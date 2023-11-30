@@ -32,12 +32,7 @@ public class ClienteModel {
     private List<NotificacionModel> notificaciones;
 
 
-    @ManyToMany
-    @JoinTable(
-            name = "cliente_servicio",
-            joinColumns = @JoinColumn(name = "servicio_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "cliente_id", referencedColumnName = "id")
-    )
+    @ManyToMany(mappedBy = "clientes")
     private List<ServicioModel> servicios;
 
     @OneToMany

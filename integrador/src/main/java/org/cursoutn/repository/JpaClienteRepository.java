@@ -14,7 +14,7 @@ public class JpaClienteRepository implements ClienteRepository{
     @Override
     public List<ClienteModel> obtenerTodosLosClientes() throws Exception {
         try{
-            return entityManager.createQuery("SELECT a FROM ClienteModel a WHERE id IS NOT NULL", ClienteModel.class).getResultList();
+            return entityManager.createQuery("SELECT a FROM ClienteModel a", ClienteModel.class).getResultList();
         } catch (Exception e) {
             throw new Exception("Error al obtener todos los registros " + e);
         }
@@ -49,7 +49,7 @@ public class JpaClienteRepository implements ClienteRepository{
         entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
-            throw new Exception("Error al actualizar el registro" + e);
+            throw new Exception("Error al actualizar el registro Cliente" + e);
         }
     }
 

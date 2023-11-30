@@ -50,7 +50,7 @@ public class JpaOperadorRepository implements OperadorRepository {
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
-            throw new Exception("Error al actualizar el registro" + e);
+            throw new Exception("Error al actualizar el registro operador" + e);
         }
     }
 

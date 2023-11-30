@@ -2,6 +2,7 @@ package org.cursoutn;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Subgraph;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import org.cursoutn.controller.*;
@@ -17,9 +18,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Crear {
+    @PersistenceContext
+    private EntityManager em;
     public static void registrarNuevoCliente() {
-        EntityManager em = Main.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
         try {
             ClienteModel cliente = new ClienteModel("cliente", (long) 0, new ArrayList<NotificacionModel>(), new ArrayList<ServicioModel>(), new ArrayList<IncidenteModel>());
             ClientesView clientesView = new ClientesView();
@@ -43,16 +44,14 @@ public class Crear {
             String ntxt = scn.nextLine();
             clienteController.agregarNotificacion(ntxt);
 
-            clienteController.repository.actualizarCliente(clienteController.model);
+            clienteController.repository.guardarCliente(clienteController.model);
 
         } catch (Exception e) {
             System.out.println("Error al crear nuevo registro: \n" + e);
         }
     }
     public static void registrarNuevoTecnico() {
-        EntityManager em = Main.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        try {
+           try {
             TecnicoModel t = new TecnicoModel("cliente", 1, new ArrayList<IncidenteModel>(), new ArrayList<EspecialidadModel>());
             TecnicosView tecnicosView = new TecnicosView();
             JpaTecnicoRepository repository = new JpaTecnicoRepository();
@@ -63,10 +62,12 @@ public class Crear {
 
             System.out.println("Nombre:");
             String txt = scn.nextLine();
-            tC.setNombreTecnico(txt);
+
 
             System.out.println("Ingrese horas extras estimadas:");
             long cuil = scn.nextLong();
+
+            scn.nextLine();
 
             System.out.println("Ingrese especialidad: ");
             String nottxt = scn.nextLine().toUpperCase();
@@ -74,6 +75,7 @@ public class Crear {
                 Crear.registrarNuevaEspecialidad();
             }
 
+            tC.model.setColchonHoras((int)cuil);
             tC.setNombreTecnico(txt);
             tC.agregarEspecialidad(nottxt);
 
@@ -85,9 +87,7 @@ public class Crear {
         }
     }
     public static void menuRegistrarIncidente() {
-        EntityManager em = Main.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        tx.begin();
+
         try{
             IncidenteModel i = new IncidenteModel(LocalDateTime.now(), 1, 0, State.INICIADO, new ArrayList<OperadorModel>(), new ClienteModel(), new ArrayList<TecnicoModel>(), new ArrayList<TipoProblemaModel>());
             IncidentesView incidentesView = new IncidentesView();
@@ -116,7 +116,7 @@ public class Crear {
 
             control.setCliente(cM);
             control.setEstadoIncidenteActual(State.INICIADO);
-            repository.actualizarIncidente(control.model);
+            repository.guardarIncidente(control.model);
         } catch (Exception e) {
             System.out.println("Problema:" + e);
         }
@@ -125,25 +125,12 @@ public class Crear {
     }
 
     private static void registrarNuevoTipoDeProblema() {
-        EntityManager em = Main.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        tx.begin();
+
         try{
             TipoProblemaModel p = new TipoProblemaModel(/*new ArrayList<>(), new ServicioModel()*/);
             TipoProblemaView tipoProblemaView = new TipoProblemaView();
             TipoProblemaController tipoProblemaController = new TipoProblemaController(p, tipoProblemaView);
-            /*
-            List listaDeIncidentes = new ArrayList<>();
-            ClienteModel cliente = new ClienteModel();
-            IncidenteModel incidenteModel = new IncidenteModel();
-            incidenteModel.setCliente(cliente);
-            JpaClienteRepository repositoryCliente = new JpaClienteRepository();
-            JpaIncidenteRepository incidenteRepository = new JpaIncidenteRepository();
-            repositoryCliente.actualizarCliente(cliente);
-            incidenteRepository.actualizarIncidente(incidenteModel);
-            listaDeIncidentes.add(incidenteModel);
-            tipoProblemaController.setIncidentes(listaDeIncidentes);
-            */
+
             JpaTipoProblemaRepository repository = new JpaTipoProblemaRepository();
 
             TipoProblemaController control = new TipoProblemaController(p, tipoProblemaView);
@@ -154,7 +141,7 @@ public class Crear {
 
             //control.setIncidentes(listaDeIncidentes);
             control.setNombreTipoProblema(desc);
-            repository.actualizarTipoProblema(control.model);
+            repository.guardarTipoProblema(control.model);
 
         } catch (Exception e) {
             System.out.println("Problema grave: " + e);
@@ -163,8 +150,6 @@ public class Crear {
     }
 
     public static void registrarNuevaEspecialidad() {
-        EntityManager em = Main.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
 
         try{
             EspecialidadModel i = new EspecialidadModel("Especialidad nueva", new ArrayList<TecnicoModel>(), new TipoProblemaModel());
@@ -187,7 +172,7 @@ public class Crear {
             control.setNombreEspecialidad(desc);
             control.setListadoTecnicos(new ArrayList<>());
 
-            control.repository.actualizarEspecialidad(i);
+            control.repository.guardarEspecialidad(i);
 
         } catch (Exception e) {
             System.out.println("Problema:" + e);

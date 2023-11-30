@@ -7,6 +7,7 @@ import org.cursoutn.repository.JpaEspecialidadRepository;
 import org.cursoutn.view.TipoProblemaView;
 import org.hibernate.annotations.DynamicInsert;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipEntry;
 
@@ -20,23 +21,13 @@ public class EspecialidadModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(columnDefinition = "varchar(255) default 'Sistemas'")
+    @Column
     private String nombreEspecialidad;
 
     @ManyToMany
-    @JoinTable(
-            name = "tipo_problema_especialidad",
-            joinColumns = @JoinColumn(name = "tipo_problema_id",referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn (name = "especialidad_id",referencedColumnName = "id")
-    )
     private List<TipoProblemaModel> tipoProblemaModels;
 
-    @ManyToMany
-    @JoinTable(
-            name = "especialidad_tenico",
-            joinColumns = @JoinColumn(name = "especialidad_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "tecnico_id", referencedColumnName = "id")
-    )
+    @ManyToMany(mappedBy = "especialidades")
     private List<TecnicoModel> tecnicos;
 
 

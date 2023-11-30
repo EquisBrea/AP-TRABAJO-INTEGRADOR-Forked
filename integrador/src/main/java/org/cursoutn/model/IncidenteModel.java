@@ -32,7 +32,7 @@ public class IncidenteModel implements Serializable {
     private List<OperadorModel> operadores;
 
     @ManyToOne
-    @JoinColumn(name="cliente_id", referencedColumnName = "id")
+    @JoinColumn(name="cliente_id", referencedColumnName = "id", nullable = false)
     private ClienteModel cliente;
 
     @ManyToMany

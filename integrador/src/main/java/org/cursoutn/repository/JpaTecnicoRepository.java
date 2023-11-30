@@ -29,7 +29,7 @@ public class JpaTecnicoRepository implements TecnicoRepository {
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
-            throw new Exception("Se produjo un error, tus cambios no fueron guardados" + e);
+            throw new Exception("Se produjo un error, tus cambios no fueron guardados(Tecnico)" + e);
         }
     }
 
@@ -50,7 +50,7 @@ public class JpaTecnicoRepository implements TecnicoRepository {
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
-            throw new Exception("Error al actualizar el registro" + e);
+            throw new Exception("Error al actualizar el registro Tecnico" + e);
         }
     }
 

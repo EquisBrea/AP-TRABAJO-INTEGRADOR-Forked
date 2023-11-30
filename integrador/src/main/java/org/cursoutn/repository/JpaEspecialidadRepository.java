@@ -50,7 +50,7 @@ public class JpaEspecialidadRepository implements EspecialidadRepository{
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
-            throw new Exception(" 1231 Error al actualizar el registro" + e);
+            throw new Exception(" 1231 Error al actualizar el registro especialidadModel" + e);
         }
     }
 

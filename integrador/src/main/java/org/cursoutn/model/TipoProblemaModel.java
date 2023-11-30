@@ -24,11 +24,7 @@ public class TipoProblemaModel {
     @ManyToMany
     private List<IncidenteModel> incidentes;
 
-    @ManyToMany
-    @JoinTable(
-            name ="tipo_problema_especialidad",
-            joinColumns = @JoinColumn(name="incidente_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name="tipo_problema_id", referencedColumnName = "id"))
+    @ManyToMany(mappedBy = "tiposDeProblemas")
             private List<EspecialidadModel> especialidades;
 
 /*

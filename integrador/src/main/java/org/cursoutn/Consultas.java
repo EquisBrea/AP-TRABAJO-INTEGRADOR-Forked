@@ -61,7 +61,7 @@ public class Consultas {
     public static boolean existeEspecialidad(String tipoDescripcion) throws Exception {
         JpaEspecialidadRepository repository = new JpaEspecialidadRepository();
         return repository.obtenerTodasLasEspecialidades().stream().
-                anyMatch(problema -> problema.getNombreEspecialidad() == tipoDescripcion);
+                anyMatch(problema -> Objects.equals(problema.getNombreEspecialidad(), tipoDescripcion));
     }
 
     public static boolean existeTecnico(int especialidad) throws Exception {
