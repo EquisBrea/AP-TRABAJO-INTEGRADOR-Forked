@@ -1,29 +1,24 @@
 package org.cursoutn;
 
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.cursoutn.controller.*;
 import org.cursoutn.model.*;
 import org.cursoutn.repository.*;
-import org.cursoutn.state.IncidenteEstado;
 import org.cursoutn.state.State;
 import org.cursoutn.view.*;
 
 import javax.swing.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 
 import static org.cursoutn.Consultas.devolverArrayDeStrings;
-import static org.cursoutn.Consultas.*;
-import static org.cursoutn.Crear.*;
-import static org.cursoutn.Menu.mostrarOpcionesConId;
 
 public class Crear {
     @PersistenceContext
-    private EntityManager em;
+    private static EntityManager em;
     public void registrarNuevoCliente() {
         try {
             ClienteModel cliente = new ClienteModel("cliente", (long) 0, new NotificacionModel(), new ArrayList<ServicioModel>(), new ArrayList<IncidenteModel>());
@@ -90,7 +85,7 @@ public class Crear {
             System.out.println("Error al crear nuevo registro Tecnico: \n" + e);
         }
     }
-    public void menuRegistrarIncidente() {
+    public static void registrarIncidente() {
         em = Persistence.createEntityManagerFactory("JPA_PU").createEntityManager();
         try {
             IncidenteModel i = new IncidenteModel(LocalDateTime.now(), 1, 0, State.INICIADO, new ArrayList<OperadorModel>(), new ClienteModel(), new ArrayList<TecnicoModel>(), new ArrayList<TipoProblemaModel>());
@@ -120,7 +115,6 @@ public class Crear {
             String salir;
             String tp;
 
-<<<<<<< Updated upstream
             do {
                 tp = JOptionPane.showInputDialog("Ingrese problemas involucrados en el incidente: ");
                 //Verificar si existe un problema
@@ -180,18 +174,19 @@ public class Crear {
 
            /* if (!em.contains(cM)){
                 cM = em.merge(cM);
-=======
-            String userinput = JOptionPane.showInputDialog("Ingrese problemas involucrados en incidente: ");
-          /*  System.out.println ("Ingrese problemas involucrados en incidente:");
-            String tp = teclado.nextLine();
-            System.out.println(Consultas.existeTipoDeProblema(tp));
+
             */
+            String userinput = JOptionPane.showInputDialog("Ingrese problemas involucrados en incidente: ");
+
+          /*  System.out.println ("Ingrese problemas involucrados en incidente:");
+            */
+            System.out.println(Consultas.existeTipoDeProblema(userinput));
+
             if (!Consultas.existeTipoDeProblema(userinput)) {
                 System.out.println("Problema no existente con anterioridad, por favor registrar: ");
                 Crear.registrarNuevoTipoDeProblema();
->>>>>>> Stashed changes
             }
-            i.setCliente(cM);*/
+            i.setCliente(cM);
             control.setTecnicos(tecnicoModel);
             control.setEstadoIncidenteActual(State.INICIADO);
             repository.actualizarIncidente(control.model);
@@ -202,7 +197,7 @@ public class Crear {
 
     }
 
-    private void registrarNuevoTipoDeProblema() {
+    private static void registrarNuevoTipoDeProblema() {
 
         try{
             TipoProblemaModel p = new TipoProblemaModel(/*new ArrayList<>(), new ServicioModel()*/);
@@ -225,7 +220,7 @@ public class Crear {
         }
 
     }
-    private void registrarNuevoTipoDeProblema(String nombreProblema) {
+    private static void registrarNuevoTipoDeProblema(String nombreProblema) {
 
         try{
             TipoProblemaModel p = new TipoProblemaModel(/*new ArrayList<>(), new ServicioModel()*/);
@@ -274,5 +269,23 @@ public class Crear {
             System.out.println("Problema:" + e);
         }
     }
+    public static void mostrarOpcionesConId(String[] opcion, List<Par<Integer, String>> lista) {
+        String[] opciones  = opcion;
+        Arrays.stream(opciones).toList().stream().forEach(caso -> System.out.println(caso));
 
+        int choice = JOptionPane.showOptionDialog(
+                null,
+                "Select an option:",
+                "Menu Inicial",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                opciones,
+                opciones[0]
+        );
+
+        // Check the user's choice
+        JOptionPane.showMessageDialog(null, "La opción seleccionada no es válida");
+    }
 }
+

@@ -3,17 +3,9 @@ package org.cursoutn;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import jakarta.persistence.*;
-import jakarta.persistence.EntityManager;
-import org.cursoutn.controller.ClientesController;
-import org.cursoutn.model.ClienteModel;
-import org.cursoutn.model.IncidenteModel;
-import org.cursoutn.model.NotificacionModel;
-import org.cursoutn.model.ServicioModel;
-import org.cursoutn.repository.JpaClienteRepository;
-import org.cursoutn.view.ClientesView;
+import org.cursoutn.GUI.VentanaInicio;
 
-import java.util.*;
+import javax.swing.*;
 
 
 public class Main {
@@ -46,6 +38,9 @@ public class Main {
     public static void main(String[] args) {
 
         Menu menu = new Menu();
+
+        SwingUtilities.invokeLater(() ->
+                new VentanaInicio());
 
         try {
             menu.showMenu();

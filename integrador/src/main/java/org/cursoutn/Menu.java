@@ -1,19 +1,17 @@
 package org.cursoutn;
 
 import org.cursoutn.controller.ClientesController;
-import org.cursoutn.controller.TecnicosController;
 import org.cursoutn.model.TecnicoModel;
 import org.cursoutn.repository.JpaTecnicoRepository;
 
 import javax.swing.*;
 import java.util.*;
+import java.util.List;
 
 import static java.lang.Long.parseLong;
-import static org.cursoutn.Menu.*;
-import static org.cursoutn.Crear.*;
 
 public class Menu {
-    public static void menuIngresarDatos() throws Exception {
+    public void menuIngresarDatos() throws Exception {
         String[] opciones = {"1- Ingresar nuevo incidente", "2- Ingresar nuevo cliente", "3- Ingresar nuevo tecnico", "4- Ingresar nuevo Especialidad", "6- Salir"};
 
         int choice = JOptionPane.showOptionDialog(
@@ -30,7 +28,7 @@ public class Menu {
         // Verificar la eleccion del usuario
         switch (choice) {
             case 0:
-                crear.menuRegistrarIncidente();
+                crear.registrarIncidente();
                 break;
             case 1:
                 registrarNuevoCliente();
@@ -79,7 +77,7 @@ public class Menu {
         */
     }
 
-    private static void registrarNuevoCliente() throws Exception {
+    private  void registrarNuevoCliente() throws Exception {
 
     }
 
@@ -87,15 +85,17 @@ public class Menu {
 
 
      */
-    public static void menuInicial() {
+    public  void menuInicial() {
         // Scanner teclado = new Scanner(System.in);
         //System.out.println("Por favor ingrese la opción deseada");
         //int seleccion = teclado.nextInt();
 
     }
 
-    public static void showMenu() throws Exception {
+    public void showMenu() throws Exception {
         String[] opciones = {"1- Ingresar datos", "2- Buscar datos", "3- Eliminar datos", "4- Actualizar datos", "5- Consultas", "6- Salir"};
+
+
 
         int choice = JOptionPane.showOptionDialog(
                 null,
@@ -134,7 +134,7 @@ public class Menu {
     private static void menuActualizarDatos() {
     }
 
-    private static void menuEliminarDatos() throws Exception {
+    private void menuEliminarDatos() throws Exception {
         Scanner teclado = new Scanner(System.in);
         System.out.println("Por favor ingrese la opción deseada:");
         System.out.println("1- Borrar incidente");
@@ -145,7 +145,7 @@ public class Menu {
         int seleccion = teclado.nextInt();
         switch (seleccion) {
             case 1:
-                Crear.menuRegistrarIncidente();
+                Crear.registrarIncidente();
                 break;
             case 2:
                 Eliminar.borrarCliente();
@@ -163,11 +163,11 @@ public class Menu {
         }
     }
 
-    private static void borrarCliente(ClientesController cliente) throws Exception {
+    private void borrarCliente(ClientesController cliente) throws Exception {
         cliente.eliminarCliente(cliente.model);
     }
 
-    private static void menuConsultas() throws Exception {
+    private void menuConsultas() throws Exception {
         String[] opciones = {"1- Listar clientes", "2- Buscar incidentes", "3- Eliminar tecnicos", "4- Desempeño tecnicos", "5- Salir"};
 
         int choice = JOptionPane.showOptionDialog(
@@ -241,7 +241,7 @@ public class Menu {
         }*/
     }
 
-    private static void menuListarIncidentesPor() throws Exception {
+    private void menuListarIncidentesPor() throws Exception {
         Scanner teclado = new Scanner(System.in);
         System.out.println("Por favor ingrese la opción deseada:");
         System.out.println("1- ...cliente:");
@@ -272,7 +272,7 @@ public class Menu {
     }
 
 
-    public static int menuBuscarDatos() throws Exception {
+    public int menuBuscarDatos() throws Exception {
         Scanner teclado = new Scanner(System.in);
         System.out.println("Por favor ingrese la opción deseada:");
         System.out.println("1- Buscar Incidente por ID");
@@ -306,14 +306,14 @@ public class Menu {
         return 0;
     }
 
-    private static void menuBuscarIncidentePorId() throws Exception {
+    private void menuBuscarIncidentePorId() throws Exception {
         Scanner teclado = new Scanner(System.in);
         System.out.println("Por favor ingrese el id del cliente:");
         int clienteId = teclado.nextInt();
     }
 
 
-    public static void mostrarOpcionesConId(String[] opcion, List<Par<Integer, String>> lista) {
+    public void mostrarOpcionesConId(String[] opcion, List<Par<Integer, String>> lista) {
         String[] opciones  = opcion;
         Arrays.stream(opciones).toList().stream().forEach(caso -> System.out.println(caso));
 
