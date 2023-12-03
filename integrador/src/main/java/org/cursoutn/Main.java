@@ -43,7 +43,7 @@ public class Main {
                 new VentanaInicio());
 
         try {
-            menu.showMenu();
+           // menu.showMenu();
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
