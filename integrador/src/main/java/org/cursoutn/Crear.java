@@ -197,6 +197,7 @@ public class Crear {
 
     }
 
+
     private static void registrarNuevoTipoDeProblema() {
 
         try{
@@ -220,26 +221,7 @@ public class Crear {
         }
 
     }
-    private static void registrarNuevoTipoDeProblema(String nombreProblema) {
 
-        try{
-            TipoProblemaModel p = new TipoProblemaModel(/*new ArrayList<>(), new ServicioModel()*/);
-            TipoProblemaView tipoProblemaView = new TipoProblemaView();
-            TipoProblemaController tipoProblemaController = new TipoProblemaController(p, tipoProblemaView);
-
-            JpaTipoProblemaRepository repository = new JpaTipoProblemaRepository();
-
-            TipoProblemaController control = new TipoProblemaController(p, tipoProblemaView);
-
-            //control.setIncidentes(listaDeIncidentes);
-            control.setNombreTipoProblema(nombreProblema);
-            repository.guardarTipoProblema(control.model);
-
-        } catch (Exception e) {
-            System.out.println("Problema grave: " + e);
-        }
-
-    }
     public void registrarNuevaEspecialidad() {
 
         try{

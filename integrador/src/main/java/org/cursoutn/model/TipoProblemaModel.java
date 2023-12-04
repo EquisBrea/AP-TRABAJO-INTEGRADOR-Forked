@@ -3,6 +3,9 @@ package org.cursoutn.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.cursoutn.controller.TipoProblemaController;
+import org.cursoutn.repository.JpaTipoProblemaRepository;
+import org.cursoutn.view.TipoProblemaView;
 import org.hibernate.annotations.DynamicInsert;
 
 import java.util.ArrayList;
@@ -43,5 +46,24 @@ public class TipoProblemaModel {
         this.servicios = servicio;
     }
 
+    private static void registrarNuevoTipoDeProblema(String nombreProblema) {
 
+        try{
+            TipoProblemaModel p = new TipoProblemaModel(/*new ArrayList<>(), new ServicioModel()*/);
+            TipoProblemaView tipoProblemaView = new TipoProblemaView();
+            TipoProblemaController tipoProblemaController = new TipoProblemaController(p, tipoProblemaView);
+
+            JpaTipoProblemaRepository repository = new JpaTipoProblemaRepository();
+
+            TipoProblemaController control = new TipoProblemaController(p, tipoProblemaView);
+
+            //control.setIncidentes(listaDeIncidentes);
+            control.setNombreTipoProblema(nombreProblema);
+            repository.guardarTipoProblema(control.model);
+
+        } catch (Exception e) {
+            System.out.println("Problema grave: " + e);
+        }
+
+    }
 }
