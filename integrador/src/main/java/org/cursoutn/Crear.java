@@ -124,7 +124,7 @@ public class Crear {
                     String agregar = JOptionPane.showInputDialog("Problema no registrado con anterioridad, \ndesea agregarlo al registro?");
 
                     if (agregar.equalsIgnoreCase("S")) {
-                        Crear.registrarNuevoTipoDeProblema(tp);
+                        Crear.registrarNuevoTipoDeProblema();
                         System.out.println("Problema agregado al registro:  \n" + tp);
                     } else {
                         System.out.println("Problema no agregado al registro");
@@ -154,7 +154,7 @@ public class Crear {
                     System.out.println("Problema no existente con anterioridad, agregar al registro?(S/N) ");
                     String agregar = teclado.nextLine();
                     if (agregar.equalsIgnoreCase("S")) {
-                        Crear.registrarNuevoTipoDeProblema(tp);
+                        Crear.registrarNuevoTipoDeProblema();
                         System.out.println("Problema agregado al registro:  \n" + tp);
                     } else {
                         System.out.println("Problema no agregado al registro");
@@ -198,7 +198,7 @@ public class Crear {
     }
 
 
-    private static void registrarNuevoTipoDeProblema() {
+    public static void registrarNuevoTipoDeProblema() {
 
         try{
             TipoProblemaModel p = new TipoProblemaModel(/*new ArrayList<>(), new ServicioModel()*/);

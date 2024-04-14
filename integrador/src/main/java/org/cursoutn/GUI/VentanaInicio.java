@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class VentanaInicio extends JFrame {
-    private JComboBox<String>[] comboBoxes;
+    private JComboBox[] comboBoxes;
     private JPanel buttonPanel;
 
     public VentanaInicio() {
@@ -64,21 +64,25 @@ public class VentanaInicio extends JFrame {
     }
 
     private void handleButtonClick(String action, JButton button) {
-        // Create JComboBox dynamically for each button
-        int index = Integer.parseInt(action.substring(action.length() - 1)) - 1; // Extract button number
+        int index = Integer.parseInt(action.substring(action.length() - 1)) - 1;
+        // index >> Indice para asignar funciones
         String[] opcionesCuadroDeDialogo = {"Ingresar nuevo Incidente", "Ingresar nuevo cliente", "Ingresar nuevo técnico", "Ingresar nueva especialidad", "Ingresar nuevo servicio", "Menú inicial"};
         String seleccionDatos = showOptionDialog(opcionesCuadroDeDialogo, "Ingresar Datos", "Seleccione los datos a ingresar");
         switch (seleccionDatos){
             case "Ingresar nuevo Incidente":
-                JOptionPane.showMessageDialog(null, "Performing Action 1" + seleccionDatos);
+                JOptionPane.showMessageDialog(null, "Ingresar nuevo Incidente" + seleccionDatos);
                 break;
-            case "Ingresar nuevo cliente":
+            case "Ingresar nuevo Cliente":
+                JOptionPane.showMessageDialog(null, "Ingresar nuevo Cliente" + seleccionDatos);
                 break;
-            case "Ingresar nuevo técnico":
+            case "Ingresar nuevo Técnico":
+                JOptionPane.showMessageDialog(null, "Ingresar nuevo Técnico" + seleccionDatos);
                 break;
-            case  "Ingresar nueva especialidad":
+            case  "Ingresar nueva Especialidad":
+                JOptionPane.showMessageDialog(null, "Ingresar nueva Especialidad" + seleccionDatos);
                 break;
-            case "Ingresar nuevo servicio":
+            case "Ingresar nuevo Servicio":
+                JOptionPane.showMessageDialog(null, "Ingresar nuevo Servi" + seleccionDatos);
                 break;
             default:
                 break;

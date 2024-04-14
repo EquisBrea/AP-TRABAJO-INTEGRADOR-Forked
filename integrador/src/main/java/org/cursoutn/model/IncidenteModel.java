@@ -186,7 +186,7 @@ public class IncidenteModel implements Serializable {
 
     }
     public static void registrarIncidente() {
-        em = Persistence.createEntityManagerFactory("JPA_PU").createEntityManager();
+        EntityManager em = Persistence.createEntityManagerFactory("JPA_PU").createEntityManager();
         try {
             IncidenteModel i = new IncidenteModel(LocalDateTime.now(), 1, 0, State.INICIADO, new ArrayList<OperadorModel>(), new ClienteModel(), new ArrayList<TecnicoModel>(), new ArrayList<TipoProblemaModel>());
             IncidentesView incidentesView = new IncidentesView();
@@ -224,7 +224,7 @@ public class IncidenteModel implements Serializable {
                     String agregar = JOptionPane.showInputDialog("Problema no registrado con anterioridad, \ndesea agregarlo al registro?");
 
                     if (agregar.equalsIgnoreCase("S")) {
-                        Crear.registrarNuevoTipoDeProblema(tp);
+                        Crear.registrarNuevoTipoDeProblema();
                         System.out.println("Problema agregado al registro:  \n" + tp);
                     } else {
                         System.out.println("Problema no agregado al registro");
@@ -254,7 +254,7 @@ public class IncidenteModel implements Serializable {
                     System.out.println("Problema no existente con anterioridad, agregar al registro?(S/N) ");
                     String agregar = teclado.nextLine();
                     if (agregar.equalsIgnoreCase("S")) {
-                        Crear.registrarNuevoTipoDeProblema(tp);
+                        Crear.registrarNuevoTipoDeProblema();
                         System.out.println("Problema agregado al registro:  \n" + tp);
                     } else {
                         System.out.println("Problema no agregado al registro");

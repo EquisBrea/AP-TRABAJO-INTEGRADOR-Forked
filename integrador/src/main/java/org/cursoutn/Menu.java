@@ -206,14 +206,16 @@ public class Menu {
             default:
                 JOptionPane.showMessageDialog(null, "La opción seleccionada no es válida");
         }
-        /*Scanner teclado = new Scanner(System.in);
+
+       /* Scanner teclado = new Scanner(System.in);
         System.out.println ("Por favor ingrese la opción deseada:");
         System.out.println ("1- Listar clientes:");
         System.out.println ("2- Listar incidentes:");
         System.out.println ("3- Listar tecnicos:");
         System.out.println ("4- Desempenio Tecnicos:");
-        System.out.println ("5- Salir");
+        System.out.println ("5- Salir");*/
 
+        /*
         int seleccion = teclado.nextInt();
         switch(seleccion) {
             case 1:

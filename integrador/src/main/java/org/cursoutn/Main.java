@@ -13,8 +13,7 @@ public class Main {
 
     public static EntityManager getEntityManager(){
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("JPA_PU");
-        EntityManager manager = factory.createEntityManager();
-        return manager;
+        return factory.createEntityManager();
     }
    //public static ClientesController abrirCliente(){
 
